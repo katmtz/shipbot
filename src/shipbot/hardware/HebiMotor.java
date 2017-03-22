@@ -1,6 +1,8 @@
 package shipbot.hardware;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Abstract interfacing with the HEBI motors.
@@ -18,6 +20,7 @@ public class HebiMotor extends Motor {
 	
 	public HebiMotor(String id) {
 		this.id = id;
+		data = new HashMap<String,Integer>();
 		data.put(HebiMotor.POS, 0);
 		// TODO properly initialize motor data w/ file IO
 	}
@@ -42,5 +45,10 @@ public class HebiMotor extends Motor {
 	public void set(String field, int value) {
 		data.put(field, value);
 		this.sendUpdate();
+	}
+
+	@Override
+	public Set<String> getFields() {
+		return data.keySet();
 	}
 }

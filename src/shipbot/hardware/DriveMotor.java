@@ -1,6 +1,8 @@
 package shipbot.hardware;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class DriveMotor extends Motor {
 	
@@ -13,6 +15,7 @@ public class DriveMotor extends Motor {
 
 	public DriveMotor(String id) {
 		this.id = id;
+		data = new HashMap<String,Integer>();
 		data.put(DriveMotor.X, 0);
 		data.put(DriveMotor.Y, 0);
 	}
@@ -39,6 +42,11 @@ public class DriveMotor extends Motor {
 	public void set(String field, int value) {
 		data.put(field, value);
 		this.sendUpdate();
+	}
+
+	@Override
+	public Set<String> getFields() {
+		return data.keySet();
 	}
 
 }

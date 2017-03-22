@@ -19,4 +19,8 @@ public class Config {
 	public static String Z_STEPPER_ID = "STEP_1";
 	public static String FIXED_HEBI_ID = "HEBI_0";
 	public static String EFFECTOR_HEBI_ID = "HEBI_1";
+	
+	// CODES
+	public static int OWNER_ARDUINO = 0;
+	public static int OWNER_PI = 1;
 }

@@ -1,13 +1,14 @@
 package shipbot.mission;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
-import shipbot.staticlib.Config;
+import shipbot.hardware.SystemState;
 import shipbot.staticlib.MessageLog;
+import shipbot.tasks.MoveTask;
+import shipbot.tasks.Station;
+import shipbot.tasks.Task;
 
 /**
  * Loads and stores the mission file, maintains the mission log, and 
@@ -18,8 +19,15 @@ import shipbot.staticlib.MessageLog;
  */
 public class Mission {
 
+	private SystemState system;
+	private List<Station> devices;
 	private List<Task> tasks;
-	private File mission_file;
+	
+	public static void main(String[] args) {
+		String path = "missions/mission_log.txt";
+		Mission mission = new Mission(path);
+		mission.executeMission();
+	}
 	
 	/**
 	 * Create a new mission from a specified mission file.
@@ -27,10 +35,18 @@ public class Mission {
 	 * @param mission_file_path - the path to desired mission file
 	 */
 	public Mission(String mission_file_path) {
-		// load mission file
-		mission_file = new File(mission_file_path);
-		this.verifyMissionFile();
-		// parse tasks
+		MessageLog.logMissionStatus("New mission initialized.");
+		system = new SystemState();
+		MissionParser parser = new MissionParser(mission_file_path);
+		MessageLog.logMissionStatus("Loaded tasks from mission file.");
+		devices = parser.getAllDevices();
+		tasks = new ArrayList<Task>();
+		
+		// Add a task to visit each device!
+		for (Station dev : devices) {
+			Task new_task = new MoveTask(system, dev.getCoordinates());
+			tasks.add(new_task);
+		}
 	}
 	
 	/**
@@ -44,24 +60,5 @@ public class Mission {
 			MessageLog.logTaskStatus(task.toString());
 		}
 		MessageLog.logMissionStatus("Task execution complete.");
-	}
-	
-	/**
-	 * Ensure that mission file meets expectations. Log any inconsistencies.
-	 */
-	private void verifyMissionFile() {
-		if (mission_file == null) {
-			MessageLog.printError(this.toString(), "Mission file improperly loaded, ABORT.");
-			return;
-		}
-		if (!(mission_file.exists() && mission_file.isFile())) {
-			MessageLog.printError(this.toString(), "Mission file does not exist or is not a file.");
-			return;
-		}
-		if (!mission_file.canRead()) {
-			MessageLog.printError(this.toString(), "Mission file was not set to readable, attempting to correct.");
-			mission_file.setReadable(true);
-			return;
-		}
 	}
  }

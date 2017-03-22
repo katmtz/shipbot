@@ -14,12 +14,12 @@ import java.io.Writer;
 public class MessageLog {
 
 	// Log file paths
-	private static String status_log = "shipbot/logs/status.log";
+	private static String status_log = "logs/status.log";
 	
 	// Format Strings
-	private static String error_format = "[ %s ERROR ] (%s) %s";
-	private static String mission_log_format = "[ MISSION LOG ] (%s) %s";
-	private static String task_log_format = "[ TASK LOG ] (%s) %s";
+	private static String error_format = "[ %s ERROR ] (%s) %s\n";
+	private static String mission_log_format = "[ MISSION LOG ] (%s) %s\n";
+	private static String task_log_format = "[ TASK LOG ] (%s) %s\n";
 	
 	/**
 	 * Print an error message to System.err.
@@ -41,7 +41,7 @@ public class MessageLog {
 		String log_msg = String.format(mission_log_format, System.currentTimeMillis(), message);
 		// Open mission log file, append log message
 		try {
-			Writer log = new FileWriter(new File(status_log));
+			Writer log = new FileWriter(new File(status_log), true);
 			log.write(log_msg);
 			log.close();
 		} catch (IOException e) {
@@ -59,7 +59,7 @@ public class MessageLog {
 		// write task info to mission log
 		String log_msg = String.format(task_log_format,  System.currentTimeMillis(), message);
 		try {
-			Writer log = new FileWriter(new File(status_log));
+			Writer log = new FileWriter(new File(status_log), true);
 			log.write(log_msg);
 			log.close();
 		} catch (IOException e) {

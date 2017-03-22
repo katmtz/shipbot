@@ -1,4 +1,4 @@
-package shipbot.mission;
+package shipbot.tasks;
 
 import java.io.File;
 import java.io.FileWriter;

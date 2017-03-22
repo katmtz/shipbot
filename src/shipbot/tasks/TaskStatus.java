@@ -1,4 +1,4 @@
-package shipbot.mission;
+package shipbot.tasks;
 
 public enum TaskStatus {
 

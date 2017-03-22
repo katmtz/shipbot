@@ -1,6 +1,8 @@
 package shipbot.hardware;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class StepperMotor extends Motor {
 	
@@ -12,6 +14,7 @@ public class StepperMotor extends Motor {
 	
 	public StepperMotor(String id) {
 		this.id = id;
+		data = new HashMap<String,Integer>();
 		data.put(StepperMotor.POS, 0);
 	}
 
@@ -36,5 +39,10 @@ public class StepperMotor extends Motor {
 		// TODO field validation?
 		data.put(field, value);
 		this.sendUpdate();
+	}
+
+	@Override
+	public Set<String> getFields() {
+		return data.keySet();
 	}
 }

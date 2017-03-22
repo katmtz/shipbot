@@ -1,0 +1,20 @@
+[ TASK LOG ] (1490207039976) Move Task, X=3 Y=3
+[ MISSION LOG ] (1490207039976) Task execution complete.
+[ MISSION LOG ] (1490207067798) New mission initialized.
+[ MISSION LOG ] (1490207067807) Loaded tasks from mission file.
+[ MISSION LOG ] (1490207067809) Starting task execution.
+[ TASK LOG ] (1490207067810) Move Task, X=0 Y=0
+[ TASK LOG ] (1490207067811) Move Task, X=3 Y=0
+[ TASK LOG ] (1490207067811) Move Task, X=3 Y=0
+[ TASK LOG ] (1490207067811) Move Task, X=3 Y=2
+[ TASK LOG ] (1490207067812) Move Task, X=3 Y=3
+[ MISSION LOG ] (1490207067812) Task execution complete.
+[ MISSION LOG ] (1490207753960) New mission initialized.
+[ MISSION LOG ] (1490207753968) Loaded tasks from mission file.
+[ MISSION LOG ] (1490207753969) Starting task execution.
+[ TASK LOG ] (1490207753971) Move Task, X=0 Y=0
+[ TASK LOG ] (1490207753971) Move Task, X=3 Y=0
+[ TASK LOG ] (1490207753972) Move Task, X=3 Y=0
+[ TASK LOG ] (1490207753972) Move Task, X=3 Y=2
+[ TASK LOG ] (1490207753973) Move Task, X=3 Y=3
+[ MISSION LOG ] (1490207753973) Task execution complete.
