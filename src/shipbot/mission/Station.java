@@ -1,4 +1,4 @@
-package shipbot.tasks;
+package shipbot.mission;
 
 public enum Station {
 

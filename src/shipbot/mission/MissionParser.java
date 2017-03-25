@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shipbot.staticlib.MessageLog;
-import shipbot.tasks.Station;
 
 /**
  * Library for parsing a mission file.
@@ -25,12 +24,12 @@ public class MissionParser {
 	private final String BBOX_REGEX = "[A-H][A-B]";
 	private final String BSW_REGEX = "B[1-3]";
 	
-	private List<Station> devices;
+	private List<Device> devices;
 	
 	public MissionParser(String mission_path) {
 		this.mission_path = mission_path;
 		this.verifyMissionPath();
-		devices = new ArrayList<Station>();
+		devices = new ArrayList<Device>();
 		try {
 			Reader reader = new FileReader(mission_path);
 			StreamTokenizer t = new StreamTokenizer(reader);
@@ -51,11 +50,11 @@ public class MissionParser {
 						String token_str = t.sval;
 						if (token_str.matches(VALVE_REGEX)) {
 							Station s = getStation(token_str.charAt(0));
-							devices.add(s);
+							// devices.add(s);
 						}
 						if (token_str.matches(BBOX_REGEX)) {
 							Station s = getStation(token_str.charAt(0));
-							devices.add(s);
+							// devices.add(s);
 						}
 						if (token_str.matches(BSW_REGEX)) {
 							// get station of last device (a breaker)
@@ -81,7 +80,7 @@ public class MissionParser {
 		}
 	}
 	
-	public List<Station> getAllDevices() {
+	public List<Device> getAllDevices() {
 		return devices;
 	}
 

@@ -1,13 +1,11 @@
 package shipbot.mission;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import shipbot.hardware.SystemState;
 import shipbot.staticlib.MessageLog;
 import shipbot.tasks.MoveTask;
-import shipbot.tasks.Station;
 import shipbot.tasks.Task;
 
 /**
@@ -20,9 +18,14 @@ import shipbot.tasks.Task;
 public class Mission {
 
 	private SystemState system;
-	private List<Station> devices;
+	private List<Device> devices;
 	private List<Task> tasks;
 	
+	/**
+	 * Test mission execution.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		String path = "missions/mission_log.txt";
 		Mission mission = new Mission(path);
@@ -38,12 +41,13 @@ public class Mission {
 		MessageLog.logMissionStatus("New mission initialized.");
 		system = new SystemState();
 		MissionParser parser = new MissionParser(mission_file_path);
+		
 		MessageLog.logMissionStatus("Loaded tasks from mission file.");
 		devices = parser.getAllDevices();
 		tasks = new ArrayList<Task>();
 		
 		// Add a task to visit each device!
-		for (Station dev : devices) {
+		for (Device dev : devices) {
 			Task new_task = new MoveTask(system, dev.getCoordinates());
 			tasks.add(new_task);
 		}
