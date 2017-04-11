@@ -1,20 +1,20 @@
-[ TASK LOG ] (1490207039976) Move Task, X=3 Y=3
-[ MISSION LOG ] (1490207039976) Task execution complete.
-[ MISSION LOG ] (1490207067798) New mission initialized.
-[ MISSION LOG ] (1490207067807) Loaded tasks from mission file.
-[ MISSION LOG ] (1490207067809) Starting task execution.
-[ TASK LOG ] (1490207067810) Move Task, X=0 Y=0
-[ TASK LOG ] (1490207067811) Move Task, X=3 Y=0
-[ TASK LOG ] (1490207067811) Move Task, X=3 Y=0
-[ TASK LOG ] (1490207067811) Move Task, X=3 Y=2
-[ TASK LOG ] (1490207067812) Move Task, X=3 Y=3
-[ MISSION LOG ] (1490207067812) Task execution complete.
-[ MISSION LOG ] (1490207753960) New mission initialized.
-[ MISSION LOG ] (1490207753968) Loaded tasks from mission file.
-[ MISSION LOG ] (1490207753969) Starting task execution.
-[ TASK LOG ] (1490207753971) Move Task, X=0 Y=0
-[ TASK LOG ] (1490207753971) Move Task, X=3 Y=0
-[ TASK LOG ] (1490207753972) Move Task, X=3 Y=0
-[ TASK LOG ] (1490207753972) Move Task, X=3 Y=2
-[ TASK LOG ] (1490207753973) Move Task, X=3 Y=3
-[ MISSION LOG ] (1490207753973) Task execution complete.
+[ MISSION LOG ] (1491873458308) New mission initialized.
+[ MISSION LOG ] (1491873458316) Loaded goals from mission file.
+[ MISSION LOG ] (1491873458316) Mission time limit is 360 sec.
+[ MISSION LOG ] (1491873458317) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1491873458318) Device: BreakerBox A @ Station D -- Goals: switch 2
+[ MISSION LOG ] (1491873458319) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1491873458319) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1491873458319) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (1491873458320) Starting task execution.
+[ TASK LOG ] (1491873458335) Move Task, X=0 Y=0 [complete]
+[ TASK LOG ] (1491873458348) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491873458349) Move Task, X=3 Y=0 [aborted]
+[ TASK LOG ] (1491873458361) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491873458362) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491873458376) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491873458388) Move Task, X=3 Y=2 [complete]
+[ TASK LOG ] (1491873458399) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491873458411) Move Task, X=3 Y=3 [complete]
+[ TASK LOG ] (1491873458412) Approach Task, depth=5 height=5 [complete]
+[ MISSION LOG ] (1491873458412) Task execution complete.

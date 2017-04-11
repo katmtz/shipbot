@@ -1,5 +1,6 @@
 package shipbot.staticlib;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,7 +62,11 @@ public class DeviceData {
 		// MOTOR WRITE TEST
 		motor_data.put("modified", 490);
 		motor_data.remove("owner");
-		DeviceData.writeMotorData(id, motor_data);
+		try {
+			DeviceData.writeMotorData(id, motor_data);
+		} catch (Exception e) {
+			System.out.println("lol what");
+		}
 	}
 	
 	/**
@@ -129,7 +134,6 @@ public class DeviceData {
 			
 			boolean eof = false;
 			String field = "";
-			int owner = 0;
 			while (!eof) {
 				int token = tok.nextToken();
 				switch (token) {
@@ -142,18 +146,11 @@ public class DeviceData {
 					case StreamTokenizer.TT_NUMBER:
 						data.put(field, (int) tok.nval);
 						break;
-					default:
-						if ((char) token == '@') {
-							token = tok.nextToken();
-							owner = (int) tok.nval;
-						}
-						break;
 				}
 			}
 			reader.close();
-			if (owner != Config.OWNER_ARDUINO) {
+			if (data.get("@") != Config.OWNER_ARDUINO) {
 				MessageLog.printError("MOTOR_UPDATE", "Read old data! Dumping.");
-				return null;
 			}
 		} catch (IOException e) {
 			MessageLog.printError("MOTOR_UPDATE", "IOException while updating motor data.");
@@ -166,7 +163,7 @@ public class DeviceData {
 	 * @param motor_id - the motor whose data should be modified
 	 * @param data - the field,value map data to write out
 	 */
-	public static void writeMotorData(String motor_id, Map<String, Integer> data) {
+	public static void writeMotorData(String motor_id, Map<String, Integer> data) throws IOException {
 		String motor_path = String.format(motor_path_format, motor_id);
 		StringBuilder sb = new StringBuilder(String.format("@ %d\n", Config.OWNER_PI));
 		for (String key : data.keySet()) {
@@ -176,11 +173,26 @@ public class DeviceData {
 		}
 		try {
 			Writer writer = new FileWriter(motor_path);
+			System.out.println(String.format("WROTE {%s} to device data", sb.toString()));
 			writer.write(sb.toString());
 			writer.close();
 		} catch (IOException e) {
 			MessageLog.printError("MOTOR_UPDATE", "IOException while writing motor data.");
+			throw e;
 		}
 		return;
+	}
+	
+	public static boolean waiting(String motor_id) throws IOException {
+		String motor_path = String.format(motor_path_format, motor_id);
+		BufferedReader reader = new BufferedReader(new FileReader(motor_path));
+		if (reader.ready()) {
+			String header = reader.readLine();
+			reader.close();
+			if (header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

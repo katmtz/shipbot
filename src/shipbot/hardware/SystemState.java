@@ -85,4 +85,18 @@ public class SystemState {
 		return ir_sensor.getValue();
 	}
 	
+	/* UPDATE METHODS */
+	
+	public void updateLocation(int x, int y) {
+		this.drive.set(DriveMotor.X, x);
+		this.drive.set(DriveMotor.Y, y);
+	}
+	
+	public void updateDepth(int depth) {
+		this.stepper_y.set(StepperMotor.POS, depth);
+	}
+	
+	public void updateHeight(int height) {
+		this.stepper_z.set(StepperMotor.POS, height);
+	}
 }

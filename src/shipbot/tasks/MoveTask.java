@@ -24,8 +24,7 @@ public class MoveTask extends Task {
 	
 	private final String status_format = "[ MOVE_TASK ] (%s) %s";
 	
-	public MoveTask(SystemState sys, int[] args) {
-		this.sys = sys;
+	public MoveTask(int[] args) {
 		this.x = args[0];
 		this.y = args[1];
 		parent = this;
@@ -44,28 +43,36 @@ public class MoveTask extends Task {
 	}
 
 	@Override
-	public void executeTask() {
+	public void executeTask(SystemState sys) {
 		status = TaskStatus.ACTIVE;
-		// Write x & y offsets to correct motor files
-		Map<String, Integer> data = new HashMap<String, Integer>();
-		data.put(DriveMotor.X, this.x);
-		data.put(DriveMotor.Y, this.y);
-		DeviceData.writeMotorData(Config.DRIVE_MOTOR_ID, data);
-		
-		// Wait for acknowledgement
-		int timer = 0;
-		while (status == TaskStatus.ACTIVE) {
-			int response_x = sys.getXPosition();
-			int response_y = sys.getYPosition();
-			if (response_x == x && response_y == y) {
-				status = TaskStatus.COMPLETE;
+		try {
+			// Write x & y offsets to correct motor files
+			Map<String, Integer> data = new HashMap<String, Integer>();
+			data.put(DriveMotor.X, this.x);
+			data.put(DriveMotor.Y, this.y);
+			DeviceData.writeMotorData(Config.DRIVE_MOTOR_ID, data);
+			
+			// Wait for acknowledgement
+			int timeout = 0;
+			while (DeviceData.waiting(Config.DRIVE_MOTOR_ID)) {
+				if (timeout > Config.MAX_TIMEOUT) {
+					System.out.println(">> MOVE TASK TIMEOUT");
+					throw new Exception();
+				}
+				
+				Thread.sleep(Config.SLEEPTIME);
+				timeout++;
 			}
-			if (timer > 100) {
-				// Timeout?
-				status = TaskStatus.ABORTED;
-			}
-			timer++;
+			
+			// Update virtual representation
+			sys.updateLocation(x, y);
+			System.out.println(String.format("> wrote %d %d as new location coords", x,y));
+		} catch (Exception e) {
+			status = TaskStatus.ABORTED;
+			return;
 		}
+		status = TaskStatus.COMPLETE;
+		return;
 	}
 
 	@Override
@@ -75,8 +82,8 @@ public class MoveTask extends Task {
 	
 	@Override
 	public String toString() {
-		String format = "Move Task, X=%d Y=%d";
-		return String.format(format, x,y);
+		String format = "Move Task, X=%d Y=%d [%s]";
+		return String.format(format, x,y, status.toString());
 	}
 
 }

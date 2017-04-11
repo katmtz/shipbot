@@ -19,7 +19,7 @@ public enum TaskStatus {
 	
 	@Override
 	public String toString() {
-		return String.format("Task Status: %s", name);
+		return name;
 	}
 	
 	/**

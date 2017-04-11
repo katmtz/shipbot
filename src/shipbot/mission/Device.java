@@ -13,10 +13,14 @@ public abstract class Device {
 		
 	public abstract int[] getCoordinates();
 	
+	public abstract int[] getPosition();
+	
 	public abstract void addGoalState(int goal_state);
 	
 	public abstract int[] getGoalState();
 	
 	protected abstract Station getStation();
+	
+	public abstract String getDescription();
 	
 }

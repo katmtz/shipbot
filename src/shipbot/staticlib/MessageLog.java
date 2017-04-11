@@ -67,4 +67,14 @@ public class MessageLog {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	public static void clearLogs() {
+		try {
+			Writer log = new FileWriter(new File(status_log), false);
+			log.write("");
+			log.close();
+		} catch (IOException e) {
+			System.err.println("IO Exception while clearing logs, proceeding.");
+		}
+	}
 }

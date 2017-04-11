@@ -1,5 +1,6 @@
 package shipbot.mission;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import shipbot.staticlib.MessageLog;
@@ -26,6 +27,7 @@ public class BreakerBox extends Device {
 	public BreakerBox(Station s, String id) {
 		this.station = s;
 		this.id = id;
+		switches = new ArrayList<Integer>();
 	}
 
 	@Override
@@ -35,7 +37,13 @@ public class BreakerBox extends Device {
 
 	@Override
 	public int[] getGoalState() {
-		return null;
+		int[] goals = new int[switches.size()];
+		int i = 0;
+		for (int n : switches) {
+			goals[i] = n;
+			i++;
+		}
+		return goals;
 	}
 
 	/**
@@ -62,5 +70,22 @@ public class BreakerBox extends Device {
 	private String name() {
 		String format = "BreakerBox %s";
 		return String.format(format, this.id);
+	}
+
+	@Override
+	public int[] getPosition() {
+		int[] position = { 5, 5 };
+		return position;
+	}
+
+	@Override
+	public String getDescription() {
+		String format = "Device: %s @ Station %s -- Goals:";
+		StringBuilder sb = new StringBuilder(String.format(format, this.name(), station.name()));
+		String append_format = " switch %d";
+		for (Integer sw : switches) {
+			sb.append(String.format(append_format, sw));
+		}
+		return sb.toString();
 	}
 }

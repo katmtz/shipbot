@@ -24,6 +24,7 @@ public class MissionParser {
 	private final String BBOX_REGEX = "[A-H][A-B]";
 	private final String BSW_REGEX = "B[1-3]";
 	
+	private int time_requirement = -1;
 	private List<Device> devices;
 	
 	public MissionParser(String mission_path) {
@@ -36,8 +37,8 @@ public class MissionParser {
 			t.parseNumbers();
 			
 			boolean eof = false;
-			int time_requirement = 0;
 			int last_token = -1;
+			boolean was_switch = false;
 			while (!eof) {
 				int token = t.nextToken();
 				
@@ -50,23 +51,32 @@ public class MissionParser {
 						String token_str = t.sval;
 						if (token_str.matches(VALVE_REGEX)) {
 							Station s = getStation(token_str.charAt(0));
-							// devices.add(s);
+							Device valve = new Valve(s, token_str.substring(1));
+							devices.add(valve);
+							was_switch = false;
 						}
 						if (token_str.matches(BBOX_REGEX)) {
 							Station s = getStation(token_str.charAt(0));
-							// devices.add(s);
+							Device breaker = new BreakerBox(s, token_str.substring(1));
+							devices.add(breaker);
+							was_switch = false;
 						}
 						if (token_str.matches(BSW_REGEX)) {
 							// get station of last device (a breaker)
-							// create breaker switch device
+							Device last = devices.get(devices.size() - 1);
+							last.addGoalState(Integer.parseInt(token_str.substring(1)));
+							was_switch = true;
 						}
 						break;
 						
 					case StreamTokenizer.TT_NUMBER:
 						double val = t.nval;
-						if (last_token == StreamTokenizer.TT_WORD) {
+						if (last_token == StreamTokenizer.TT_NUMBER || was_switch) {
 							time_requirement = (int) val;
-						} 
+						} else {
+							Device last = devices.get(devices.size() - 1);
+							last.addGoalState((int) val);
+						}
 						break;
 					default:
 						break;
@@ -82,6 +92,10 @@ public class MissionParser {
 	
 	public List<Device> getAllDevices() {
 		return devices;
+	}
+	
+	public int getTimeLimit() {
+		return time_requirement;
 	}
 
 	private void verifyMissionPath() {

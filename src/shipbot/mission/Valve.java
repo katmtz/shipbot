@@ -12,28 +12,47 @@ import shipbot.tasks.Task;
  *
  */
 public class Valve extends Device {
+	
+	private String id;
+	private Station station;
+	private int goal_state = -1;
+	
+	public Valve(Station s, String id) {
+		this.station = s;
+		this.id = id;
+	}
 
 	@Override
 	public int[] getCoordinates() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.station.getCoordinates();
 	}
 
 	@Override
 	public void addGoalState(int goal_state) {
-		// TODO Auto-generated method stub
+		this.goal_state = goal_state;
 	}
 
 	@Override
 	protected Station getStation() {
-		// TODO Auto-generated method stub
-		return null;
+		return station;
 	}
 
 	@Override
 	public int[] getGoalState() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int[] getPosition() {
+		int[] position = { 5, 5 };
+		return position;
+	}
+
+	@Override
+	public String getDescription() {
+		String format = "Device: %s @ Station %s -- Rotate to [%d] degrees.";
+		return String.format(format, this.id, station.toString(), this.goal_state);
 	}
 
 }

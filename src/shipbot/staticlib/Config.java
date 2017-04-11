@@ -21,6 +21,10 @@ public class Config {
 	public static String EFFECTOR_HEBI_ID = "HEBI_1";
 	
 	// CODES
-	public static int OWNER_ARDUINO = 0;
-	public static int OWNER_PI = 1;
+	public static final Integer OWNER_ARDUINO = 0;
+	public static final Integer OWNER_PI = 1;
+	
+	// TIMEOUT (arbitrary!!)
+	public static int MAX_TIMEOUT = 1000;
+	public static int SLEEPTIME = 10;
 }
