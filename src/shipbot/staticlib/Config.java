@@ -27,7 +27,7 @@ public class Config {
 	public static final Integer OWNER_PI = 1;
 	
 	// TIMEOUT (arbitrary!!)
-	public static int MAX_TIMEOUT = 1000;
+	public static int MAX_TIMEOUT = 5000;
 	public static int SLEEPTIME = 10;
 	
 	/**

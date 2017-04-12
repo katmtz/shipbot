@@ -1,4 +1,5 @@
 import serial
+import time
 from sys import stdin
 import atexit
 
@@ -9,7 +10,10 @@ serial_port = "/dev/cu.usbmodem1411"
 DEBUG = True
 
 class DeviceData:
+	# indicates we read a stop from the files
+	killed = False
 
+	# paths to arduino controlled devices
 	device_paths = {
 		"drive": "devices/actuators/DRIVE_0.txt",
 		"depth": "devices/actuators/STEP_0.txt",
@@ -39,7 +43,11 @@ class DeviceData:
 	def update_drive(self):
 		file = open(self.device_paths["drive"], 'r')
 		for line in file:
-			# Split header and data
+			if "STOP" in line:
+				file.close()
+				self.serial_close()
+				return True;
+
 			if len(line) <= 1:
 				continue
 			[ key, value ] = line.split(' ')
@@ -62,6 +70,11 @@ class DeviceData:
 	def update_depth(self):
 		file = open(self.device_paths["depth"], 'r')
 		for line in file:
+			if "STOP" in line:
+				file.close()
+				self.serial_close()
+				return True;
+
 			#print ">" + line
 			if len(line) <= 1:
 				continue
@@ -82,6 +95,11 @@ class DeviceData:
 		#print "hi"
 		file = open(self.device_paths["height"], 'r')
 		for line in file:
+			if "STOP" in line:
+				file.close()
+				self.serial_close()
+				return True;
+
 			#print " - " + line
 			if len(line) <= 1:
 				continue
@@ -107,7 +125,7 @@ class DeviceData:
 			read_drive = read_drive or self.update_drive()
 			read_height = read_height or self.update_height()
 			read_depth = read_depth or self.update_depth()
-		print "Read new data from files!"
+		# print "Read new data from files!"
 
 	def writeToData(self):
 		drive = open(self.device_paths["drive"], 'w')
@@ -130,7 +148,7 @@ class DeviceData:
 		message = format_str.format(x=self.data["X"], y=self.data["Y"], d=self.data["D"], h=self.data["H"])
 		if DEBUG:
 			hex_str = ':'.join(x.encode('hex') for x in message)
-			print "[pi->ard] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
+			print "[SERIAL_OUT] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
 		else:
 			self.serial.write(message)
 
@@ -140,11 +158,10 @@ class DeviceData:
 		rec_depth = False
 		rec_height = False
 		if DEBUG:
-			print "[ard->pi] <<"
+			time.sleep(1)
 		while not (rec_x and rec_y and rec_depth and rec_height):
 			if DEBUG:
 				line = "1"
-				print line
 			else:
 				line = self.serial.readline().strip("\n")
 			if (not rec_x):
@@ -159,29 +176,30 @@ class DeviceData:
 			elif (not rec_height):
 				self.response[3] = line
 				rec_height = True
-		if DEBUG:
-			print ">>"
-
 
 	def serial_close(self):
-		if DEBUG:
-			print "closed serial"
+		if not self.killed:
+			self.killed = True
+			if DEBUG:
+				print "[DEBUG] Mock closed serial port."
+			else:
+				self.serial.close()
 		else:
-			self.serial.close()
+			return;
+
+	def serial_active(self):
+		return not self.killed
 
 # /dev/cu._____ should be the serial port the arduino
 # is connected to.
 dev = DeviceData(serial_port)
 print "Starting file communication!"
 
-@atexit.register
-def close():
-	dev.serial_close()
-
-while True:
+while dev.serial_active():
 	dev.writeToSerial()
 	dev.recieve()
 	dev.writeToData()
 	dev.update()
 
+print "Recieved stop signal from file system!"
 

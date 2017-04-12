@@ -44,7 +44,7 @@ public class Mission {
 			DeviceData.clear_data();
 			
 			// Check for arduino serial sync
-			System.out.println("WAITING FOR SYNC");
+			System.out.println("WAITING FOR SYNC, ready to start pipeline");
 			
 			boolean synced = false;
 			while (!synced) {
@@ -68,6 +68,8 @@ public class Mission {
 		}
 		mission.executeMission();
 		System.out.println("MISSION COMPLETE");
+		DeviceData.send_kill();
+		System.out.println("DATA FILES DUMPED");
 	}
 	
 	/**

@@ -20,6 +20,7 @@ public class DeviceData {
 
 	private static String motor_path_format = "devices/actuators/%s.txt";	
 	private static String UNINITIALIZED_MSG = "@ 1\nNO DATA\n";
+	private static String KILL_MSG = "STOP";
 	
 	/**
 	 * Test sensor and motor data functions. 
@@ -167,6 +168,29 @@ public class DeviceData {
 		} catch (IOException e) {
 			MessageLog.printError("DATA_INIT", "IOException while clearing CV data.");
 			throw e;
+		}
+	}
+	
+	public static void send_kill() {
+		for (String motor_id : Config.getAllMotorIds()) {
+			String motor_path = String.format(motor_path_format, motor_id);
+			try {
+				Writer writer = new FileWriter(motor_path);
+				writer.write(KILL_MSG);
+				writer.close();
+			} catch (IOException e) {
+				MessageLog.printError("DATA_CLEANUP", "IOException while clearing motor data.");
+			}
+		}
+		
+		// Clear opencv file
+		String cv_path = "devices/CV.txt";
+		try {
+			Writer writer = new FileWriter(cv_path);
+			writer.write(KILL_MSG);
+			writer.close();
+		} catch (IOException e) {
+			MessageLog.printError("DATA_CLEANUP", "IOException while clearing CV data.");
 		}
 	}
 }

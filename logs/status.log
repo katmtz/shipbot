@@ -1,20 +1,20 @@
-[ MISSION LOG ] (1491957834769) New mission initialized.
-[ MISSION LOG ] (1491957834777) Loaded goals from mission file.
-[ MISSION LOG ] (1491957834777) Mission time limit is 360 sec.
-[ MISSION LOG ] (1491957834778) Device: V1 @ Station A -- Rotate to [175] degrees.
-[ MISSION LOG ] (1491957834779) Device: BreakerBox A @ Station D -- Goals: switch 2
-[ MISSION LOG ] (1491957834780) Device: V3 @ Station D -- Rotate to [0] degrees.
-[ MISSION LOG ] (1491957834780) Device: BreakerBox B @ Station F -- Goals: switch 3
-[ MISSION LOG ] (1491957834780) Device: V1 @ Station G -- Rotate to [50] degrees.
-[ MISSION LOG ] (1491957838922) Starting task execution.
-[ TASK LOG ] (1491957838933) Move Task, X=0 Y=0 [complete]
-[ TASK LOG ] (1491957838947) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1491957838958) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1491957838969) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1491957838980) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1491957838991) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1491957839002) Move Task, X=3 Y=2 [complete]
-[ TASK LOG ] (1491957839014) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1491957839025) Move Task, X=3 Y=3 [complete]
-[ TASK LOG ] (1491957839037) Approach Task, depth=5 height=5 [complete]
-[ MISSION LOG ] (1491957839037) Task execution complete.
+[ MISSION LOG ] (1491959377749) New mission initialized.
+[ MISSION LOG ] (1491959377756) Loaded goals from mission file.
+[ MISSION LOG ] (1491959377756) Mission time limit is 360 sec.
+[ MISSION LOG ] (1491959377757) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1491959377758) Device: BreakerBox A @ Station D -- Goals: switch 2
+[ MISSION LOG ] (1491959377759) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1491959377759) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1491959377759) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (1491959380872) Starting task execution.
+[ TASK LOG ] (1491959381887) Move Task, X=0 Y=0 [complete]
+[ TASK LOG ] (1491959382904) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491959383916) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491959384932) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491959385937) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491959386950) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491959387965) Move Task, X=3 Y=2 [complete]
+[ TASK LOG ] (1491959388979) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491959389992) Move Task, X=3 Y=3 [complete]
+[ TASK LOG ] (1491959391005) Approach Task, depth=5 height=5 [complete]
+[ MISSION LOG ] (1491959391006) Task execution complete.
