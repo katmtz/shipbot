@@ -3,9 +3,8 @@ depth_file = "devices/actuators/STEP_0.txt"
 height_file = "devices/actuators/STEP_1.txt"
 
 commands = [
-	{ "x": "1", "y": "1", "d": "0", "h": "0"},
-	{ "x": "1", "y": "1", "d": "5", "h": "5"},
-	{ "x": "1", "y": "2", "d": "5", "h": "5"}
+	{ "x": "0", "y": "1", "d": "0", "h": "0"},
+	{ "x": "1", "y": "0", "d": "5", "h": "5"}
 ]
 
 drive_format = "@ 1\nx {x}\ny {y}"

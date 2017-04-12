@@ -2,7 +2,11 @@ import serial
 from sys import stdin
 import atexit
 
+# Serial port connected to arduino
 serial_port = "/dev/cu.usbmodem1411"
+
+# Use to swap between terminal and serial output
+DEBUG = True
 
 class DeviceData:
 
@@ -26,7 +30,8 @@ class DeviceData:
 			"0",
 			"0"
 		]
-		#self.serial = serial.Serial(serial_port, 9600)
+		if not DEBUG:
+			self.serial = serial.Serial(serial_port, 9600)
 		print "Awaiting data initialization!"
 		self.writeToData()
 		self.update()
@@ -44,7 +49,7 @@ class DeviceData:
 					file.close()
 					return False
 			if ("x" in key):
-				print "X was : " + value
+				#print "X was : " + value
 				self.data["X"] = value.strip('\n')
 			elif ("y" in key):
 				self.data["Y"] = value.strip('\n')
@@ -121,22 +126,27 @@ class DeviceData:
 		height.close()
 
 	def writeToSerial(self):
-		message = ""
-		for (key,value) in self.data.items():
-			message += value + "\n"
-		print "[pi->ard] Message is <<" + message + ">>"
-		# self.serial.write(message)
+		format_str = "{x}\n{y}\n{d}\n{h}\n"
+		message = format_str.format(x=self.data["X"], y=self.data["Y"], d=self.data["D"], h=self.data["H"])
+		if DEBUG:
+			hex_str = ':'.join(x.encode('hex') for x in message)
+			print "[pi->ard] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
+		else:
+			self.serial.write(message)
 
 	def recieve(self):
 		rec_x = False
 		rec_y = False
 		rec_depth = False
 		rec_height = False
-		print "[ard->pi] <<"
+		if DEBUG:
+			print "[ard->pi] <<"
 		while not (rec_x and rec_y and rec_depth and rec_height):
-			#line = self.serial.readline().strip("\n")
-			line = "1"
-			print line
+			if DEBUG:
+				line = "1"
+				print line
+			else:
+				line = self.serial.readline().strip("\n")
 			if (not rec_x):
 				self.response[0] = line
 				rec_x = True
@@ -149,17 +159,25 @@ class DeviceData:
 			elif (not rec_height):
 				self.response[3] = line
 				rec_height = True
-		print ">>"
+		if DEBUG:
+			print ">>"
 
 
 	def serial_close(self):
-		print "closed serial"
-		# self.serial.close()
+		if DEBUG:
+			print "closed serial"
+		else:
+			self.serial.close()
 
 # /dev/cu._____ should be the serial port the arduino
 # is connected to.
 dev = DeviceData(serial_port)
 print "Starting file communication!"
+
+@atexit.register
+def close():
+	dev.serial_close()
+
 while True:
 	dev.writeToSerial()
 	dev.recieve()

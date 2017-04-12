@@ -4,8 +4,6 @@ import shipbot.hardware.SystemState;
 
 public class AlignTask extends Task {
 
-	private int z = -1;
-	private int y = -1;
 	private TaskStatus status = TaskStatus.WAITING;
 	
 	public AlignTask() {
@@ -23,5 +21,7 @@ public class AlignTask extends Task {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
 }

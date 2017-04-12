@@ -66,7 +66,6 @@ public class MoveTask extends Task {
 			
 			// Update virtual representation
 			sys.updateLocation(x, y);
-			System.out.println(String.format("> wrote %d %d as new location coords", x,y));
 		} catch (Exception e) {
 			status = TaskStatus.ABORTED;
 			return;

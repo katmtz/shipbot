@@ -21,7 +21,6 @@ public class SystemState {
 	
 	// Devices
 	private Motor drive;
-	private Sensor ir_sensor;
 	private Motor stepper_y;
 	private Motor stepper_z;
 	private Motor hebi_fixed;
@@ -29,7 +28,6 @@ public class SystemState {
 	
 	public SystemState() {
 		// Initialize sensors and actuators
-		ir_sensor = new SensorIR(Config.IR_SENSOR_ID);
 		stepper_z = new StepperMotor(Config.Z_STEPPER_ID);
 		stepper_y = new StepperMotor(Config.Y_STEPPER_ID);
 		drive = new DriveMotor(Config.DRIVE_MOTOR_ID);
@@ -79,10 +77,6 @@ public class SystemState {
 	
 	public int getSpin() {
 		return hebi_effector.get(HebiMotor.POS);
-	}
-	
-	public Double getSensorDepth() {
-		return ir_sensor.getValue();
 	}
 	
 	/* UPDATE METHODS */

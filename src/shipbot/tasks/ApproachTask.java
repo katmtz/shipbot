@@ -43,7 +43,6 @@ public class ApproachTask extends Task {
 			// write new positions to virtual representation
 			sys.updateDepth(this.depth);
 			sys.updateHeight(this.height);
-			System.out.println(String.format("wrote %d %d as new approach coords", this.depth,this.height));
 		} catch (Exception e) {
 			this.status = TaskStatus.ABORTED;
 			return;

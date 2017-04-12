@@ -32,9 +32,17 @@ public class Mission {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// This is a debugging script!!!!
+		if (!Config.DEBUG) {
+			return;
+		}
+		
 		String path = "missions/mission_log.txt";
 		Mission mission = new Mission(path);
 		try {
+			// Clear files before waiting for data sync
+			DeviceData.clear_data();
+			
 			// Check for arduino serial sync
 			System.out.println("WAITING FOR SYNC");
 			
@@ -54,11 +62,12 @@ public class Mission {
 			}
 			System.out.println("SYNC ACQUIRED");
 		} catch (IOException e) {
-			System.out.println("EXCEPTION");
+			System.out.println("!!! EXCEPTION !!!");
 			System.out.println(e.getMessage());
 			return;
 		}
 		mission.executeMission();
+		System.out.println("MISSION COMPLETE");
 	}
 	
 	/**
@@ -96,7 +105,7 @@ public class Mission {
 		MessageLog.logMissionStatus("Starting task execution.");
 		// Execute tasks.
 		for (Task task : tasks) {
-			System.out.println(String.format("Executing task: %s", task.toString()));
+			// System.out.println(String.format("Executing task: %s", task.toString()));
 			task.executeTask(system);
 			MessageLog.logTaskStatus(task.toString());
 		}

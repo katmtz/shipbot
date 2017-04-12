@@ -18,8 +18,8 @@ import java.util.Map;
  */
 public class DeviceData {
 
-	private static String sensor_path_format = "devices/sensors/%s.txt";
-	private static String motor_path_format = "devices/actuators/%s.txt";
+	private static String motor_path_format = "devices/actuators/%s.txt";	
+	private static String UNINITIALIZED_MSG = "@ 1\nNO DATA\n";
 	
 	/**
 	 * Test sensor and motor data functions. 
@@ -31,22 +31,9 @@ public class DeviceData {
 		if (!Config.DEBUG) {
 			return;
 		}
-		// SENSOR TEST
-		String id = "IR_0";
-		Map<String,Double> data = DeviceData.getSensorData(id);
-		for (String key : data.keySet()) {
-			if (key != "owner") {
-				System.out.print(key);
-				System.out.print(": ");
-				System.out.println(data.get(key).toString());
-			} else {
-				System.out.print("Owner is ");
-				System.out.println(data.get(key).toString());
-			}
-		}
 		
 		// MOTOR READ TEST
-		id = "DRIVE_0";
+		String id = "DRIVE_0";
 		Map<String, Integer> motor_data = DeviceData.getMotorData(id);
 		for (String key : motor_data.keySet()) {
 			if (key != "owner") {
@@ -67,51 +54,6 @@ public class DeviceData {
 		} catch (Exception e) {
 			System.out.println("lol what");
 		}
-	}
-	
-	/**
-	 * Tokenizes the sensor data file, reads fields and stores data as a map
-	 * of field -> (double) value. 
-	 * 
-	 * @param sensor_id
-	 * @return map of data file
-	 */
-	public static Map<String, Double> getSensorData(String sensor_id) {
-		String sensor_path = String.format(sensor_path_format, sensor_id);
-		Map<String, Double> data = new HashMap<String, Double>();
-		try {
-			// TODO: lock sensor data file before reading!
-			Reader reader = new FileReader(sensor_path);
-			StreamTokenizer tok = new StreamTokenizer(reader);
-			tok.parseNumbers();
-			
-			boolean eof = false;
-			String field = "";
-			while (!eof) {
-				int token = tok.nextToken();
-				switch (token) {
-					case StreamTokenizer.TT_EOF:
-						eof = true;
-						break;
-					case StreamTokenizer.TT_WORD:
-						field = tok.sval;
-						break;
-					case StreamTokenizer.TT_NUMBER:
-						data.put(field, tok.nval);
-						break;
-					default:
-						if ((char) token == '@') {
-							token = tok.nextToken();
-							data.put("owner", tok.nval);
-						}
-						break;
-				}
-			}
-			reader.close();
-		} catch (IOException e) {
-			MessageLog.printError("SENSOR_UPDATE", "IOException while updating sensor data.");
-		}
-		return data;
 	}
 	
 	/**
@@ -173,7 +115,7 @@ public class DeviceData {
 		}
 		try {
 			Writer writer = new FileWriter(motor_path);
-			System.out.println(String.format("WROTE {%s} to device data", sb.toString()));
+			// System.out.println(String.format("WROTE {%s} to device data", sb.toString()));
 			writer.write(sb.toString());
 			writer.close();
 		} catch (IOException e) {
@@ -189,10 +131,42 @@ public class DeviceData {
 		if (reader.ready()) {
 			String header = reader.readLine();
 			reader.close();
-			if (header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
+			if ((header != null) && header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Utility function to clear device data files before
+	 * starting system. 
+	 * 
+	 * @throws IOException
+	 */
+	public static void clear_data() throws IOException {
+		// Clear motor files.
+		for (String motor_id : Config.getAllMotorIds()) {
+			String motor_path = String.format(motor_path_format, motor_id);
+			try {
+				Writer writer = new FileWriter(motor_path);
+				writer.write(UNINITIALIZED_MSG);
+				writer.close();
+			} catch (IOException e) {
+				MessageLog.printError("DATA_INIT", "IOException while clearing motor data.");
+				throw e;
+			}
+		}
+		
+		// Clear opencv file
+		String cv_path = "devices/CV.txt";
+		try {
+			Writer writer = new FileWriter(cv_path);
+			writer.write(UNINITIALIZED_MSG);
+			writer.close();
+		} catch (IOException e) {
+			MessageLog.printError("DATA_INIT", "IOException while clearing CV data.");
+			throw e;
+		}
 	}
 }
