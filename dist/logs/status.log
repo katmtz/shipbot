@@ -1,0 +1,31 @@
+[ MISSION LOG ] (1491960347888) New mission initialized.
+[ MISSION LOG ] (1491960347901) Loaded goals from mission file.
+[ MISSION LOG ] (1491960347901) Mission time limit is 360 sec.
+[ MISSION LOG ] (1491960347901) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1491960347905) Device: BreakerBox A @ Station D -- Goals: switch 2
+[ MISSION LOG ] (1491960347906) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1491960347906) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1491960347906) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ TASK LOG ] (1491960348779) Move Task, X=0 Y=0 [complete]
+[ MISSION LOG ] (1491960348780) Starting task execution.
+[ TASK LOG ] (1491960349791) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960349791) Move Task, X=0 Y=0 [complete]
+[ TASK LOG ] (1491960350801) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960351814) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491960351814) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491960352820) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960352822) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960353831) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491960353831) Move Task, X=3 Y=0 [complete]
+[ TASK LOG ] (1491960354841) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960354841) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960355851) Move Task, X=3 Y=2 [complete]
+[ TASK LOG ] (1491960355851) Move Task, X=3 Y=2 [complete]
+[ TASK LOG ] (1491960356861) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960356862) Approach Task, depth=5 height=5 [complete]
+[ TASK LOG ] (1491960357871) Move Task, X=3 Y=3 [complete]
+[ TASK LOG ] (1491960357872) Move Task, X=3 Y=3 [complete]
+[ TASK LOG ] (1491960358882) Approach Task, depth=5 height=5 [complete]
+[ MISSION LOG ] (1491960358882) Task execution complete.
+[ TASK LOG ] (1491960358882) Approach Task, depth=5 height=5 [complete]
+[ MISSION LOG ] (1491960358882) Task execution complete.

@@ -1,0 +1,7 @@
+WAITING FOR SYNC, ready to start pipeline
+- Drive motor synced.
+- Depth stepper synced.
+- Height stepper synced.
+SYNC ACQUIRED
+MISSION COMPLETE
+DATA FILES DUMPED
