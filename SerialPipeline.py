@@ -8,7 +8,7 @@ serial_MEGA = "/dev/cu.usbmodem1411"
 serial_UNO = "/dev/cu.usbmodem1411"
 
 # Use to swap between terminal and serial output
-DEBUG = False
+DEBUG = True
 
 class DeviceData:
 	# indicates we read a stop from the files
@@ -36,7 +36,7 @@ class DeviceData:
 			"0"
 		]
 		if not DEBUG:
-			#self.serial = serial.Serial(serial_MEGA, 9600)
+			self.serial = serial.Serial(serial_MEGA, 9600)
 			self.uno = serial.Serial(serial_MEGA, 9600)
 		print "Awaiting data initialization!"
 		self.writeToData()
@@ -64,6 +64,8 @@ class DeviceData:
 			elif ("y" in key):
 				self.data["Y"] = value.strip('\n')
 				file.close()
+			elif ("r" in key):
+				self.data["R"] = value.strip("\n")
 				#print "Updated drive!"
 				return True
 		file.close()
@@ -124,7 +126,7 @@ class DeviceData:
 		read_depth = False
 		# while not (read_drive or (read_height and read_depth)):
 			#print "file lines as read:"
-		while not read_drive or (read_height and read_drive):
+		while not (read_drive or (read_height and read_drive)):
 			read_drive = read_drive or self.update_drive()
 			read_height = read_height or self.update_height()
 			read_depth = read_depth or self.update_depth()
@@ -132,17 +134,17 @@ class DeviceData:
 
 	def writeToData(self):
 		drive = open(self.device_paths["drive"], 'w')
-		drive_message = "@ 0\nx " + self.response[0] + "\ny " + self.response[1]
+		drive_message = "@ 0\nack 1\n"
 		drive.write(drive_message)
 		drive.close()
 
 		depth = open(self.device_paths["depth"], 'w')
-		depth_msg = "@ 0\nposition " + self.response[2]
+		depth_msg = "@ 0\nack 1\n"
 		depth.write(depth_msg)
 		depth.close()
 
 		height = open(self.device_paths["height"], 'w')
-		height_msg = "@ 0\nposition " + self.response[3]
+		height_msg = "@ 0\nack 1\n"
 		height.write(height_msg)
 		height.close()
 
@@ -154,7 +156,8 @@ class DeviceData:
 		message = format_str.format(dist=dist, direc=direc)
 		hex_str = ':'.join(x.encode('hex') for x in message)
 		print "[MEGA_OUT] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
-		self.serial.write(message)
+		if not DEBUG:
+			self.serial.write(message)
 
 	def recieve(self):
 		time.sleep(1)
