@@ -3,7 +3,13 @@ package shipbot.mission;
 import java.util.ArrayList;
 import java.util.List;
 
+import shipbot.hardware.CVSensing;
 import shipbot.staticlib.MessageLog;
+import shipbot.tasks.AlignTask;
+import shipbot.tasks.CaptureTask;
+import shipbot.tasks.EngageTask;
+import shipbot.tasks.MoveTask;
+import shipbot.tasks.PositionTask;
 import shipbot.tasks.Task;
 
 /**
@@ -27,23 +33,7 @@ public class BreakerBox extends Device {
 	public BreakerBox(Station s, String id) {
 		this.station = s;
 		this.id = id;
-		switches = new ArrayList<Integer>();
-	}
-
-	@Override
-	public int[] getCoordinates() {
-		return this.station.getCoordinates();
-	}
-
-	@Override
-	public int[] getGoalState() {
-		int[] goals = new int[switches.size()];
-		int i = 0;
-		for (int n : switches) {
-			goals[i] = n;
-			i++;
-		}
-		return goals;
+		this.switches = new ArrayList<Integer>();
 	}
 
 	/**
@@ -59,7 +49,7 @@ public class BreakerBox extends Device {
 			MessageLog.printError(this.name(), "Goal state not in expected range!");
 			return;
 		}
-		switches.add(goal_state);
+		this.switches.add(goal_state);
 	}
 
 	@Override
@@ -72,12 +62,32 @@ public class BreakerBox extends Device {
 		return String.format(format, this.id);
 	}
 
-	@Override
-	public int[] getPosition() {
-		int[] position = { 5, 5 };
-		return position;
+	public List<Task> getTasks() {
+		List<Task> tasks = new ArrayList<Task>();
+		// Move to station
+		tasks.add(new MoveTask(this.station));
+		
+		// Capture & identify image
+		tasks.add(new CaptureTask(CVSensing.BREAKER));
+		
+		// Raise arm (z stepper, partial y stepper)
+		tasks.add(new AlignTask(false));
+		// For each switch
+		for (Integer sw_no : switches) {
+			// Adjust L/R position
+			tasks.add(new MoveTask(sw_no));
+			// Position HEBI
+			tasks.add(new PositionTask(this.station.needsFlip()));
+			// Push arm in
+			tasks.add(new AlignTask(true));
+			// Rotate effector
+			tasks.add(new EngageTask());
+			// Pull arm back
+			tasks.add(new AlignTask(false));
+		}
+		return tasks;
 	}
-
+	
 	@Override
 	public String getDescription() {
 		String format = "Device: %s @ Station %s -- Goals:";

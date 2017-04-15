@@ -4,10 +4,11 @@ from sys import stdin
 import atexit
 
 # Serial port connected to arduino
-serial_port = "/dev/cu.usbmodem1411"
+serial_MEGA = "/dev/cu.usbmodem1411"
+serial_UNO = "/dev/cu.usbmodem1411"
 
 # Use to swap between terminal and serial output
-DEBUG = True
+DEBUG = False
 
 class DeviceData:
 	# indicates we read a stop from the files
@@ -20,7 +21,7 @@ class DeviceData:
 		"height": "devices/actuators/STEP_1.txt"
 	}
 
-	def __init__(self, serial_port):
+	def __init__(self):
 		# Create a data dictionary & initialize it
 		self.data = {
 			"X": "0",
@@ -35,7 +36,8 @@ class DeviceData:
 			"0"
 		]
 		if not DEBUG:
-			self.serial = serial.Serial(serial_port, 9600)
+			#self.serial = serial.Serial(serial_MEGA, 9600)
+			self.uno = serial.Serial(serial_MEGA, 9600)
 		print "Awaiting data initialization!"
 		self.writeToData()
 		self.update()
@@ -120,8 +122,9 @@ class DeviceData:
 		read_drive = False
 		read_height = False
 		read_depth = False
-		while not (read_drive or (read_height and read_depth)):
+		# while not (read_drive or (read_height and read_depth)):
 			#print "file lines as read:"
+		while not read_drive or (read_height and read_drive):
 			read_drive = read_drive or self.update_drive()
 			read_height = read_height or self.update_height()
 			read_depth = read_depth or self.update_depth()
@@ -143,39 +146,18 @@ class DeviceData:
 		height.write(height_msg)
 		height.close()
 
+
 	def writeToSerial(self):
-		format_str = "{x}\n{y}\n{d}\n{h}\n"
-		message = format_str.format(x=self.data["X"], y=self.data["Y"], d=self.data["D"], h=self.data["H"])
-		if DEBUG:
-			hex_str = ':'.join(x.encode('hex') for x in message)
-			print "[SERIAL_OUT] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
-		else:
-			self.serial.write(message)
+		format_str = "{direc}\n{dist}\n"
+		dist = self.data["X"]
+		direc = 2
+		message = format_str.format(dist=dist, direc=direc)
+		hex_str = ':'.join(x.encode('hex') for x in message)
+		print "[MEGA_OUT] Message is (" + str(len(message)) + " bytes) <<" + hex_str + ">>"
+		self.serial.write(message)
 
 	def recieve(self):
-		rec_x = False
-		rec_y = False
-		rec_depth = False
-		rec_height = False
-		if DEBUG:
-			time.sleep(1)
-		while not (rec_x and rec_y and rec_depth and rec_height):
-			if DEBUG:
-				line = "1"
-			else:
-				line = self.serial.readline().strip("\n")
-			if (not rec_x):
-				self.response[0] = line
-				rec_x = True
-			elif (not rec_y):
-				self.response[1] = line
-				rec_y = True
-			elif (not rec_depth):
-				self.response[2] = line
-				rec_depth = True
-			elif (not rec_height):
-				self.response[3] = line
-				rec_height = True
+		time.sleep(1)
 
 	def serial_close(self):
 		if not self.killed:
@@ -183,7 +165,8 @@ class DeviceData:
 			if DEBUG:
 				print "[DEBUG] Mock closed serial port."
 			else:
-				self.serial.close()
+				#self.serial.close()
+				self.uno.close()
 		else:
 			return;
 
@@ -192,7 +175,7 @@ class DeviceData:
 
 # /dev/cu._____ should be the serial port the arduino
 # is connected to.
-dev = DeviceData(serial_port)
+dev = DeviceData()
 print "Starting file communication!"
 
 while dev.serial_active():

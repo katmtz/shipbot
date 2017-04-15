@@ -1,5 +1,9 @@
 package shipbot.mission;
 
+import java.util.List;
+
+import shipbot.tasks.Task;
+
 /** 
  * Abstract representation of goal states for manipulated devices as specified by 
  * the mission file. This object doesn't store information about *how* to complete
@@ -10,16 +14,12 @@ package shipbot.mission;
  *
  */
 public abstract class Device {
-		
-	public abstract int[] getCoordinates();
-	
-	public abstract int[] getPosition();
 	
 	public abstract void addGoalState(int goal_state);
 	
-	public abstract int[] getGoalState();
-	
 	protected abstract Station getStation();
+	
+	public abstract List<Task> getTasks();
 	
 	public abstract String getDescription();
 	

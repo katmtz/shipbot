@@ -51,13 +51,14 @@ public class Mission {
 				// Check all the files
 				if (!DeviceData.waiting(Config.DRIVE_MOTOR_ID)) {
 					System.out.println("- Drive motor synced.");
-					if (!DeviceData.waiting(Config.Y_STEPPER_ID)) {
-						System.out.println("- Depth stepper synced.");
-						if (!DeviceData.waiting(Config.Z_STEPPER_ID)) {
-							System.out.println("- Height stepper synced.");
-							synced = true;
-						}
-					}
+					synced = true;
+//					if (!DeviceData.waiting(Config.Y_STEPPER_ID)) {
+//						System.out.println("- Depth stepper synced.");
+//						if (!DeviceData.waiting(Config.Z_STEPPER_ID)) {
+//							System.out.println("- Height stepper synced.");
+//							synced = true;
+//						}
+//					}
 				}
 			}
 			System.out.println("SYNC ACQUIRED");
@@ -90,13 +91,10 @@ public class Mission {
 		String format = "Mission time limit is %d sec.";
 		MessageLog.logMissionStatus(String.format(format, time_limit));
 		
-		// Add a task to visit each device!
+		// Add each device's needed tasks.
 		for (Device dev : devices) {
 			MessageLog.logMissionStatus(dev.getDescription());
-			Task move = new MoveTask(dev.getCoordinates());
-			tasks.add(move);
-			Task approach = new ApproachTask(dev.getPosition());
-			tasks.add(approach);
+			tasks.addAll(dev.getTasks());
 		}
 	}
 	

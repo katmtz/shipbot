@@ -36,7 +36,8 @@ public class SystemState {
 	}
 	
 	/**
-	 * Gets X position relative to testbed.
+	 * Gets X position relative to testbed, using upper left corner
+	 * as (0,0).
 	 * 
 	 * @return X position
 	 */
@@ -45,12 +46,17 @@ public class SystemState {
 	}
 	
 	/**
-	 * Gets Y position relative to testbed.
+	 * Gets Y position relative to testbed, using the upper right
+	 * corner as (0,0)
 	 * 
 	 * @return Y position
 	 */
 	public int getYPosition() {
 		return drive.get(DriveMotor.Y);
+	}
+	
+	public int getOrientation() {
+		return drive.get(DriveMotor.ORIENT);
 	}
 	
 	/**
@@ -78,12 +84,14 @@ public class SystemState {
 	public int getSpin() {
 		return hebi_effector.get(HebiMotor.POS);
 	}
+
 	
 	/* UPDATE METHODS */
 	
-	public void updateLocation(int x, int y) {
+	public void updateLocation(int x, int y, int r) {
 		this.drive.set(DriveMotor.X, x);
 		this.drive.set(DriveMotor.Y, y);
+		this.drive.set(DriveMotor.ORIENT, r);
 	}
 	
 	public void updateDepth(int depth) {

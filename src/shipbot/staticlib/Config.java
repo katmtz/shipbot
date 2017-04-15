@@ -21,18 +21,25 @@ public class Config {
 	public static String Z_STEPPER_ID = "STEP_1";
 	public static String FIXED_HEBI_ID = "HEBI_0";
 	public static String EFFECTOR_HEBI_ID = "HEBI_1";
+	public static String REACH_HEBI_ID = "HEBI_2";
 	
-	// CODES
+	// OWNER HEADER CODES
 	public static final Integer OWNER_ARDUINO = 0;
 	public static final Integer OWNER_PI = 1;
 	
-	// TIMEOUT (arbitrary!!)
+	// ORIENTATION
+	public static final int FRONT_FACING = 1;
+	public static final int SIDE_FACING = 0;
+	
+	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 5000;
 	public static int SLEEPTIME = 10;
 	
+	// STATIC POSITIONS (in mm)
+	public static int DEVICE_HEIGHT = 458;
+	
 	/**
 	 * Returns an array of all the motor ids
-	 * TODO: make this not gross?? 
 	 * @return
 	 */
 	public static List<String> getAllMotorIds() {
@@ -42,6 +49,7 @@ public class Config {
 		ids.add(Z_STEPPER_ID);
 		ids.add(FIXED_HEBI_ID);
 		ids.add(EFFECTOR_HEBI_ID);
+		ids.add(REACH_HEBI_ID);
 		return ids;
 	}
 }
