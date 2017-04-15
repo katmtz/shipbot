@@ -34,7 +34,7 @@ class DrivePipeline:
 			print "[DRIVE] Skipped serial open due to mock-up."
 			return
 
-		self.serial = serial.Serial(serial_MEGA, 9600)
+		self.serial = serial.Serial(port, 9600)
 
 	def recieve(self):
 		if self.serial_mock:
@@ -69,7 +69,7 @@ class DrivePipeline:
 
 		# Write 'ALL' command and data
 		format_str = "{c_x} {c_y} {c_o} {t_x} {t_y} {t_r}\n"
-		msg = format_str.format(c_x=self.x, c_y=self.y, c_r=self.r, t_x=t_x, t_y=t_y, t_r=t_r)
+		msg = format_str.format(c_x=self.x, c_y=self.y, c_o=self.r, t_x=t_x, t_y=t_y, t_r=t_r)
 
 		if self.serial_mock:
 			print ">a"
@@ -259,7 +259,7 @@ class StepperPipeline:
 			if (self.debug):
 				print "[STEPPER] waiting for Arduino to send confirmation."
 			time.sleep(.5)
-			timeout++
+			timeout += 1
 		line = self.serial.readline()
 		if self.debug:
 			print "[STEPPER] recieved line:" + line

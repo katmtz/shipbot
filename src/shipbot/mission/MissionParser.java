@@ -122,6 +122,7 @@ public class MissionParser {
 				break;
 			case 'C':
 				station = Station.C;
+				break;
 			case 'D':
 				station = Station.D;
 				break;

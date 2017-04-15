@@ -51,14 +51,13 @@ public class Mission {
 				// Check all the files
 				if (!DeviceData.waiting(Config.DRIVE_MOTOR_ID)) {
 					System.out.println("- Drive motor synced.");
-					synced = true;
-//					if (!DeviceData.waiting(Config.Y_STEPPER_ID)) {
-//						System.out.println("- Depth stepper synced.");
-//						if (!DeviceData.waiting(Config.Z_STEPPER_ID)) {
-//							System.out.println("- Height stepper synced.");
-//							synced = true;
-//						}
-//					}
+					if (!DeviceData.waiting(Config.Y_STEPPER_ID)) {
+						System.out.println("- Depth stepper synced.");
+						if (!DeviceData.waiting(Config.Z_STEPPER_ID)) {
+							System.out.println("- Height stepper synced.");
+							synced = true;
+						}
+					}
 				}
 			}
 			System.out.println("SYNC ACQUIRED");

@@ -1,74 +1,41 @@
-[ MISSION LOG ] (1492275097217) New mission initialized.
-[ MISSION LOG ] (1492275097225) Loaded goals from mission file.
-[ MISSION LOG ] (1492275097225) Mission time limit is 360 sec.
-[ MISSION LOG ] (1492275097225) Device: V1 @ Station A -- Rotate to [175] degrees.
-[ MISSION LOG ] (1492275097228) Device: BreakerBox A @ Station D -- Goals: switch 2
-[ MISSION LOG ] (1492275097228) Device: V3 @ Station D -- Rotate to [0] degrees.
-[ MISSION LOG ] (1492275097229) Device: BreakerBox B @ Station F -- Goals: switch 3
-[ MISSION LOG ] (1492275097229) Device: V1 @ Station G -- Rotate to [50] degrees.
-[ MISSION LOG ] (1492275103854) Starting task execution.
-[ MISSION LOG ] (1492275104862) Starting task execution.
-[ TASK LOG ] (1492275104863) Move Task, X=1080 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275104863) shipbot.tasks.CaptureTask@677327b6
-[ TASK LOG ] (1492275105869) Move Task, X=1080 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275105870) shipbot.tasks.CaptureTask@677327b6
-[ TASK LOG ] (1492275163748) shipbot.tasks.AlignTask@14ae5a5
-[ TASK LOG ] (1492275163749) shipbot.tasks.PositionTask@7f31245a
-[ TASK LOG ] (1492275163750) shipbot.tasks.EngageTask@6d6f6e28
-[ TASK LOG ] (1492275164756) shipbot.tasks.AlignTask@14ae5a5
-[ TASK LOG ] (1492275164756) shipbot.tasks.PositionTask@7f31245a
-[ TASK LOG ] (1492275164758) shipbot.tasks.EngageTask@6d6f6e28
-[ TASK LOG ] (1492275165769) Move Task, X=165 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275165769) Move Task, X=165 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275165769) shipbot.tasks.CaptureTask@135fbaa4
-[ TASK LOG ] (1492275165769) shipbot.tasks.CaptureTask@135fbaa4
-[ TASK LOG ] (1492275223630) shipbot.tasks.AlignTask@45ee12a7
-[ TASK LOG ] (1492275223727) shipbot.tasks.AlignTask@45ee12a7
-[ TASK LOG ] (1492275224635) Move Task, X=0 Y=0 Orient=0 [complete]
-[ TASK LOG ] (1492275224635) Move Task, X=0 Y=0 Orient=0 [complete]
-[ TASK LOG ] (1492275224635) shipbot.tasks.PositionTask@330bedb4
-[ TASK LOG ] (1492275224635) shipbot.tasks.PositionTask@330bedb4
-[ TASK LOG ] (1492275283524) shipbot.tasks.AlignTask@2503dbd3
-[ TASK LOG ] (1492275283525) shipbot.tasks.EngageTask@4b67cf4d
-[ TASK LOG ] (1492275283536) shipbot.tasks.AlignTask@2503dbd3
-[ TASK LOG ] (1492275283536) shipbot.tasks.EngageTask@4b67cf4d
-[ TASK LOG ] (1492275341447) shipbot.tasks.AlignTask@7ea987ac
-[ TASK LOG ] (1492275341469) shipbot.tasks.AlignTask@7ea987ac
-[ TASK LOG ] (1492275342457) Move Task, X=165 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275342457) shipbot.tasks.CaptureTask@12a3a380
-[ TASK LOG ] (1492275342458) Move Task, X=165 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492275342458) shipbot.tasks.CaptureTask@12a3a380
-[ TASK LOG ] (1492275399557) shipbot.tasks.AlignTask@29453f44
-[ TASK LOG ] (1492275399557) shipbot.tasks.PositionTask@5cad8086
-[ TASK LOG ] (1492275399559) shipbot.tasks.EngageTask@6e0be858
-[ TASK LOG ] (1492275399579) shipbot.tasks.AlignTask@29453f44
-[ TASK LOG ] (1492275399580) shipbot.tasks.PositionTask@5cad8086
-[ TASK LOG ] (1492275399580) shipbot.tasks.EngageTask@6e0be858
-[ TASK LOG ] (1492275400568) Move Task, X=0 Y=165 Orient=0 [complete]
-[ TASK LOG ] (1492275400568) shipbot.tasks.CaptureTask@61bbe9ba
-[ TASK LOG ] (1492275400569) Move Task, X=0 Y=165 Orient=0 [complete]
-[ TASK LOG ] (1492275400570) shipbot.tasks.CaptureTask@61bbe9ba
-[ TASK LOG ] (1492275458702) shipbot.tasks.AlignTask@610455d6
-[ TASK LOG ] (1492275458702) shipbot.tasks.AlignTask@610455d6
-[ TASK LOG ] (1492275459712) Move Task, X=0 Y=0 Orient=0 [complete]
-[ TASK LOG ] (1492275459712) shipbot.tasks.PositionTask@511d50c0
-[ TASK LOG ] (1492275459717) Move Task, X=0 Y=0 Orient=0 [complete]
-[ TASK LOG ] (1492275459717) shipbot.tasks.PositionTask@511d50c0
-[ TASK LOG ] (1492275518515) shipbot.tasks.AlignTask@60e53b93
-[ TASK LOG ] (1492275518516) shipbot.tasks.EngageTask@5e2de80c
-[ TASK LOG ] (1492275518538) shipbot.tasks.AlignTask@60e53b93
-[ TASK LOG ] (1492275518538) shipbot.tasks.EngageTask@5e2de80c
-[ TASK LOG ] (1492275577219) shipbot.tasks.AlignTask@1d44bcfa
-[ TASK LOG ] (1492275577231) shipbot.tasks.AlignTask@1d44bcfa
-[ TASK LOG ] (1492275578233) Move Task, X=0 Y=470 Orient=0 [complete]
-[ TASK LOG ] (1492275578233) Move Task, X=0 Y=470 Orient=0 [complete]
-[ TASK LOG ] (1492275578234) shipbot.tasks.CaptureTask@266474c2
-[ TASK LOG ] (1492275578234) shipbot.tasks.CaptureTask@266474c2
-[ TASK LOG ] (1492275637004) shipbot.tasks.AlignTask@6f94fa3e
-[ TASK LOG ] (1492275637005) shipbot.tasks.PositionTask@5e481248
-[ TASK LOG ] (1492275637006) shipbot.tasks.EngageTask@66d3c617
-[ MISSION LOG ] (1492275637006) Task execution complete.
-[ TASK LOG ] (1492275637028) shipbot.tasks.AlignTask@6f94fa3e
-[ TASK LOG ] (1492275637029) shipbot.tasks.PositionTask@5e481248
-[ TASK LOG ] (1492275637029) shipbot.tasks.EngageTask@66d3c617
-[ MISSION LOG ] (1492275637029) Task execution complete.
+[ MISSION LOG ] (1492282645364) New mission initialized.
+[ MISSION LOG ] (1492282645371) Loaded goals from mission file.
+[ MISSION LOG ] (1492282645371) Mission time limit is 360 sec.
+[ MISSION LOG ] (1492282645371) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1492282645374) Device: BreakerBox A @ Station C -- Goals: switch 2
+[ MISSION LOG ] (1492282645375) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1492282645375) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1492282645375) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (1492282647221) Starting task execution.
+[ TASK LOG ] (1492282648230) Move Task, X=1080 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492282648231) shipbot.tasks.CaptureTask@677327b6
+[ TASK LOG ] (1492282649243) shipbot.tasks.AlignTask@14ae5a5
+[ TASK LOG ] (1492282649243) shipbot.tasks.PositionTask@7f31245a
+[ TASK LOG ] (1492282649243) shipbot.tasks.EngageTask@6d6f6e28
+[ TASK LOG ] (1492282650250) Move Task, X=470 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492282650250) shipbot.tasks.CaptureTask@135fbaa4
+[ TASK LOG ] (1492282651260) shipbot.tasks.AlignTask@45ee12a7
+[ TASK LOG ] (1492282652272) Move Task, X=666 Y=420 Orient=1 [complete]
+[ TASK LOG ] (1492282652273) shipbot.tasks.PositionTask@330bedb4
+[ TASK LOG ] (1492282653282) shipbot.tasks.AlignTask@2503dbd3
+[ TASK LOG ] (1492282653282) shipbot.tasks.EngageTask@4b67cf4d
+[ TASK LOG ] (1492282654287) shipbot.tasks.AlignTask@7ea987ac
+[ TASK LOG ] (1492282655299) Move Task, X=165 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492282655299) shipbot.tasks.CaptureTask@12a3a380
+[ TASK LOG ] (1492282656303) shipbot.tasks.AlignTask@29453f44
+[ TASK LOG ] (1492282656303) shipbot.tasks.PositionTask@5cad8086
+[ TASK LOG ] (1492282656304) shipbot.tasks.EngageTask@6e0be858
+[ TASK LOG ] (1492282657316) Move Task, X=0 Y=165 Orient=0 [complete]
+[ TASK LOG ] (1492282657316) shipbot.tasks.CaptureTask@61bbe9ba
+[ TASK LOG ] (1492282658327) shipbot.tasks.AlignTask@610455d6
+[ TASK LOG ] (1492282659339) Move Task, X=666 Y=420 Orient=1 [complete]
+[ TASK LOG ] (1492282659339) shipbot.tasks.PositionTask@511d50c0
+[ TASK LOG ] (1492282660350) shipbot.tasks.AlignTask@60e53b93
+[ TASK LOG ] (1492282660350) shipbot.tasks.EngageTask@5e2de80c
+[ TASK LOG ] (1492282661367) shipbot.tasks.AlignTask@1d44bcfa
+[ TASK LOG ] (1492282662377) Move Task, X=0 Y=470 Orient=0 [complete]
+[ TASK LOG ] (1492282662377) shipbot.tasks.CaptureTask@266474c2
+[ TASK LOG ] (1492282663386) shipbot.tasks.AlignTask@6f94fa3e
+[ TASK LOG ] (1492282663387) shipbot.tasks.PositionTask@5e481248
+[ TASK LOG ] (1492282663387) shipbot.tasks.EngageTask@66d3c617
+[ MISSION LOG ] (1492282663387) Task execution complete.

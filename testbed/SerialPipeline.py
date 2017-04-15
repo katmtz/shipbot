@@ -70,12 +70,12 @@ class SerialPipeline:
 		msg = format_str.format(status=status)
 		
 		if (drive):
-			drive_file = open(drive_path, 'w')
+			drive_file = open(self.drive_path, 'w')
 			drive_file.write(msg)
 			drive_file.close()
 
 		if (stepper):
-			for path in stepper_paths:
+			for path in self.stepper_paths:
 				step_file = open(path, 'w')
 				step_file.write(msg)
 				step_file.close()
@@ -90,7 +90,7 @@ class SerialPipeline:
 		if verbose:
 			print "[SERIAL] syncing with controller..."
 		while not synced:
-			drive_file = open(drive_path, 'r')
+			drive_file = open(self.drive_path, 'r')
 			for line in drive_file:
 				if "NO DATA" in line:
 					synced = True
@@ -98,7 +98,7 @@ class SerialPipeline:
 			print "[SERIAL] - drive sync acquired"
 
 		# Sync with stepper files
-		for path in stepper_paths:
+		for path in self.stepper_paths:
 			synced = False
 			while not synced:
 				stepper_file = open(path, 'r')

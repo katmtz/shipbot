@@ -42,6 +42,9 @@ public class MoveTask extends Task {
 	public MoveTask(Integer switch_no) {
 		// load x & y from system state (due to cv adjustments!)
 		// keep previous orientation info
+		this.x = 666;
+		this.y = 420;
+		this.orient = 1;
 	}
 
 	@Override
