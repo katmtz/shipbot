@@ -32,6 +32,8 @@ public class AlignTask extends Task {
 	
 	public AlignTask() {
 		// Determine height and depth from CV-gained info
+		this.depth = -15;
+		this.height = Config.DEVICE_HEIGHT;
 	}
 	
 	@Override
@@ -58,8 +60,7 @@ public class AlignTask extends Task {
 			}
 			
 			// write new positions to virtual representation
-			sys.updateDepth(this.depth);
-			sys.updateHeight(this.height);
+			sys.updateSteppers(this.depth, this.height);
 		} catch (Exception e) {
 			this.status = TaskStatus.ABORTED;
 			return;
@@ -73,6 +74,11 @@ public class AlignTask extends Task {
 		return this.status;
 	}
 	
+	@Override
+	public String toString() {
+		String format = "Align Task, Y=%d Z=%d [%s]";
+		return String.format(format, depth, height, status.toString());
+	}
 	
 
 }

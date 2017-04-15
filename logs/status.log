@@ -1,41 +1,41 @@
-[ MISSION LOG ] (1492282645364) New mission initialized.
-[ MISSION LOG ] (1492282645371) Loaded goals from mission file.
-[ MISSION LOG ] (1492282645371) Mission time limit is 360 sec.
-[ MISSION LOG ] (1492282645371) Device: V1 @ Station A -- Rotate to [175] degrees.
-[ MISSION LOG ] (1492282645374) Device: BreakerBox A @ Station C -- Goals: switch 2
-[ MISSION LOG ] (1492282645375) Device: V3 @ Station D -- Rotate to [0] degrees.
-[ MISSION LOG ] (1492282645375) Device: BreakerBox B @ Station F -- Goals: switch 3
-[ MISSION LOG ] (1492282645375) Device: V1 @ Station G -- Rotate to [50] degrees.
-[ MISSION LOG ] (1492282647221) Starting task execution.
-[ TASK LOG ] (1492282648230) Move Task, X=1080 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492282648231) shipbot.tasks.CaptureTask@677327b6
-[ TASK LOG ] (1492282649243) shipbot.tasks.AlignTask@14ae5a5
-[ TASK LOG ] (1492282649243) shipbot.tasks.PositionTask@7f31245a
-[ TASK LOG ] (1492282649243) shipbot.tasks.EngageTask@6d6f6e28
-[ TASK LOG ] (1492282650250) Move Task, X=470 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492282650250) shipbot.tasks.CaptureTask@135fbaa4
-[ TASK LOG ] (1492282651260) shipbot.tasks.AlignTask@45ee12a7
-[ TASK LOG ] (1492282652272) Move Task, X=666 Y=420 Orient=1 [complete]
-[ TASK LOG ] (1492282652273) shipbot.tasks.PositionTask@330bedb4
-[ TASK LOG ] (1492282653282) shipbot.tasks.AlignTask@2503dbd3
-[ TASK LOG ] (1492282653282) shipbot.tasks.EngageTask@4b67cf4d
-[ TASK LOG ] (1492282654287) shipbot.tasks.AlignTask@7ea987ac
-[ TASK LOG ] (1492282655299) Move Task, X=165 Y=0 Orient=1 [complete]
-[ TASK LOG ] (1492282655299) shipbot.tasks.CaptureTask@12a3a380
-[ TASK LOG ] (1492282656303) shipbot.tasks.AlignTask@29453f44
-[ TASK LOG ] (1492282656303) shipbot.tasks.PositionTask@5cad8086
-[ TASK LOG ] (1492282656304) shipbot.tasks.EngageTask@6e0be858
-[ TASK LOG ] (1492282657316) Move Task, X=0 Y=165 Orient=0 [complete]
-[ TASK LOG ] (1492282657316) shipbot.tasks.CaptureTask@61bbe9ba
-[ TASK LOG ] (1492282658327) shipbot.tasks.AlignTask@610455d6
-[ TASK LOG ] (1492282659339) Move Task, X=666 Y=420 Orient=1 [complete]
-[ TASK LOG ] (1492282659339) shipbot.tasks.PositionTask@511d50c0
-[ TASK LOG ] (1492282660350) shipbot.tasks.AlignTask@60e53b93
-[ TASK LOG ] (1492282660350) shipbot.tasks.EngageTask@5e2de80c
-[ TASK LOG ] (1492282661367) shipbot.tasks.AlignTask@1d44bcfa
-[ TASK LOG ] (1492282662377) Move Task, X=0 Y=470 Orient=0 [complete]
-[ TASK LOG ] (1492282662377) shipbot.tasks.CaptureTask@266474c2
-[ TASK LOG ] (1492282663386) shipbot.tasks.AlignTask@6f94fa3e
-[ TASK LOG ] (1492282663387) shipbot.tasks.PositionTask@5e481248
-[ TASK LOG ] (1492282663387) shipbot.tasks.EngageTask@66d3c617
-[ MISSION LOG ] (1492282663387) Task execution complete.
+[ MISSION LOG ] (1492285055630) New mission initialized.
+[ MISSION LOG ] (1492285055638) Loaded goals from mission file.
+[ MISSION LOG ] (1492285055638) Mission time limit is 360 sec.
+[ MISSION LOG ] (1492285055639) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1492285055641) Device: BreakerBox A @ Station C -- Goals: switch 2
+[ MISSION LOG ] (1492285055641) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1492285055642) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1492285055642) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (1492285059608) Starting task execution.
+[ TASK LOG ] (1492285060622) Move Task, X=1080 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492285060622) Capture Task, device is v [complete]
+[ TASK LOG ] (1492285061630) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492285061630) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492285061631) EngageTask, rotate 175 degrees [complete]
+[ TASK LOG ] (1492285062642) Move Task, X=470 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492285062642) Capture Task, device is b [complete]
+[ TASK LOG ] (1492285063649) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492285064663) Move Task, X=490 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492285064663) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492285065667) Align Task, Y=-5 Z=458 [complete]
+[ TASK LOG ] (1492285065668) EngageTask, rotate 180 degrees [complete]
+[ TASK LOG ] (1492285066677) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492285067687) Move Task, X=165 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492285067688) Capture Task, device is v [complete]
+[ TASK LOG ] (1492285068701) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492285068701) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492285068701) EngageTask, rotate 0 degrees [complete]
+[ TASK LOG ] (1492285069713) Move Task, X=0 Y=165 Orient=0 [complete]
+[ TASK LOG ] (1492285069713) Capture Task, device is b [complete]
+[ TASK LOG ] (1492285070728) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492285071736) Move Task, X=0 Y=195 Orient=0 [complete]
+[ TASK LOG ] (1492285071736) PositionTask, needs reach hebi engaged! [complete]
+[ TASK LOG ] (1492285072741) Align Task, Y=-5 Z=458 [complete]
+[ TASK LOG ] (1492285072742) EngageTask, rotate 180 degrees [complete]
+[ TASK LOG ] (1492285073748) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492285074761) Move Task, X=0 Y=470 Orient=0 [complete]
+[ TASK LOG ] (1492285074761) Capture Task, device is v [complete]
+[ TASK LOG ] (1492285075774) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492285075774) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492285075774) EngageTask, rotate 50 degrees [complete]
+[ MISSION LOG ] (1492285075774) Task execution complete.

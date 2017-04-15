@@ -20,18 +20,22 @@ import shipbot.staticlib.Config;
 public class SystemState {
 	
 	// Devices
+	private CVSensing cv;
 	private Motor drive;
 	private Motor stepper_y;
 	private Motor stepper_z;
 	private Motor hebi_fixed;
+	private Motor hebi_reach;
 	private Motor hebi_effector;
 	
 	public SystemState() {
-		// Initialize sensors and actuators
+		// Initialize onboard hardware
+		cv = new CVSensing();
 		stepper_z = new StepperMotor(Config.Z_STEPPER_ID);
 		stepper_y = new StepperMotor(Config.Y_STEPPER_ID);
 		drive = new DriveMotor(Config.DRIVE_MOTOR_ID);
 		hebi_fixed = new HebiMotor(Config.FIXED_HEBI_ID);
+		hebi_reach = new HebiMotor(Config.REACH_HEBI_ID);
 		hebi_effector = new HebiMotor(Config.EFFECTOR_HEBI_ID);
 	}
 	
@@ -85,6 +89,11 @@ public class SystemState {
 		return hebi_effector.get(HebiMotor.POS);
 	}
 
+	public void getNewCapture(String device_type) {
+		// cvfile.write(@ 1, device)
+		// while (!cvfile.updated()): sleep
+		// cv data updated!
+	}
 	
 	/* UPDATE METHODS */
 	
@@ -94,11 +103,8 @@ public class SystemState {
 		this.drive.set(DriveMotor.ORIENT, r);
 	}
 	
-	public void updateDepth(int depth) {
+	public void updateSteppers(int depth, int height) {
 		this.stepper_y.set(StepperMotor.POS, depth);
-	}
-	
-	public void updateHeight(int height) {
 		this.stepper_z.set(StepperMotor.POS, height);
 	}
 }

@@ -75,7 +75,7 @@ public class BreakerBox extends Device {
 		// For each switch
 		for (Integer sw_no : switches) {
 			// Adjust L/R position
-			tasks.add(new MoveTask(sw_no));
+			tasks.add(new MoveTask(this.station, sw_no));
 			// Position HEBI
 			tasks.add(new PositionTask(this.station.needsFlip()));
 			// Push arm in

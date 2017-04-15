@@ -27,5 +27,14 @@ public class PositionTask extends Task {
 	protected TaskStatus getStatus() {
 		return this.status;
 	}
+	
+	@Override
+	public String toString() {
+		if (this.flip) {
+			return String.format("PositionTask, needs reach hebi engaged! [%s]", status);
+		} else {
+			return String.format("PositionTask, no reach needed. [%s]", status);
+		}
+	}
 
 }

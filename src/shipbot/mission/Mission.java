@@ -9,8 +9,6 @@ import shipbot.hardware.SystemState;
 import shipbot.staticlib.Config;
 import shipbot.staticlib.DeviceData;
 import shipbot.staticlib.MessageLog;
-import shipbot.tasks.ApproachTask;
-import shipbot.tasks.MoveTask;
 import shipbot.tasks.Task;
 
 /**

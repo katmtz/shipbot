@@ -44,5 +44,11 @@ public class EngageTask extends Task {
 	protected TaskStatus getStatus() {
 		return this.status;
 	}
+	
+	@Override 
+	public String toString() {
+		String format = "EngageTask, rotate %d degrees [%s]";
+		return String.format(format, angle, status);
+	}
 
 }

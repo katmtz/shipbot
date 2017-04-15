@@ -27,9 +27,9 @@ public class CaptureTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-		// Take photo
 		
-		// Process & extract offsets, orientation with CV
+		// Take photo & process data
+		sys.getNewCapture(this.device_type);
 		
 		this.status = TaskStatus.COMPLETE;
 	}
@@ -37,6 +37,12 @@ public class CaptureTask extends Task {
 	@Override
 	protected TaskStatus getStatus() {
 		return this.status;
+	}
+	
+	@Override
+	public String toString() {
+		String format = "Capture Task, device is %s [%s]";
+		return String.format(format, device_type, status);
 	}
 
 }

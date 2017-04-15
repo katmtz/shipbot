@@ -39,12 +39,18 @@ public class MoveTask extends Task {
 	 * 
 	 * @param switch_no
 	 */
-	public MoveTask(Integer switch_no) {
+	public MoveTask(Station s, Integer switch_no) {
 		// load x & y from system state (due to cv adjustments!)
 		// keep previous orientation info
-		this.x = 666;
-		this.y = 420;
-		this.orient = 1;
+		this.orient = s.getOrientation();
+		int[] coords = s.getCoordinates();
+		if (this.orient == Config.FRONT_FACING) {
+			this.x = coords[0] + 10*switch_no;
+			this.y = coords[1];
+		} else {
+			this.x = coords[0];
+			this.y = coords[1] + 10*switch_no;
+		}
 	}
 
 	@Override
