@@ -1,31 +1,41 @@
-[ MISSION LOG ] (1492112613822) New mission initialized.
-[ MISSION LOG ] (1492112613831) Loaded goals from mission file.
-[ MISSION LOG ] (1492112613831) Mission time limit is 360 sec.
-[ MISSION LOG ] (1492112613831) Device: V1 @ Station A -- Rotate to [175] degrees.
-[ MISSION LOG ] (1492112613835) Device: BreakerBox A @ Station D -- Goals: switch 2
-[ MISSION LOG ] (1492112613835) Device: V3 @ Station D -- Rotate to [0] degrees.
-[ MISSION LOG ] (1492112613835) Device: BreakerBox B @ Station F -- Goals: switch 3
-[ MISSION LOG ] (1492112613835) Device: V1 @ Station G -- Rotate to [50] degrees.
-[ MISSION LOG ] (1492112614736) Starting task execution.
-[ TASK LOG ] (1492112615741) Move Task, X=0 Y=0 [complete]
-[ TASK LOG ] (1492112615749) Move Task, X=0 Y=0 [complete]
-[ TASK LOG ] (1492112616749) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112616749) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112617754) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1492112617754) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1492112618764) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112618769) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112619772) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1492112619772) Move Task, X=3 Y=0 [complete]
-[ TASK LOG ] (1492112620780) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112620780) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112621786) Move Task, X=3 Y=2 [complete]
-[ TASK LOG ] (1492112621795) Move Task, X=3 Y=2 [complete]
-[ TASK LOG ] (1492112622797) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112622797) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112623808) Move Task, X=3 Y=3 [complete]
-[ TASK LOG ] (1492112623808) Move Task, X=3 Y=3 [complete]
-[ TASK LOG ] (1492112624824) Approach Task, depth=5 height=5 [complete]
-[ TASK LOG ] (1492112624824) Approach Task, depth=5 height=5 [complete]
-[ MISSION LOG ] (1492112624824) Task execution complete.
-[ MISSION LOG ] (1492112624824) Task execution complete.
+[ MISSION LOG ] (1492288321032) New mission initialized.
+[ MISSION LOG ] (1492288321044) Loaded goals from mission file.
+[ MISSION LOG ] (1492288321044) Mission time limit is 360 sec.
+[ MISSION LOG ] (1492288321045) Device: V1 @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (1492288321050) Device: BreakerBox A @ Station C -- Goals: switch 2
+[ MISSION LOG ] (1492288321051) Device: V3 @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (1492288321051) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (1492288321051) Device: V1 @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (1492288321055) Starting task execution.
+[ TASK LOG ] (1492288322068) Move Task, X=1080 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492288322068) Capture Task, device is valve [complete]
+[ TASK LOG ] (1492288323078) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492288323078) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492288323078) EngageTask, rotate 175 degrees [complete]
+[ TASK LOG ] (1492288324086) Move Task, X=470 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492288324087) Capture Task, device is breaker [complete]
+[ TASK LOG ] (1492288325099) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492288326107) Move Task, X=490 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492288326107) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492288327122) Align Task, Y=-5 Z=458 [complete]
+[ TASK LOG ] (1492288327122) EngageTask, rotate 180 degrees [complete]
+[ TASK LOG ] (1492288328130) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492288329137) Move Task, X=165 Y=0 Orient=1 [complete]
+[ TASK LOG ] (1492288329138) Capture Task, device is valve [complete]
+[ TASK LOG ] (1492288330145) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492288330145) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492288330145) EngageTask, rotate 0 degrees [complete]
+[ TASK LOG ] (1492288331162) Move Task, X=0 Y=165 Orient=0 [complete]
+[ TASK LOG ] (1492288331163) Capture Task, device is breaker [complete]
+[ TASK LOG ] (1492288332178) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492288333188) Move Task, X=0 Y=195 Orient=0 [complete]
+[ TASK LOG ] (1492288333188) PositionTask, needs reach hebi engaged! [complete]
+[ TASK LOG ] (1492288334195) Align Task, Y=-5 Z=458 [complete]
+[ TASK LOG ] (1492288334195) EngageTask, rotate 180 degrees [complete]
+[ TASK LOG ] (1492288335206) Align Task, Y=-10 Z=458 [complete]
+[ TASK LOG ] (1492288336212) Move Task, X=0 Y=470 Orient=0 [complete]
+[ TASK LOG ] (1492288336212) Capture Task, device is valve [complete]
+[ TASK LOG ] (1492288337223) Align Task, Y=-15 Z=458 [complete]
+[ TASK LOG ] (1492288337224) PositionTask, no reach needed. [complete]
+[ TASK LOG ] (1492288337224) EngageTask, rotate 50 degrees [complete]
+[ MISSION LOG ] (1492288337224) Task execution complete.

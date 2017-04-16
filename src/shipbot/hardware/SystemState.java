@@ -93,6 +93,7 @@ public class SystemState {
 		// cvfile.write(@ 1, device)
 		// while (!cvfile.updated()): sleep
 		// cv data updated!
+		return;
 	}
 	
 	/* UPDATE METHODS */
