@@ -32,7 +32,7 @@ public class AlignTask extends Task {
 	
 	public AlignTask() {
 		// Determine height and depth from CV-gained info
-		this.depth = -15;
+		this.depth = 100;
 		this.height = Config.DEVICE_HEIGHT;
 	}
 	

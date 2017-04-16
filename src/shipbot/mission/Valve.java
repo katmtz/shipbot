@@ -47,11 +47,11 @@ public class Valve extends Device {
 		// Capture & identify device image
 		tasks.add(new CaptureTask(CVSensing.VALVE));
 		
-		// Position arm (y & z steppers)
-		tasks.add(new AlignTask());
-		
 		// Position HEBIs
 		tasks.add(new PositionTask(this.station.needsFlip()));
+		
+		// Position arm (y & z steppers)
+		tasks.add(new AlignTask());
 		
 		// Rotate effector
 		tasks.add(new EngageTask(this.angle));

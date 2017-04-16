@@ -197,6 +197,9 @@ both motors.
 - Close serial port.
 """
 class StepperPipeline:
+	y = 0
+	z = 0
+
 	RECIEVE_TIMEOUT = 1000
 
 	def __init__(self, port, verbose=False, serial_mock=False):
@@ -224,6 +227,24 @@ class StepperPipeline:
 
 	def send(self, y, z):
 		if (self.debug):
+			print "[STEPPER] sending y & z relative positions"
+
+		if self.serial_mock:
+			return
+
+		diff_y = y - self.y
+		diff_z = z - self.z
+
+		if (diff_y != 0):
+			self.serial.write("yr")
+			self.serial.write(diff_y)
+		if (diff_z != 0):
+			self.serial.write("zr")
+			self.serial.write(diff_z)
+		self.serial.flush()
+
+	def sendAbsolute(self, y, z):
+		if (self.debug):
 			print "[STEPPER] sending y & z absolute positions"
 
 		if (self.serial_mock):
@@ -238,10 +259,12 @@ class StepperPipeline:
 		self.serial.write("y")
 		self.serial.write("a")
 		self.serial.write(str(y))
+		self.y = y
 
 		self.serial.write("z")
 		self.serial.write("a")
 		self.serial.write(str(z))
+		self.z = z
 
 	def recieve(self):
 		if (self.serial_mock):
