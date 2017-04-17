@@ -139,7 +139,7 @@ public class MissionParser {
 				station = Station.H;
 				break;
 			default:
-				MessageLog.printError(this.name, "Unrecognized character in mission file!");
+				MessageLog.printError(MissionParser.name, "Unrecognized character in mission file!");
 				station = null;
 		}
 		return station;

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import shipbot.hardware.StepperMotor;
 import shipbot.hardware.SystemState;
+import shipbot.mission.Device;
 import shipbot.staticlib.Config;
 import shipbot.staticlib.DeviceData;
 
@@ -16,24 +17,16 @@ import shipbot.staticlib.DeviceData;
  */
 public class AlignTask extends Task {
 
+	private Device device;
 	private TaskStatus status = TaskStatus.WAITING;
 	private int depth;
 	private int height;
 	
-	public AlignTask(boolean full_extend) {
+	public AlignTask(Device device) {
 		// indicate whether the y axis should be fully out or kept back
-		if (full_extend) {
-			this.depth = -5;
-		} else {
-			this.depth = -10;
-		}
+		this.device = device;
 		this.height = Config.DEVICE_HEIGHT;
-	}
-	
-	public AlignTask() {
-		// Determine height and depth from CV-gained info
-		this.depth = 100;
-		this.height = Config.DEVICE_HEIGHT;
+		this.depth = 500;
 	}
 	
 	@Override
@@ -78,6 +71,11 @@ public class AlignTask extends Task {
 	public String toString() {
 		String format = "Align Task, Y=%d Z=%d [%s]";
 		return String.format(format, depth, height, status.toString());
+	}
+
+	@Override
+	public Device getAssociatedDevice() {
+		return this.device;
 	}
 	
 

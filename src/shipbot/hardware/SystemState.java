@@ -2,6 +2,7 @@ package shipbot.hardware;
 
 import java.util.List;
 
+import shipbot.mission.Device;
 import shipbot.staticlib.Config;
 
 /** 
@@ -89,7 +90,7 @@ public class SystemState {
 		return hebi_effector.get(HebiMotor.POS);
 	}
 
-	public void getNewCapture(String device_type) {
+	public void getNewCapture(Device device) {
 		// cvfile.write(@ 1, device)
 		// while (!cvfile.updated()): sleep
 		// cv data updated!

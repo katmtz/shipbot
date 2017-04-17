@@ -1,11 +1,13 @@
 package shipbot.tasks;
 
 import shipbot.hardware.SystemState;
+import shipbot.mission.Device;
 
 public class EngageTask extends Task {
 	
 	private TaskStatus status;
 	private int angle;
+	private Device device;
 	
 	/**
 	 * Create a new EngageTask that rotates the end effector by
@@ -13,8 +15,9 @@ public class EngageTask extends Task {
 	 * 
 	 * @param angle
 	 */
-	public EngageTask(int angle) {
-		this.angle = angle;
+	public EngageTask(Device device) {
+		this.device = device;
+		this.angle = device.getGoalState();
 		this.status = TaskStatus.WAITING;
 	}
 	
@@ -37,7 +40,7 @@ public class EngageTask extends Task {
 		
 		// Write angle to effector hebi
 
-		this.status = TaskStatus.COMPLETE;
+		this.status = TaskStatus.SKIPPED;
 	}
 
 	@Override
@@ -49,6 +52,11 @@ public class EngageTask extends Task {
 	public String toString() {
 		String format = "EngageTask, rotate %d degrees [%s]";
 		return String.format(format, angle, status);
+	}
+
+	@Override
+	public Device getAssociatedDevice() {
+		return this.device;
 	}
 
 }

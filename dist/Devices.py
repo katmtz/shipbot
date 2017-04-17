@@ -34,29 +34,25 @@ class DrivePipeline:
 			print "[DRIVE] Skipped serial open due to mock-up."
 			return
 
-		self.serial = serial.Serial(port, 9600)
+		self.serial = serial.Serial(port, 9600, timeout=1)
 
 	def recieve(self):
 		if self.serial_mock:
-			print "[DRIVE] sleeping 1s to mock communication delay."
-			time.sleep(1)
+			print "Waiting for drive response..."
+			msg = raw_input()
+			#while (msg != "DONE"):
+			#	msg = raw_input()
 			return 1
-
+			
 		timeout = 0
-		while (self.serial.in_waiting() < 1):
-			if timeout > self.RECIEVE_TIMEOUT:
-				if self.debug:
-					print "[DRIVE] timed out waiting for ACK!"
-				return 0
-
+		while (not timeout > RECIEVE_TIMEOUT):
+			line = self.serial.readline()
 			timeout += 1
-			if self.debug:
-				print "[DRIVE] waiting for ack from Arduino"
-		
-		line = self.serial.readline()
-		if self.debug:
-			print "[DRIVE] recieved:" + line
-		return 1
+			if "DONE" in line:
+				return 1
+		if self.verbose:
+			print "[STEPPER] timed out waiting for ack"
+		return 0
 
 	def send(self, t_x, t_y, t_r):
 		# for now, just sending all every time
@@ -201,6 +197,7 @@ class StepperPipeline:
 	z = 0
 
 	RECIEVE_TIMEOUT = 1000
+	pos_init = False
 
 	def __init__(self, port, verbose=False, serial_mock=False):
 		self.debug = verbose
@@ -210,83 +207,87 @@ class StepperPipeline:
 			print "[STEPPER] opening serial port at [" + port +"]"
 		
 		if self.serial_mock:
-			print ">y"
-			print ">i"
-			print ">z"
-			print ">i"
-			return
+			print ">yi"
+			print ">zi"
+		else:
+			# Open a serial port
+			self.serial = serial.Serial(port, 9600, timeout=1)
 
-		# Open a serial port
-		self.serial = serial.Serial(port, 9600)
-
-		# Initialize y & z steppers
-		self.serial.write("y")
-		self.serial.write("i")
-		self.serial.write("z")
-		self.serial.write("i")
+			# Initialize y & z steppers
+			self.serial.write("yi")
+			self.serial.write("zi")
+			self.serial.flush()
+		response = self.recieve()
 
 	def send(self, y, z):
+		if not self.pos_init:
+			if self.debug:
+				print "[STEPPER] using absolute to initialize position"
+			self.pos_init = True
+			self.sendAbsolute(y,z)
+			return
+
 		if (self.debug):
 			print "[STEPPER] sending y & z relative positions"
 
 		if self.serial_mock:
 			return
 
-		diff_y = y - self.y
-		diff_z = z - self.z
+		diff_y = int(y) - self.y
+		diff_z = int(z) - self.z
 
 		if (diff_y != 0):
+			if self.debug:
+				print " - Sending a y offset of " + str(diff_y)
 			self.serial.write("yr")
-			self.serial.write(diff_y)
+			self.serial.write(str(diff_y))
 		if (diff_z != 0):
+			if self.debug:
+				print " - Sending a z offset of " + str(diff_z)
 			self.serial.write("zr")
-			self.serial.write(diff_z)
+			self.serial.write(str(diff_z))
 		self.serial.flush()
+
+		self.y = int(y)
+		self.z = int(z)
 
 	def sendAbsolute(self, y, z):
 		if (self.debug):
 			print "[STEPPER] sending y & z absolute positions"
 
 		if (self.serial_mock):
-			print ">y"
-			print ">a"
+			print ">ya"
 			print ">" + str(y)
-			print ">z"
-			print ">a"
+			print ">za"
 			print ">" + str(z)
 			return
 
-		self.serial.write("y")
-		self.serial.write("a")
-		self.serial.write(str(y))
-		self.y = y
+		self.serial.write("ya")
+		self.serial.write(y)
 
-		self.serial.write("z")
-		self.serial.write("a")
-		self.serial.write(str(z))
+		self.serial.write("za")
+		self.serial.write(z)
+		self.serial.flush()
+		self.y = y
 		self.z = z
 
 	def recieve(self):
 		if (self.serial_mock):
-			print "[STEPPER] waiting 1 sec to mock communication delay"
-			time.sleep(1)
+			print "Waiting for stepper response..."
+			msg = raw_input()
+			#while (msg != "DONE"):
+			#	msg = raw_input()
 			return 1
-
+		
 		timeout = 0
-		while (self.serial.in_waiting() < 1):
-			if timeout > RECIEVE_TIMEOUT:
-				if (self.debug):
-					print "[STEPPER] timed out waiting for response."
-				return 0
-
-			if (self.debug):
-				print "[STEPPER] waiting for Arduino to send confirmation."
-			time.sleep(.5)
+		while (not timeout > RECIEVE_TIMEOUT):
+			line = self.serial.readline()
 			timeout += 1
-		line = self.serial.readline()
+			if "DONE" in line:
+				return 1
 		if self.debug:
-			print "[STEPPER] recieved line:" + line
-		return 1
+			print "[STEPPER] timed out waiting for ack"
+		return 0
 
 	def close(self):
 		if (self.debug):

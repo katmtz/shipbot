@@ -1,6 +1,7 @@
 package shipbot.tasks;
 
 import shipbot.hardware.SystemState;
+import shipbot.mission.Device;
 
 /**
  * Performs the process of capturing, analyzing, and storing information
@@ -12,26 +13,25 @@ import shipbot.hardware.SystemState;
  */
 public class CaptureTask extends Task {
 
-	private String device_type;
+	private Device device;
 	private TaskStatus status;
 	
 	/**
 	 * Create a new CaptureTask
 	 * @param device_type - static String from CVSensing
 	 */
-	public CaptureTask(String device_type) {
-		this.device_type = device_type;
+	public CaptureTask(Device device) {
+		this.device = device;
 		this.status = TaskStatus.WAITING;
 	}
 
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-		
 		// Take photo & process data
-		sys.getNewCapture(this.device_type);
+		sys.getNewCapture(this.device);
 		
-		this.status = TaskStatus.COMPLETE;
+		this.status = TaskStatus.SKIPPED;
 	}
 
 	@Override
@@ -42,7 +42,12 @@ public class CaptureTask extends Task {
 	@Override
 	public String toString() {
 		String format = "Capture Task, device is %s [%s]";
-		return String.format(format, device_type, status);
+		return String.format(format, this.device.toString(), status);
+	}
+
+	@Override
+	public Device getAssociatedDevice() {
+		return this.device;
 	}
 
 }

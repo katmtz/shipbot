@@ -65,26 +65,28 @@ public class BreakerBox extends Device {
 	public List<Task> getTasks() {
 		List<Task> tasks = new ArrayList<Task>();
 		// Move to station
-		tasks.add(new MoveTask(this.station));
+		tasks.add(new MoveTask(this));
 		
 		// Capture & identify image
-		tasks.add(new CaptureTask(CVSensing.BREAKER));
+		tasks.add(new CaptureTask(this));
 		
 		// Raise arm (z stepper, partial y stepper)
-		tasks.add(new AlignTask(false));
+		tasks.add(new AlignTask(this));
+
 		// For each switch
 		for (Integer sw_no : switches) {
 			// Adjust L/R position
-			tasks.add(new MoveTask(this.station, sw_no));
+			tasks.add(new MoveTask(this, sw_no));
 			// Position HEBI
-			tasks.add(new PositionTask(this.station.needsFlip()));
+			tasks.add(new PositionTask(this));
 			// Push arm in
-			tasks.add(new AlignTask(true));
+			tasks.add(new AlignTask(this));
 			// Rotate effector
-			tasks.add(new EngageTask());
+			tasks.add(new EngageTask(this));
 			// Pull arm back
-			tasks.add(new AlignTask(false));
+			tasks.add(new AlignTask(this));
 		}
+
 		return tasks;
 	}
 	
@@ -98,4 +100,15 @@ public class BreakerBox extends Device {
 		}
 		return sb.toString();
 	}
+
+	@Override
+	public int getGoalState() {
+		return 180;
+	}
+	
+	@Override
+	protected String id() {
+		return this.id;
+	}
 }
+

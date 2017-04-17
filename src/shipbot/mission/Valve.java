@@ -20,13 +20,31 @@ import shipbot.tasks.Task;
  */
 public class Valve extends Device {
 	
+	private static String VALVE_SM = "Small Valve";
+	private static String VALVE_LG = "Large Valve";
+	private static String SHUTTLECOCK = "Shuttlecock";
+	
 	private String id;
 	private Station station;
 	private int angle = -1;
 	
 	public Valve(Station s, String id) {
 		this.station = s;
-		this.id = id;
+		switch (id) {
+			case "V1":
+				this.id = Valve.VALVE_SM;
+				break;
+			case "V2":
+				this.id = Valve.VALVE_LG;
+				break;
+			case "V3":
+				this.id = Valve.SHUTTLECOCK;
+				break;
+		}
+	}
+	
+	public int getGoalState() {
+		return this.angle;
 	}
 
 	@Override
@@ -42,19 +60,19 @@ public class Valve extends Device {
 	public List<Task> getTasks() {
 		List<Task> tasks = new ArrayList<Task>();
 		// Move to position (go to station & recalibrate).
-		tasks.add(new MoveTask(this.station));
+		tasks.add(new MoveTask(this));
 		
 		// Capture & identify device image
-		tasks.add(new CaptureTask(CVSensing.VALVE));
+		tasks.add(new CaptureTask(this));
 		
 		// Position HEBIs
-		tasks.add(new PositionTask(this.station.needsFlip()));
+		tasks.add(new PositionTask(this));
 		
 		// Position arm (y & z steppers)
-		tasks.add(new AlignTask());
+		tasks.add(new AlignTask(this));
 		
 		// Rotate effector
-		tasks.add(new EngageTask(this.angle));
+		tasks.add(new EngageTask(this));
 		return tasks;
 	}
 
@@ -62,6 +80,11 @@ public class Valve extends Device {
 	public String getDescription() {
 		String format = "Device: %s @ Station %s -- Rotate to [%d] degrees.";
 		return String.format(format, this.id, station.toString(), this.angle);
+	}
+
+	@Override
+	protected String id() {
+		return this.id;
 	}
 
 }

@@ -1,14 +1,17 @@
 package shipbot.tasks;
 
 import shipbot.hardware.SystemState;
+import shipbot.mission.Device;
 
 public class PositionTask extends Task {
 	
 	private TaskStatus status;
 	private boolean flip;
+	private Device device;
 
-	public PositionTask(boolean needsFlip) {
-		this.flip = needsFlip;
+	public PositionTask(Device device) {
+		this.device = device;
+		this.flip = device.needsReach();
 		this.status = TaskStatus.WAITING;
 	}
 
@@ -20,7 +23,7 @@ public class PositionTask extends Task {
 		}
 		// adjust angle based on system state
 		
-		this.status = TaskStatus.COMPLETE;
+		this.status = TaskStatus.SKIPPED;
 	}
 
 	@Override
@@ -35,6 +38,11 @@ public class PositionTask extends Task {
 		} else {
 			return String.format("PositionTask, no reach needed. [%s]", status);
 		}
+	}
+
+	@Override
+	public Device getAssociatedDevice() {
+		return this.device;
 	}
 
 }

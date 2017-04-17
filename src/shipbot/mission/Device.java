@@ -17,10 +17,31 @@ public abstract class Device {
 	
 	public abstract void addGoalState(int goal_state);
 	
-	protected abstract Station getStation();
+	public abstract int getGoalState();
 	
 	public abstract List<Task> getTasks();
 	
 	public abstract String getDescription();
 	
+	public int[] getCoordinates() {
+		return this.getStation().getCoordinates();
+	}
+	
+	public int getOrientation() {
+		return this.getStation().getOrientation();
+	}
+	
+	public boolean needsReach() {
+		return this.getStation().needsFlip();
+	}
+	
+	@Override
+	public String toString() {
+		String format = "%s at station %s";
+		return String.format(format, this.id(), this.getStation().toString());
+	}
+	
+	protected abstract String id();
+	
+	protected abstract Station getStation();
 }

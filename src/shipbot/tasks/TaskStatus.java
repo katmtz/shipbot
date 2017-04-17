@@ -5,7 +5,8 @@ public enum TaskStatus {
 	WAITING ("waiting", true, false), 
 	ACTIVE ("active", false, false), 
 	ABORTED ("aborted", false, true), 
-	COMPLETE ("complete", false, false);
+	COMPLETE ("complete", false, false),
+	SKIPPED ("skipped", false, true);
 	
 	private final String name;
 	private final Boolean pending;

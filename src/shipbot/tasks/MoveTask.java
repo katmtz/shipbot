@@ -5,7 +5,7 @@ import java.util.Map;
 
 import shipbot.hardware.DriveMotor;
 import shipbot.hardware.SystemState;
-import shipbot.mission.Station;
+import shipbot.mission.Device;
 import shipbot.staticlib.Config;
 import shipbot.staticlib.DeviceData;
 import shipbot.staticlib.MessageLog;
@@ -21,16 +21,18 @@ import shipbot.staticlib.MessageLog;
  */
 public class MoveTask extends Task {
 	
+	private Device device;
 	private TaskStatus status = TaskStatus.WAITING;
 	private int x;
 	private int y;
 	private int orient;
 	
-	public MoveTask(Station s) {
-		int[] coords = s.getCoordinates();
+	public MoveTask(Device device) {
+		this.device = device;
+		int[] coords = device.getCoordinates();
 		this.x = coords[0];
 		this.y = coords[1];
-		this.orient = s.getOrientation();
+		this.orient = device.getOrientation();
 	}
 	
 	/**
@@ -39,11 +41,11 @@ public class MoveTask extends Task {
 	 * 
 	 * @param switch_no
 	 */
-	public MoveTask(Station s, Integer switch_no) {
+	public MoveTask(Device device, Integer switch_no) {
 		// load x & y from system state (due to cv adjustments!)
 		// keep previous orientation info
-		this.orient = s.getOrientation();
-		int[] coords = s.getCoordinates();
+		this.orient = device.getOrientation();
+		int[] coords = device.getCoordinates();
 		if (this.orient == Config.FRONT_FACING) {
 			this.x = coords[0] + 10*switch_no;
 			this.y = coords[1];
@@ -96,6 +98,11 @@ public class MoveTask extends Task {
 	public String toString() {
 		String format = "Move Task, X=%d Y=%d Orient=%d [%s]";
 		return String.format(format, x, y, orient, status.toString());
+	}
+
+	@Override
+	public Device getAssociatedDevice() {
+		return this.device;
 	}
 
 }

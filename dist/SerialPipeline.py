@@ -1,9 +1,9 @@
 from Devices import DrivePipeline, StepperPipeline
 
 # Global configs!
-stepper_port = "/dev/cu.usbmodem1411"
-drive_port = "/dev/cu.usbmodem1411"
-verbose = True
+stepper_port = "/dev/ttyACM0"
+drive_port = "/dev/ttyACM1"
+verbose = False
 serial_mock = True
 
 class SerialPipeline:
@@ -190,9 +190,9 @@ class SerialPipeline:
 		file.close()
 		return False
 
-print "START"
+print "> pipeline start"
 pipe = SerialPipeline()
 while not pipe.isStopped():
 	pipe.processCommand()
 
-print "DONE"
+print "> pipeline stop"

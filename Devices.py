@@ -41,21 +41,6 @@ class DrivePipeline:
 			print "[DRIVE] sleeping 1s to mock communication delay."
 			time.sleep(1)
 			return 1
-
-		timeout = 0
-		while (self.serial.in_waiting() < 1):
-			if timeout > self.RECIEVE_TIMEOUT:
-				if self.debug:
-					print "[DRIVE] timed out waiting for ACK!"
-				return 0
-
-			timeout += 1
-			if self.debug:
-				print "[DRIVE] waiting for ack from Arduino"
-		
-		line = self.serial.readline()
-		if self.debug:
-			print "[DRIVE] recieved:" + line
 		return 1
 
 	def send(self, t_x, t_y, t_r):
@@ -77,6 +62,7 @@ class DrivePipeline:
 		else:
 			self.serial.write("a")
 			self.serial.write(msg)
+			self.serial.flush()
 			if self.debug:
 				print "[DRIVE] wrote message:"
 				print msg
@@ -217,10 +203,10 @@ class StepperPipeline:
 		self.serial = serial.Serial(port, 9600)
 
 		# Initialize y & z steppers
-		self.serial.write("y")
-		self.serial.write("i")
-		self.serial.write("z")
-		self.serial.write("i")
+		self.serial.write("yi")
+		self.serial.flush()
+		self.serial.write("zi")
+		self.serial.flush()
 
 	def send(self, y, z):
 		if (self.debug):
@@ -235,13 +221,12 @@ class StepperPipeline:
 			print ">" + str(z)
 			return
 
-		self.serial.write("y")
-		self.serial.write("a")
-		self.serial.write(str(y))
+		self.serial.write("ya")
+		self.serial.write(y)
 
-		self.serial.write("z")
-		self.serial.write("a")
-		self.serial.write(str(z))
+		self.serial.write("za")
+		self.serial.write(z)
+		self.serial.flush()
 
 	def recieve(self):
 		if (self.serial_mock):
