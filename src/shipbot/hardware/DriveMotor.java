@@ -27,36 +27,13 @@ public class DriveMotor extends Motor {
 	}
 
 	@Override
-	protected void recieveUpdate() {
-		// TODO Auto-generated method stub
-		try {
-			while (DeviceData.waiting(this.id)) {
-				Thread.sleep(Config.SLEEPTIME);
-			}
-			return;
-		} catch (InterruptedException e) {
-			System.out.println("interrupt exception");
-		} catch (IOException e) {
-			System.out.println("ioexception while waiting for motor data");
-		}
-	}
-
-	@Override
-	protected void sendUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int get(String field) {
-		this.recieveUpdate();
 		return data.get(field);
 	}
 
 	@Override
 	public void set(String field, int value) {
 		data.put(field, value);
-		this.sendUpdate();
 	}
 
 	@Override

@@ -19,9 +19,7 @@ public class Config {
 	public static String DRIVE_MOTOR_ID = "DRIVE_0";
 	public static String Y_STEPPER_ID = "STEP_0";
 	public static String Z_STEPPER_ID = "STEP_1";
-	public static String FIXED_HEBI_ID = "HEBI_0";
-	public static String EFFECTOR_HEBI_ID = "HEBI_1";
-	public static String REACH_HEBI_ID = "HEBI_2";
+	public static String HEBI_ID = "HEBI";
 	
 	// OWNER HEADER CODES
 	public static final Integer OWNER_ARDUINO = 0;
@@ -35,8 +33,29 @@ public class Config {
 	public static int MAX_TIMEOUT = 2000;
 	public static int SLEEPTIME = 10;
 	
-	// STATIC POSITIONS (in mm)
+	/**
+	 * Static height of device centers on the testbed
+	 * set at 1.5' in cm.
+	 */
 	public static int DEVICE_HEIGHT = 458;
+	
+	/**
+	 * depth of hebi arm when fixed hebi @ 0º 
+	 * TEMPORARILY set at 3in in mm
+	 */
+	public static int ARM_DEPTH_VERTICAL = 76;
+	
+	/**
+	 * depth of hebi arm when fixed hebi @ -90º
+	 * TEMPORARILY set at 4in in mm
+	 */
+	public static int ARM_DEPTH_HORIZONTAL = 101;
+	
+	/**
+	 * length of hebi reach offset
+	 * TEMPORARILY set at 6in in mm
+	 */
+	public static int REACH_OFFSET = 152;
 	
 	/**
 	 * Returns an array of all the motor ids
@@ -47,9 +66,7 @@ public class Config {
 		ids.add(DRIVE_MOTOR_ID);
 		ids.add(Y_STEPPER_ID);
 		ids.add(Z_STEPPER_ID);
-		ids.add(FIXED_HEBI_ID);
-		ids.add(EFFECTOR_HEBI_ID);
-		ids.add(REACH_HEBI_ID);
+		ids.add(HEBI_ID);
 		return ids;
 	}
 }

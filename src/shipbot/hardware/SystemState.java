@@ -25,9 +25,7 @@ public class SystemState {
 	private Motor drive;
 	private Motor stepper_y;
 	private Motor stepper_z;
-	private Motor hebi_fixed;
-	private Motor hebi_reach;
-	private Motor hebi_effector;
+	private Motor hebi_arm;
 	
 	public SystemState() {
 		// Initialize onboard hardware
@@ -35,9 +33,7 @@ public class SystemState {
 		stepper_z = new StepperMotor(Config.Z_STEPPER_ID);
 		stepper_y = new StepperMotor(Config.Y_STEPPER_ID);
 		drive = new DriveMotor(Config.DRIVE_MOTOR_ID);
-		hebi_fixed = new HebiMotor(Config.FIXED_HEBI_ID);
-		hebi_reach = new HebiMotor(Config.REACH_HEBI_ID);
-		hebi_effector = new HebiMotor(Config.EFFECTOR_HEBI_ID);
+		hebi_arm = new HebiMotor();
 	}
 	
 	/**
@@ -60,6 +56,12 @@ public class SystemState {
 		return drive.get(DriveMotor.Y);
 	}
 	
+	/**
+	 * Gets the direction the robot is facing (either FRONT/LONG-SIDE 
+	 * or SIDE/SHORT-SIDE).
+	 * 
+	 * @return
+	 */
 	public int getOrientation() {
 		return drive.get(DriveMotor.ORIENT);
 	}
@@ -81,14 +83,6 @@ public class SystemState {
 	public int getHeight() {
 		return stepper_z.get(StepperMotor.POS);
 	}
-	
-	public int getRotation() {
-		return hebi_fixed.get(HebiMotor.POS);
-	}
-	
-	public int getSpin() {
-		return hebi_effector.get(HebiMotor.POS);
-	}
 
 	public void getNewCapture(Device device) {
 		// cvfile.write(@ 1, device)
@@ -97,8 +91,7 @@ public class SystemState {
 		return;
 	}
 	
-	/* UPDATE METHODS */
-	
+	/* UPDATE METHODS: sends updates about accepted commands to virtual representation */
 	public void updateLocation(int x, int y, int r) {
 		this.drive.set(DriveMotor.X, x);
 		this.drive.set(DriveMotor.Y, y);
@@ -108,5 +101,11 @@ public class SystemState {
 	public void updateSteppers(int depth, int height) {
 		this.stepper_y.set(StepperMotor.POS, depth);
 		this.stepper_z.set(StepperMotor.POS, height);
+	}
+	
+	public void updateArm(int fixed, int reach, int effector) {
+		this.hebi_arm.set(HebiMotor.FIXED, fixed);
+		this.hebi_arm.set(HebiMotor.REACH, reach);
+		this.hebi_arm.set(HebiMotor.EFFECTOR, reach);
 	}
 }

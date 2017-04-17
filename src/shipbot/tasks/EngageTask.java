@@ -20,15 +20,6 @@ public class EngageTask extends Task {
 		this.angle = device.getGoalState();
 		this.status = TaskStatus.WAITING;
 	}
-	
-	/**
-	 * When called without a particular angle, an EngageTask
-	 * is intended to flip a switch, not turn a valve.
-	 */
-	public EngageTask() {
-		this.status = TaskStatus.WAITING;
-		this.angle = 180;
-	}
 
 	/**
 	 * Sends command to end effector HEBI to perform a rotation

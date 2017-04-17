@@ -19,94 +19,22 @@ import java.util.Map;
 public class DeviceData {
 
 	private static String motor_path_format = "devices/actuators/%s.txt";	
+	
+	// HEBI comm strings
+	private static String HEBI_GO = "0";
+	private static String HEBI_STOP = "1";
+	private static String HEBI_CMD = "@ 1\n%s\ns %d\ne %d\nh %d\n";
+	
+	// Arduino comm strings
 	private static String UNINITIALIZED_MSG = "@ 1\nNO DATA\n";
 	private static String KILL_MSG = "STOP";
-	
-	/**
-	 * Test sensor and motor data functions. 
-	 * Does nothing if Config.DEBUG is false.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		if (!Config.DEBUG) {
-			return;
-		}
-		
-		// MOTOR READ TEST
-		String id = "DRIVE_0";
-		Map<String, Integer> motor_data = DeviceData.getMotorData(id);
-		for (String key : motor_data.keySet()) {
-			if (key != "owner") {
-				System.out.print(key);
-				System.out.print(": ");
-				System.out.println(motor_data.get(key).toString());
-			} else {
-				System.out.print("Owner is ");
-				System.out.println(motor_data.get(key).toString());
-			}
-		}
-		
-		// MOTOR WRITE TEST
-		motor_data.put("modified", 490);
-		motor_data.remove("owner");
-		try {
-			DeviceData.writeMotorData(id, motor_data);
-		} catch (Exception e) {
-			System.out.println("lol what");
-		}
-	}
-	
-	/**
-	 * Tokenizes the motor data file, reads fields and stores data as a map
-	 * of field -> (int) value. Be sure to check that the owner is Arduino
-	 * (which is to say, the last writer was the Arduino) before storing values
-	 * in system state. 
-	 * 
-	 * @param motor_id
-	 * @return
-	 */
-	public static Map<String, Integer> getMotorData(String motor_id) {
-		String motor_path = String.format(motor_path_format, motor_id);
-		Map<String, Integer> data = new HashMap<String, Integer>();
-		try {
-			// TODO: lock motor file before reading!
-			Reader reader = new FileReader(motor_path);
-			StreamTokenizer tok = new StreamTokenizer(reader);
-			tok.parseNumbers();
-			
-			boolean eof = false;
-			String field = "";
-			while (!eof) {
-				int token = tok.nextToken();
-				switch (token) {
-					case StreamTokenizer.TT_EOF:
-						eof = true;
-						break;
-					case StreamTokenizer.TT_WORD:
-						field = tok.sval;
-						break;
-					case StreamTokenizer.TT_NUMBER:
-						data.put(field, (int) tok.nval);
-						break;
-				}
-			}
-			reader.close();
-			if (data.get("@") != Config.OWNER_ARDUINO) {
-				MessageLog.printError("MOTOR_UPDATE", "Read old data! Dumping.");
-			}
-		} catch (IOException e) {
-			MessageLog.printError("MOTOR_UPDATE", "IOException while updating motor data.");
-		}
-		return data;
-	}
-	
+
 	/**
 	 * Writes mapped data to specified motor's data file, setting the file owner to be the Pi. 
 	 * @param motor_id - the motor whose data should be modified
 	 * @param data - the field,value map data to write out
 	 */
-	public static void writeMotorData(String motor_id, Map<String, Integer> data) throws IOException {
+	public static void writeArduinoData(String motor_id, Map<String, Integer> data) throws IOException {
 		String motor_path = String.format(motor_path_format, motor_id);
 		StringBuilder sb = new StringBuilder(String.format("@ %d\n", Config.OWNER_PI));
 		for (String key : data.keySet()) {
@@ -116,7 +44,6 @@ public class DeviceData {
 		}
 		try {
 			Writer writer = new FileWriter(motor_path);
-			// System.out.println(String.format("WROTE {%s} to device data", sb.toString()));
 			writer.write(sb.toString());
 			writer.close();
 		} catch (IOException e) {
@@ -126,6 +53,13 @@ public class DeviceData {
 		return;
 	}
 	
+	/**
+	 * Checks if we're still reading the last command we wrote
+	 * 
+	 * @param motor_id the motor to check from
+	 * @return True if there's been no new updates
+	 * @throws IOException
+	 */
 	public static boolean waiting(String motor_id) throws IOException {
 		String motor_path = String.format(motor_path_format, motor_id);
 		BufferedReader reader = new BufferedReader(new FileReader(motor_path));
@@ -133,7 +67,6 @@ public class DeviceData {
 			String header = reader.readLine();
 			reader.close();
 			if ((header != null) && header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
-				System.out.println("FOUND NEW DATA");
 				return false;
 			}
 		}

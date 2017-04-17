@@ -19,18 +19,7 @@ public class StepperMotor extends Motor {
 	}
 
 	@Override
-	protected void recieveUpdate() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected void sendUpdate() {
-		// TODO Auto-generated method stub	
-	}
-
-	@Override
 	public int get(String field) {
-		this.recieveUpdate();
 		return data.get(field);
 	}
 
@@ -38,7 +27,6 @@ public class StepperMotor extends Motor {
 	public void set(String field, int value) {
 		// TODO field validation?
 		data.put(field, value);
-		this.sendUpdate();
 	}
 
 	@Override

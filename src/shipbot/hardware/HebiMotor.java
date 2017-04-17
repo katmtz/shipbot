@@ -13,38 +13,35 @@ import java.util.Set;
 public class HebiMotor extends Motor {
 	
 	// Data Fields
-	public static String POS = "angle";
+	public static String FIXED = "s";
+	public static String REACH = "e";
+	public static String EFFECTOR = "h";
 	
-	private String id;
+	// Command format:
+	// @ 1
+	// [STOP/GO]
+	// s [VAL]
+	// e [VAL]
+	// h [VAl]
+	public static String cmd_format = "@ 1\n%s\ns %d\ne %d\nh %d\n";
+	
 	private Map<String, Integer> data;
 	
-	public HebiMotor(String id) {
-		this.id = id;
+	public HebiMotor() {
 		data = new HashMap<String,Integer>();
-		data.put(HebiMotor.POS, 0);
-		// TODO properly initialize motor data w/ file IO
-	}
-
-	@Override
-	protected void recieveUpdate() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	protected void sendUpdate() {
-		// TODO Auto-generated method stub
+		data.put(HebiMotor.FIXED, 0);
+		data.put(HebiMotor.REACH, 0);
+		data.put(HebiMotor.EFFECTOR, 0);
 	}
 
 	@Override
 	public int get(String field) {
-		this.recieveUpdate();
 		return data.get(field);
 	}
 
 	@Override
 	public void set(String field, int value) {
 		data.put(field, value);
-		this.sendUpdate();
 	}
 
 	@Override

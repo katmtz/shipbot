@@ -65,7 +65,7 @@ public class MoveTask extends Task {
 			data.put(DriveMotor.X, this.x);
 			data.put(DriveMotor.Y, this.y);
 			data.put(DriveMotor.ORIENT, this.orient);
-			DeviceData.writeMotorData(Config.DRIVE_MOTOR_ID, data);
+			DeviceData.writeArduinoData(Config.DRIVE_MOTOR_ID, data);
 			
 			// Wait for acknowledgement
 			int timeout = 0;

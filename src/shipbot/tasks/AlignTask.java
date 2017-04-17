@@ -37,9 +37,9 @@ public class AlignTask extends Task {
 		try {
 			Map<String, Integer> data = new HashMap<String,Integer>();
 			data.put(StepperMotor.POS, this.depth);
-			DeviceData.writeMotorData(Config.Y_STEPPER_ID, data);
+			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, data);
 			data.put(StepperMotor.POS, this.height);
-			DeviceData.writeMotorData(Config.Z_STEPPER_ID, data);
+			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
 			
 			// hang, waiting for arduino to acknowledge & complete task
 			int timeout = 0;

@@ -63,4 +63,14 @@ public class CVSensing {
 			MessageLog.printError("CV", "IO exception while communicating with CV file.");
 		}
 	}
+	
+	public int getHorizontalOffset() {
+		String val = this.data.get(this.X_OFFSET);
+		return Integer.parseInt(val);
+	}
+	
+	public int getDeviceOrientation() {
+		String val = this.data.get(this.ORIENTATION);
+		return Integer.parseInt(val);
+	}
 }
