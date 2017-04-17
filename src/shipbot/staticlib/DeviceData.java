@@ -133,6 +133,7 @@ public class DeviceData {
 			String header = reader.readLine();
 			reader.close();
 			if ((header != null) && header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
+				System.out.println("FOUND NEW DATA");
 				return false;
 			}
 		}

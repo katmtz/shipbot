@@ -1,10 +1,12 @@
 package shipbot.hardware;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import shipbot.staticlib.Config;
+import shipbot.staticlib.DeviceData;
 
 public class DriveMotor extends Motor {
 	
@@ -27,7 +29,16 @@ public class DriveMotor extends Motor {
 	@Override
 	protected void recieveUpdate() {
 		// TODO Auto-generated method stub
-		
+		try {
+			while (DeviceData.waiting(this.id)) {
+				Thread.sleep(Config.SLEEPTIME);
+			}
+			return;
+		} catch (InterruptedException e) {
+			System.out.println("interrupt exception");
+		} catch (IOException e) {
+			System.out.println("ioexception while waiting for motor data");
+		}
 	}
 
 	@Override

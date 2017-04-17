@@ -3,7 +3,7 @@ from Devices import DrivePipeline, StepperPipeline
 # Global configs!
 stepper_port = "/dev/ttyACM0"
 drive_port = "/dev/ttyACM1"
-verbose = False
+verbose = True
 serial_mock = True
 
 class SerialPipeline:
