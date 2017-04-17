@@ -73,4 +73,9 @@ public class CVSensing {
 		String val = this.data.get(this.ORIENTATION);
 		return Integer.parseInt(val);
 	}
+
+	public boolean isUpward() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

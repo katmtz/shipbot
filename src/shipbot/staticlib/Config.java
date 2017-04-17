@@ -33,29 +33,43 @@ public class Config {
 	public static int MAX_TIMEOUT = 2000;
 	public static int SLEEPTIME = 10;
 	
+	/* DEVICE & TESTBED CONSTANTS */
+	
 	/**
-	 * Static height of device centers on the testbed
+	 * Static height & depth of device centers on the testbed
 	 * set at 1.5' in cm.
 	 */
 	public static int DEVICE_HEIGHT = 458;
+	public static int DEVICE_DEPTH = 458;
 	
 	/**
-	 * depth of hebi arm when fixed hebi @ 0º 
-	 * TEMPORARILY set at 3in in mm
+	 * hebi arm depth offset for fixed hebi positions
+	 * TEMPORARILY set at 3in in mm for downward &
+	 * 4in in mm for outward
 	 */
-	public static int ARM_DEPTH_VERTICAL = 76;
+	public static int ARM_DEPTH_DOWN = 76;
+	public static int ARM_DEPTH_FRONT = 101;
 	
-	/**
-	 * depth of hebi arm when fixed hebi @ -90º
-	 * TEMPORARILY set at 4in in mm
+	/** 
+	 * hebi arm height offset
+	 * TEMPORARILY set at 0mm for downward &
+	 * 25mm for horizontal
 	 */
-	public static int ARM_DEPTH_HORIZONTAL = 101;
+	public static int ARM_HEIGHT_DOWN = 0;
+	public static int ARM_HEIGHT_FRONT = -25;
 	
 	/**
 	 * length of hebi reach offset
 	 * TEMPORARILY set at 6in in mm
 	 */
 	public static int REACH_OFFSET = 152;
+	
+	/**
+	 * Needed clearance to access testbed devices.
+	 * Should be length of "fingers" + extra space
+	 * TEMPORARILY set at 2in in mm
+	 */
+	public static int CLEARANCE = 51;
 	
 	/**
 	 * Returns an array of all the motor ids

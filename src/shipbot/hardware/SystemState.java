@@ -25,7 +25,7 @@ public class SystemState {
 	private Motor drive;
 	private Motor stepper_y;
 	private Motor stepper_z;
-	private Motor hebi_arm;
+	private HebiMotor hebi_arm;
 	
 	public SystemState() {
 		// Initialize onboard hardware
@@ -34,6 +34,59 @@ public class SystemState {
 		stepper_y = new StepperMotor(Config.Y_STEPPER_ID);
 		drive = new DriveMotor(Config.DRIVE_MOTOR_ID);
 		hebi_arm = new HebiMotor();
+	}
+	
+	public int[] getGoalCenter() {
+		int height;
+		int depth;
+		
+		int pos = 0 + cv.getHorizontalOffset();
+		
+		// If the device is oriented upwards, we want
+		// fixed depth & position, but offset height
+		if (cv.isUpward()) {
+			depth = Config.DEVICE_DEPTH;
+			height = Config.DEVICE_HEIGHT + Config.CLEARANCE;
+		} else {
+			depth = Config.DEVICE_DEPTH - Config.CLEARANCE;
+			height = Config.DEVICE_HEIGHT;
+		}
+		
+		int[] coords = { pos, height, depth };
+		return coords;
+	}
+	
+	public int[] getEffectorCenter() {
+		int height;
+		int depth;
+		int pos;
+		
+		// calculate position based on orientation and reach
+		if (hebi_arm.isReaching()) {
+			if (drive.get(DriveMotor.ORIENT) == Config.FRONT_FACING) {
+				pos = drive.get(DriveMotor.X) - Config.REACH_OFFSET;
+			} else {
+				pos = drive.get(DriveMotor.Y) + Config.REACH_OFFSET;
+			}
+		} else {
+			if (drive.get(DriveMotor.ORIENT) == Config.FRONT_FACING) {
+				pos = Config.REACH_OFFSET;
+			} else {
+				pos = (-1) * Config.REACH_OFFSET;
+			}
+		}
+	
+		// calculate height & depth based on fixed hebi position (front or down)
+		if (hebi_arm.isFront()) {
+			height = stepper_z.get(StepperMotor.POS) + Config.ARM_HEIGHT_FRONT;
+			depth = stepper_y.get(StepperMotor.POS) + Config.ARM_DEPTH_FRONT;
+		} else {
+			height = stepper_z.get(StepperMotor.POS) + Config.ARM_HEIGHT_DOWN;
+			depth = stepper_y.get(StepperMotor.POS) + Config.ARM_DEPTH_DOWN;
+		}
+		
+		int[] coords = { pos, height, depth };
+		return coords;
 	}
 	
 	/**
@@ -107,5 +160,9 @@ public class SystemState {
 		this.hebi_arm.set(HebiMotor.FIXED, fixed);
 		this.hebi_arm.set(HebiMotor.REACH, reach);
 		this.hebi_arm.set(HebiMotor.EFFECTOR, reach);
+	}
+
+	public boolean deviceIsUpward() {
+		return cv.isUpward();
 	}
 }

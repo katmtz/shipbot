@@ -73,6 +73,27 @@ public class DeviceData {
 		return true;
 	}
 	
+	public static void writeToHebis(boolean active, int fixed, int reach, int effector) throws IOException {
+		String hebi_path = String.format(motor_path_format, Config.HEBI_ID);
+		String command;
+		if (active) {
+			command = String.format(DeviceData.HEBI_CMD, DeviceData.HEBI_GO, fixed, reach, effector);
+		} else {
+			command = String.format(DeviceData.HEBI_CMD, DeviceData.HEBI_STOP, fixed, reach, effector);
+		}
+		System.out.print("Message to hebis was: ");
+		System.out.println(command);
+		try {
+			Writer writer = new FileWriter(hebi_path);
+			writer.write(command);
+			writer.close();
+		} catch (IOException e) {
+			MessageLog.printError("MOTOR_UPDATE", "IOException while writing hebi data.");
+			throw e;
+		}
+		return;
+	}
+	
 	/**
 	 * Utility function to clear device data files before
 	 * starting system. 

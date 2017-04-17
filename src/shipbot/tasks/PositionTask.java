@@ -1,7 +1,12 @@
 package shipbot.tasks;
 
+import java.io.IOException;
+
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
+import shipbot.staticlib.Config;
+import shipbot.staticlib.DeviceData;
+import shipbot.staticlib.MessageLog;
 
 public class PositionTask extends Task {
 	
@@ -18,10 +23,43 @@ public class PositionTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
+		
+		int reach;
+		int fixed;
+		int effector = 0;
+		
 		if (this.flip) {
-			// rotate the flipping hebi!
+			reach = 180;
+		} else {
+			reach = 0;
 		}
-		// adjust angle based on system state
+		
+		if (sys.deviceIsUpward()) {
+			fixed = -90;
+		} else {
+			fixed = 0;
+		}
+		
+		try {
+			DeviceData.writeToHebis(true, fixed, reach, effector);
+			
+			int timeout = 0;
+			while (DeviceData.waiting(Config.HEBI_ID)) {
+				if (timeout > Config.MAX_TIMEOUT) {
+					MessageLog.printError("POSITION TASK", "Timed out waiting for hebi response");
+					this.status = TaskStatus.ABORTED;
+				}
+				timeout++;
+				Thread.sleep(Config.SLEEPTIME);
+			}
+			sys.updateArm(fixed, reach, effector);
+		} catch (InterruptedException e) {
+			this.status = TaskStatus.ABORTED;
+			MessageLog.printError("POSITION TASK", "Interrupted while waiting for hebi response.");
+		} catch (IOException e) {
+			this.status = TaskStatus.ABORTED;
+			return;
+		}
 		
 		this.status = TaskStatus.SKIPPED;
 	}
