@@ -13,7 +13,7 @@ mock serial communication over stdout.
 - recieve: wait for a response from the Arduino
 """
 class DrivePipeline:
-	RECIEVE_TIMEOUT = 1000
+	RECIEVE_TIMEOUT = 500
 
 	# Defined orientation codes
 	FRONT = 1
@@ -214,12 +214,26 @@ class StepperPipeline:
 			self.serial = serial.Serial(port, 9600, timeout=1)
 
 			# Initialize y & z steppers
+			if self.debug:
+				print "[STEPPER] waiting for y axis init response..."
 			self.serial.write("yi")
+			self.serial.flush()
+			response_y = self.recieve()
+			if self.debug:
+				print "[STEPPER] recieved y init!"
+
+			if self.debug:
+				print "[STEPPER] waiting for z axis init response..."
 			self.serial.write("zi")
 			self.serial.flush()
-		response = self.recieve()
+			response_z = self.recieve()
+			if self.debug:
+				print "[STEPPER] recieved z init!"
 
 	def send(self, y, z):
+		if self.debug:
+			print "[STEPPER] update steppers to y:" + y + " z:" + z
+		
 		if not self.pos_init:
 			if self.debug:
 				print "[STEPPER] using absolute to initialize position"
@@ -241,15 +255,17 @@ class StepperPipeline:
 				print " - Sending a y offset of " + str(diff_y)
 			self.serial.write("yr")
 			self.serial.write(str(diff_y))
+			self.serial.flush()
+			response_y = self.recieve()
 		if (diff_z != 0):
 			if self.debug:
 				print " - Sending a z offset of " + str(diff_z)
 			self.serial.write("zr")
 			self.serial.write(str(diff_z))
-		self.serial.flush()
+			self.serial.flush()
 
-		self.y = int(y)
-		self.z = int(z)
+		self.y += diff_y
+		self.z += diff_z
 
 	def sendAbsolute(self, y, z):
 		if (self.debug):
@@ -264,11 +280,14 @@ class StepperPipeline:
 
 		self.serial.write("ya")
 		self.serial.write(y)
+		self.serial.flush()
+		response_y = self.recieve()
+		self.y = y
 
 		self.serial.write("za")
 		self.serial.write(z)
 		self.serial.flush()
-		self.y = y
+		response_z = self.recieve()
 		self.z = z
 
 	def recieve(self):
