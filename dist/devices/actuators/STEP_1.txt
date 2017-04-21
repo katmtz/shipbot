@@ -1,2 +1,1 @@
-@ 1
-position 200
+STOP

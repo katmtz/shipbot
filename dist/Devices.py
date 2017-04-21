@@ -50,7 +50,7 @@ class DrivePipeline:
 			timeout += 1
 			if "DONE" in line:
 				return 1
-		if self.verbose:
+		if self.debug:
 			print "[DRIVE] timed out waiting for ack"
 		return 0
 
@@ -208,7 +208,12 @@ class StepperPipeline:
 		
 		if self.serial_mock:
 			print ">yi"
+			response_y = self.recieve()
 			print ">zi"
+			response_z = self.recieve()
+
+			self.sendAbsolute(int(response_y) - 20, int(response_z) / 2)
+                        response = self.recieve()
 		else:
 			# Open a serial port
 			self.serial = serial.Serial(port, 9600, timeout=1)
@@ -230,25 +235,29 @@ class StepperPipeline:
 			if self.debug:
 				print "[STEPPER] recieved z init!"
 
+			if self.debug:
+				print "[STEPPER] pulling back y axis"
+			self.sendAbsolute(response_y - 20, response_z / 2)
+			response = self.recieve()
+
 	def send(self, y, z):
+		print self.y
+		print self.z
+
 		if self.debug:
 			print "[STEPPER] update steppers to y:" + y + " z:" + z
-		
-		if not self.pos_init:
-			if self.debug:
-				print "[STEPPER] using absolute to initialize position"
-			self.pos_init = True
-			self.sendAbsolute(y,z)
-			return
-
-		if (self.debug):
-			print "[STEPPER] sending y & z relative positions"
-
-		if self.serial_mock:
-			return
 
 		diff_y = int(y) - self.y
 		diff_z = int(z) - self.z
+
+		if self.serial_mock:
+			print "[STEPPER] sending relative command:"
+			print " - y offset: " + str(diff_y)
+			print " - z offset: " + str(diff_z)
+			response = self.recieve()
+			self.y += diff_y
+			self.z += diff_z
+			return
 
 		if (diff_y != 0):
 			if self.debug:
@@ -277,19 +286,21 @@ class StepperPipeline:
 			print ">" + str(y)
 			print ">za"
 			print ">" + str(z)
+			self.y = int(y)
+			self.z = int(z)
 			return
 
 		self.serial.write("ya")
 		self.serial.write(y)
 		self.serial.flush()
 		response_y = self.recieve()
-		self.y = y
+		self.y = int(y)
 
 		self.serial.write("za")
 		self.serial.write(z)
 		self.serial.flush()
 		response_z = self.recieve()
-		self.z = z
+		self.z = int(z)
 
 	def recieve(self):
 		if (self.serial_mock):
@@ -297,7 +308,7 @@ class StepperPipeline:
 			msg = raw_input()
 			#while (msg != "DONE"):
 			#	msg = raw_input()
-			return 1
+			return str(msg)
 		
 		timeout = 0
 		while (timeout < self.RECIEVE_TIMEOUT):

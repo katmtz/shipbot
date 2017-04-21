@@ -4,8 +4,8 @@ from Devices import DrivePipeline, StepperPipeline
 axis_port = "/dev/ttyACM3"
 base_port = "/dev/ttyACM2"
 verbose = True
-serialmock_axis = False
-serialmock_base = True
+serialmock_axis = True #False
+serialmock_base = True #False
 
 class SerialPipeline:
 

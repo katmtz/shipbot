@@ -9,3 +9,35 @@ s 0
 e 0
 h 0
 
+Message to hebis was: @ 1
+0
+s 0
+e 180
+h 0
+
+>> APPROACH TASK TIMEOUT
+>> APPROACH TASK TIMEOUT
+Message to hebis was: @ 1
+0
+s 0
+e 0
+h 0
+
+>> APPROACH TASK TIMEOUT
+>> APPROACH TASK TIMEOUT
+Message to hebis was: @ 1
+0
+s 0
+e 180
+h 0
+
+>> APPROACH TASK TIMEOUT
+>> APPROACH TASK TIMEOUT
+Message to hebis was: @ 1
+0
+s 0
+e 0
+h 0
+
+MISSION COMPLETE
+DATA FILES DUMPED

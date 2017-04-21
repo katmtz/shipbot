@@ -1,0 +1,14 @@
+Broadcasting on:
+  192.168.2.255
+  128.237.223.255
+  128.237.223.255
+Modules found on the network:
+    238045233854836:   d8:80:39:9a:b9:74   (192.168.2.4) Hand | TeamJ
+    238045233887184:   d8:80:39:9b:37:d0   (192.168.2.3) elbow | TeamJ
+    238045239271894:   d8:80:39:ed:61:d6   (192.168.2.5) Shoulder | TeamJ
+User-created module objects:
+User-created group objects:
+
+Looking up group by name.
+Found group with 3 modules.
+Initializd
