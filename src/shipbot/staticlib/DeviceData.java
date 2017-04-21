@@ -44,6 +44,7 @@ public class DeviceData {
 		}
 		try {
 			Writer writer = new FileWriter(motor_path);
+			System.out.println(String.format("[debug] wrote <%s> to path <%s>", sb.toString(), motor_path));
 			writer.write(sb.toString());
 			writer.close();
 		} catch (IOException e) {

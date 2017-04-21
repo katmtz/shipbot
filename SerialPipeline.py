@@ -1,11 +1,11 @@
 from Devices import DrivePipeline, StepperPipeline
 
 # Global configs!
-axis_port = "/dev/ttyACM0"
-base_port = "/dev/ttyACM1"
+axis_port = "/dev/ttyACM3"
+base_port = "/dev/ttyACM2"
 verbose = True
-serialmock_axis = True
-serialmock_base = True
+serialmock_axis = True #False
+serialmock_base = True #False
 
 class SerialPipeline:
 
@@ -47,7 +47,7 @@ class SerialPipeline:
 					print "[SERIAL] recieved stop signal."
 				return
 
-			if (height_cmd or depth_cmd):
+			if (height_cmd and depth_cmd):
 				if verbose:
 					print "[SERIAL] processing stepper command."
 				

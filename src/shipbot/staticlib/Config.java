@@ -39,16 +39,16 @@ public class Config {
 	 * Static height & depth of device centers on the testbed
 	 * set at 1.5' in cm.
 	 */
-	public static int DEVICE_HEIGHT = 458;
-	public static int DEVICE_DEPTH = 458;
+	public static int DEVICE_HEIGHT = 200;
+	public static int DEVICE_DEPTH = 200;
 	
 	/**
 	 * hebi arm depth offset for fixed hebi positions
 	 * TEMPORARILY set at 3in in mm for downward &
 	 * 4in in mm for outward
 	 */
-	public static int ARM_DEPTH_DOWN = 76;
-	public static int ARM_DEPTH_FRONT = 101;
+	public static int ARM_DEPTH_DOWN = 4;
+	public static int ARM_DEPTH_FRONT = 7;
 	
 	/** 
 	 * hebi arm height offset
@@ -62,7 +62,7 @@ public class Config {
 	 * length of hebi reach offset
 	 * TEMPORARILY set at 6in in mm
 	 */
-	public static int REACH_OFFSET = 152;
+	public static int REACH_OFFSET = 50;
 	
 	/**
 	 * Needed clearance to access testbed devices.

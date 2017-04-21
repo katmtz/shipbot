@@ -26,7 +26,7 @@ public class AlignTask extends Task {
 		// indicate whether the y axis should be fully out or kept back
 		this.device = device;
 		this.height = Config.DEVICE_HEIGHT;
-		this.depth = 500;
+		this.depth = Config.DEVICE_DEPTH;
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class AlignTask extends Task {
 			int timeout = 0;
 			while (DeviceData.waiting(Config.Y_STEPPER_ID) && DeviceData.waiting(Config.Z_STEPPER_ID)) {
 				if (timeout > Config.MAX_TIMEOUT) {
-					System.out.println(">> APPROACH TASK TIMEOUT");
+					System.out.println(">> ALIGN TASK TIMEOUT");
 					throw new Exception();
 				}
 				Thread.sleep(Config.SLEEPTIME);

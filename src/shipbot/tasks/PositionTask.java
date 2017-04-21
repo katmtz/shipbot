@@ -48,6 +48,7 @@ public class PositionTask extends Task {
 				if (timeout > Config.MAX_TIMEOUT) {
 					MessageLog.printError("POSITION TASK", "Timed out waiting for hebi response");
 					this.status = TaskStatus.ABORTED;
+					return;
 				}
 				timeout++;
 				Thread.sleep(Config.SLEEPTIME);
@@ -56,6 +57,7 @@ public class PositionTask extends Task {
 		} catch (InterruptedException e) {
 			this.status = TaskStatus.ABORTED;
 			MessageLog.printError("POSITION TASK", "Interrupted while waiting for hebi response.");
+			return;
 		} catch (IOException e) {
 			this.status = TaskStatus.ABORTED;
 			return;

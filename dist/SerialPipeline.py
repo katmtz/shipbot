@@ -47,7 +47,7 @@ class SerialPipeline:
 					print "[SERIAL] recieved stop signal."
 				return
 
-			if (height_cmd or depth_cmd):
+			if (height_cmd and depth_cmd):
 				if verbose:
 					print "[SERIAL] processing stepper command."
 				
