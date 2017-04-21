@@ -13,7 +13,7 @@ mock serial communication over stdout.
 - recieve: wait for a response from the Arduino
 """
 class DrivePipeline:
-	RECIEVE_TIMEOUT = 5
+	RECIEVE_TIMEOUT = 50
 
 	# Defined orientation codes
 	FRONT = 1
@@ -196,7 +196,7 @@ class StepperPipeline:
 	y = 0
 	z = 0
 
-	RECIEVE_TIMEOUT = 3
+	RECIEVE_TIMEOUT = 50
 	pos_init = False
 
 	def __init__(self, port, verbose=False, serial_mock=False):

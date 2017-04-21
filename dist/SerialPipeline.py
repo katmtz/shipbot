@@ -1,8 +1,8 @@
 from Devices import DrivePipeline, StepperPipeline
 
 # Global configs!
-axis_port = "/dev/ttyACM1"
-base_port = "/dev/ttyACM0"
+axis_port = "/dev/ttyACM3"
+base_port = "/dev/ttyACM2"
 verbose = True
 serialmock_axis = False
 serialmock_base = True
