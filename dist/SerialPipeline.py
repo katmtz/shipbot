@@ -1,10 +1,11 @@
 from Devices import DrivePipeline, StepperPipeline
 
 # Global configs!
-stepper_port = "/dev/ttyACM0"
-drive_port = "/dev/ttyACM1"
+axis_port = "/dev/ttyACM1"
+base_port = "/dev/ttyACM0"
 verbose = True
-serial_mock = True
+serialmock_axis = False
+serialmock_base = True
 
 class SerialPipeline:
 
@@ -28,8 +29,8 @@ class SerialPipeline:
 		self.synchronize()
 
 		# Initialize communication to pipelines (also inits hardware)
-		self.drive_pipeline = DrivePipeline(drive_port, verbose, serial_mock)
-		self.stepper_pipeline = StepperPipeline(stepper_port, verbose, serial_mock)
+		self.drive_pipeline = DrivePipeline(base_port, verbose, serialmock_base)
+		self.stepper_pipeline = StepperPipeline(axis_port, verbose, serialmock_axis)
 
 		# Send init status to controller
 		self.sendStatus(1)

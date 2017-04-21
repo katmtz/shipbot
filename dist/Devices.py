@@ -13,7 +13,7 @@ mock serial communication over stdout.
 - recieve: wait for a response from the Arduino
 """
 class DrivePipeline:
-	RECIEVE_TIMEOUT = 1000
+	RECIEVE_TIMEOUT = 5
 
 	# Defined orientation codes
 	FRONT = 1
@@ -28,7 +28,7 @@ class DrivePipeline:
 		self.serial_mock = serial_mock
 
 		if self.debug:
-			print "[DRIVE] Opening serial port!"
+			print "[DRIVE] Opening serial port at [" + port + "]"
 
 		if self.serial_mock:
 			print "[DRIVE] Skipped serial open due to mock-up."
@@ -45,13 +45,13 @@ class DrivePipeline:
 			return 1
 			
 		timeout = 0
-		while (not timeout > RECIEVE_TIMEOUT):
+		while (timeout < self.RECIEVE_TIMEOUT):
 			line = self.serial.readline()
 			timeout += 1
 			if "DONE" in line:
 				return 1
 		if self.verbose:
-			print "[STEPPER] timed out waiting for ack"
+			print "[DRIVE] timed out waiting for ack"
 		return 0
 
 	def send(self, t_x, t_y, t_r):
@@ -196,7 +196,7 @@ class StepperPipeline:
 	y = 0
 	z = 0
 
-	RECIEVE_TIMEOUT = 1000
+	RECIEVE_TIMEOUT = 3
 	pos_init = False
 
 	def __init__(self, port, verbose=False, serial_mock=False):
@@ -214,12 +214,26 @@ class StepperPipeline:
 			self.serial = serial.Serial(port, 9600, timeout=1)
 
 			# Initialize y & z steppers
+			if self.debug:
+				print "[STEPPER] waiting for y axis init response..."
 			self.serial.write("yi")
+			self.serial.flush()
+			response_y = self.recieve()
+			if self.debug:
+				print "[STEPPER] recieved y init!"
+
+			if self.debug:
+				print "[STEPPER] waiting for z axis init response..."
 			self.serial.write("zi")
 			self.serial.flush()
-		response = self.recieve()
+			response_z = self.recieve()
+			if self.debug:
+				print "[STEPPER] recieved z init!"
 
 	def send(self, y, z):
+		if self.debug:
+			print "[STEPPER] update steppers to y:" + y + " z:" + z
+		
 		if not self.pos_init:
 			if self.debug:
 				print "[STEPPER] using absolute to initialize position"
@@ -241,15 +255,18 @@ class StepperPipeline:
 				print " - Sending a y offset of " + str(diff_y)
 			self.serial.write("yr")
 			self.serial.write(str(diff_y))
+			self.serial.flush()
+			response_y = self.recieve()
 		if (diff_z != 0):
 			if self.debug:
 				print " - Sending a z offset of " + str(diff_z)
 			self.serial.write("zr")
 			self.serial.write(str(diff_z))
-		self.serial.flush()
+			self.serial.flush()
+			response_z = self.recieve()
 
-		self.y = int(y)
-		self.z = int(z)
+		self.y += diff_y
+		self.z += diff_z
 
 	def sendAbsolute(self, y, z):
 		if (self.debug):
@@ -264,11 +281,14 @@ class StepperPipeline:
 
 		self.serial.write("ya")
 		self.serial.write(y)
+		self.serial.flush()
+		response_y = self.recieve()
+		self.y = y
 
 		self.serial.write("za")
 		self.serial.write(z)
 		self.serial.flush()
-		self.y = y
+		response_z = self.recieve()
 		self.z = z
 
 	def recieve(self):
@@ -280,10 +300,11 @@ class StepperPipeline:
 			return 1
 		
 		timeout = 0
-		while (not timeout > RECIEVE_TIMEOUT):
+		while (timeout < self.RECIEVE_TIMEOUT):
 			line = self.serial.readline()
 			timeout += 1
-			if "DONE" in line:
+			if len(line) > 0:
+				print "[STEPPER] >" + line
 				return 1
 		if self.debug:
 			print "[STEPPER] timed out waiting for ack"
