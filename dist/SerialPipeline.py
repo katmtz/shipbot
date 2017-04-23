@@ -14,6 +14,7 @@ class SerialPipeline:
 		"devices/actuators/STEP_0.txt", 
 		"devices/actuators/STEP_1.txt" 
 	]
+
 	command = {
 		"X": "0",
 		"Y": "0",
@@ -32,7 +33,6 @@ class SerialPipeline:
 		self.drive_pipeline = DrivePipeline(base_port, verbose, serialmock_base)
 		self.stepper_pipeline = StepperPipeline(axis_port, verbose, serialmock_axis)
 
-		# Send init status to controller
 		self.sendStatus(1)
 
 	def processCommand(self):
