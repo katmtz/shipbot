@@ -27,7 +27,7 @@ public class DeviceData {
 	
 	// Arduino comm strings
 	private static String UNINITIALIZED_MSG = "@ 1\nNO DATA\n";
-	private static String KILL_MSG = "STOP";
+	private static String KILL_MSG = "@ 1\nSTOP";
 
 	/**
 	 * Writes mapped data to specified motor's data file, setting the file owner to be the Pi. 

@@ -138,10 +138,18 @@ public class SystemState {
 	}
 
 	public void getNewCapture(Device device) {
-		// cvfile.write(@ 1, device)
+		//cvfile.write(@ 1, device)
 		// while (!cvfile.updated()): sleep
-		// cv data updated!
+		//cv data updated!
 		return;
+	}
+	
+	public int[] getArmPosition() {
+		int fixed = this.hebi_arm.get(HebiMotor.FIXED);
+		int reach = this.hebi_arm.get(HebiMotor.REACH);
+		int effector = this.hebi_arm.get(HebiMotor.REACH);
+		int[] data = { fixed, reach, effector };
+		return data;
 	}
 	
 	/* UPDATE METHODS: sends updates about accepted commands to virtual representation */

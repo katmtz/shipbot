@@ -6,6 +6,7 @@ import java.util.List;
 import shipbot.hardware.CVSensing;
 import shipbot.tasks.AlignTask;
 import shipbot.tasks.CaptureTask;
+import shipbot.tasks.DisengageTask;
 import shipbot.tasks.EngageTask;
 import shipbot.tasks.MoveTask;
 import shipbot.tasks.PositionTask;
@@ -65,6 +66,12 @@ public class Valve extends Device {
 		// Capture & identify device image
 		tasks.add(new CaptureTask(this));
 		
+		// Realign
+		tasks.add(new MoveTask(this));
+		
+		// Recapture
+		tasks.add(new CaptureTask(this));
+		
 		// Position HEBIs
 		tasks.add(new PositionTask(this));
 		
@@ -73,6 +80,9 @@ public class Valve extends Device {
 		
 		// Rotate effector
 		tasks.add(new EngageTask(this));
+		
+		// Disengage
+		tasks.add(new DisengageTask(this));
 		return tasks;
 	}
 

@@ -71,6 +71,9 @@ public class Config {
 	 */
 	public static int CLEARANCE = 51;
 	
+	public static int Y_TRAVELLING = 270;
+	public static int Z_TRAVELLING = 10;
+	
 	/**
 	 * Returns an array of all the motor ids
 	 * @return

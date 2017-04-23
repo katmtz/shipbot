@@ -1,7 +1,11 @@
 package shipbot.tasks;
 
+import java.io.IOException;
+
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
+import shipbot.staticlib.DeviceData;
+import shipbot.staticlib.MessageLog;
 
 /**
  * Insert the effector and rotate it as needed.
@@ -34,9 +38,17 @@ public class EngageTask extends Task {
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
 		// check if system is already at needed position
+		int[] arm_pos = sys.getArmPosition();
 		
 		// Write angle to effector hebi
-		this.status = TaskStatus.SKIPPED;
+		try {
+			DeviceData.writeToHebis(true, arm_pos[0], arm_pos[1], this.angle);
+			sys.updateArm(arm_pos[0], arm_pos[1], this.angle);
+			this.status = TaskStatus.COMPLETE;
+		} catch (IOException e) {
+			MessageLog.printError("Engage Task", "IO exception while engaging hebis.");
+			this.status = TaskStatus.ABORTED;
+		}
 	}
 
 	@Override
