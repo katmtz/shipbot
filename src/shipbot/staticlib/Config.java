@@ -25,13 +25,16 @@ public class Config {
 	public static final Integer OWNER_ARDUINO = 0;
 	public static final Integer OWNER_PI = 1;
 	
-	// ORIENTATION
+	// ROBOT ORIENTATION
 	public static final int FRONT_FACING = 1;
 	public static final int SIDE_FACING = 0;
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
 	public static int SLEEPTIME = 5;
+	
+	// BASE OFFSET THRESHOLD (the min distance we adjust with base motion)
+	public static int OFFSET_THRESHOLD = 20;
 	
 	/* DEVICE & TESTBED CONSTANTS */
 	

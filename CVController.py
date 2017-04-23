@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-import sys
 
 path = "imgs/shuttlecock_lowres.jpg"
 # NEEDS PYTHON3 !!!!
@@ -25,9 +24,19 @@ class Shuttlecock:
 		self.thresh_low = np.array(self.hsb_low, dtype="uint8")
 		self.thresh_high = np.array(self.hsb_high, dtype="uint8")
 
+		initialized = False
+		while not initialized:
+			file = open(self.data_path, 'r')
+			for line in file:
+				if "NO DATA" in line:
+					initialized = True
+			file.close()
+		return
+
 	def commandLoop(self):
+		killed = False
 		cmd_recieved = False
-		device = "NONE"
+		device = "0"
 
 		while not cmd_recieved:
 			file = open(self.data_path, 'r')
@@ -36,26 +45,33 @@ class Shuttlecock:
 					break
 				else:
 					if "STOP" in line:
-						return False
-					(key, value) = line.split(' ')
-					if "device" in key:
-						device = value.strip("\n")
 						cmd_recieved = True
+						killed = True
+						break
+
+					(key, value) = line.split(' ')
+					if "DEVICE" in key:
+						device = value
+						cmd_recieved = True
+						break
 			file.close()
+
+		if killed:
+			return False
 
 		# Shuttlecock code is 3!!
 		if not ("3" in device):
 			print ("Unexpected device!")
-			return False
+			return True
 
 		# send capture to picamera!
 		# for now, use dummy image
 		self.loadImage()
 		return True
 
-	def writeData(self, center, orientation, angle):
+	def writeData(self, offset, orientation, angle):
 		format_str = "@ 0\nOFFSET {offset}\nORIENT {orient}\nANGLE {angle}\n"
-		msg = format_str.format(offset=center[0], orient=orientation, angle=angle)
+		msg = format_str.format(offset=offset, orient=orientation, angle=angle)
 		file = open(self.data_path, 'w')
 		file.write(msg)
 		file.close()
@@ -102,7 +118,7 @@ class Shuttlecock:
 					#print ("ratio: " + str(ratio))
 					#print ("area: " + str(area))
 					#print ("angle: " + str(angle))
-					self.writeData((x_offset, y_offset), 0, theta)
+					self.writeData(x_offset, 0, theta)
 					return
 
 

@@ -22,10 +22,12 @@ public class SystemState {
 	
 	// Devices
 	private CVSensing cv;
-	private Motor drive;
+	private DriveMotor drive;
 	private Motor stepper_y;
 	private Motor stepper_z;
 	private HebiMotor hebi_arm;
+	
+	private boolean base_adjustment = false;
 	
 	public SystemState() {
 		// Initialize onboard hardware
@@ -138,9 +140,8 @@ public class SystemState {
 	}
 
 	public void getNewCapture(Device device) {
-		//cvfile.write(@ 1, device)
-		// while (!cvfile.updated()): sleep
-		//cv data updated!
+		cv.getNewCapture(device.getCVId());
+		this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.OFFSET_THRESHOLD);
 		return;
 	}
 	
@@ -150,6 +151,21 @@ public class SystemState {
 		int effector = this.hebi_arm.get(HebiMotor.REACH);
 		int[] data = { fixed, reach, effector };
 		return data;
+	}
+
+	/* CV adjustment info */
+	
+	public boolean deviceIsUpward() {
+		return cv.isUpward();
+	}
+
+	public boolean needsBaseAdjustment() {
+		return this.base_adjustment;
+	}
+	
+	public int getBaseAdjustment() {
+		this.base_adjustment = false;
+		return cv.getHorizontalOffset();
 	}
 	
 	/* UPDATE METHODS: sends updates about accepted commands to virtual representation */
@@ -168,9 +184,5 @@ public class SystemState {
 		this.hebi_arm.set(HebiMotor.FIXED, fixed);
 		this.hebi_arm.set(HebiMotor.REACH, reach);
 		this.hebi_arm.set(HebiMotor.EFFECTOR, reach);
-	}
-
-	public boolean deviceIsUpward() {
-		return cv.isUpward();
 	}
 }

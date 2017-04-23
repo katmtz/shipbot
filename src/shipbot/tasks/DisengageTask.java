@@ -31,10 +31,35 @@ public class DisengageTask extends Task {
 		int[] arm_pos = sys.getArmPosition();
 		try {
 			Map<String, Integer> steppers = new HashMap<String, Integer>();
-			steppers.put(StepperMotor.POS, Config.Y_TRAVELLING);
-			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, steppers);
-			steppers.put(StepperMotor.POS, Config.Z_TRAVELLING);
-			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, steppers);
+			
+			// If device is upward, we need to extract Z then Y.
+			if (sys.deviceIsUpward()) {
+				MessageLog.logDebugMessage("DISENGAGE TASK", "Extracting effector vertically.");
+				// Extract effector from device vertically
+				steppers.put(StepperMotor.POS, (Config.DEVICE_HEIGHT + Config.CLEARANCE));
+				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, steppers);
+				
+				// Pull back y axis to travel position
+				steppers.put(StepperMotor.POS, Config.Y_TRAVELLING);
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, steppers);
+				
+				// Move z axis to travel position
+				steppers.put(StepperMotor.POS, Config.Z_TRAVELLING);
+				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, steppers);
+			} else {
+				MessageLog.logDebugMessage("DISENGAGE TASK", "Extracting effector horizontally.");
+				// Extract effector horizontally
+				steppers.put(StepperMotor.POS, Config.DEVICE_DEPTH + Config.CLEARANCE);
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, steppers);
+				
+				// Move z axis to travel pos
+				steppers.put(StepperMotor.POS, Config.Z_TRAVELLING);
+				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, steppers);
+				
+				// Move y axis to travel pos
+				steppers.put(StepperMotor.POS, Config.Y_TRAVELLING);
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, steppers);
+			}
 
 			// hang, waiting for arduino to acknowledge & complete task
 			int timeout = 0;
@@ -47,6 +72,8 @@ public class DisengageTask extends Task {
 				timeout++;
 			}
 			sys.updateSteppers(Config.Y_TRAVELLING, Config.Z_TRAVELLING);
+			
+			// Reset hebi positions
 			DeviceData.writeToHebis(true, arm_pos[0], 90, 0);
 			sys.updateArm(arm_pos[0], 90, 0);
 		} catch (Exception e) {
@@ -56,14 +83,12 @@ public class DisengageTask extends Task {
 
 	@Override
 	protected TaskStatus getStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.status;
 	}
 
 	@Override
 	public Device getAssociatedDevice() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.device;
 	}
 
 }

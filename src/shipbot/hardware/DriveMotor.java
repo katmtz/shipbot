@@ -25,6 +25,12 @@ public class DriveMotor extends Motor {
 		data.put(DriveMotor.Y, 0);
 		data.put(DriveMotor.ORIENT, 0);
 	}
+	
+	// True if the robot is facing the long side of 
+	// the testbed
+	public boolean isFrontFacing() {
+		return (data.get(ORIENT) == Config.FRONT_FACING);
+	}
 
 	@Override
 	public int get(String field) {

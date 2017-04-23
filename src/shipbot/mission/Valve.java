@@ -25,7 +25,8 @@ public class Valve extends Device {
 	private static String VALVE_LG = "Large Valve";
 	private static String SHUTTLECOCK = "Shuttlecock";
 	
-	private String id;
+	private Integer id_cv;
+	private String id_readable;
 	private Station station;
 	private int angle = -1;
 	
@@ -33,13 +34,16 @@ public class Valve extends Device {
 		this.station = s;
 		switch (id) {
 			case "V1":
-				this.id = Valve.VALVE_SM;
+				this.id_readable = Valve.VALVE_SM;
+				this.id_cv = CVSensing.DEVICE_VALVE_SM;
 				break;
 			case "V2":
-				this.id = Valve.VALVE_LG;
+				this.id_readable = Valve.VALVE_LG;
+				this.id_cv = CVSensing.DEVICE_VALVE_LG;
 				break;
 			case "V3":
-				this.id = Valve.SHUTTLECOCK;
+				this.id_readable = Valve.SHUTTLECOCK;
+				this.id_cv = CVSensing.DEVICE_SHUTTLE;
 				break;
 		}
 	}
@@ -89,12 +93,17 @@ public class Valve extends Device {
 	@Override
 	public String getDescription() {
 		String format = "Device: %s @ Station %s -- Rotate to [%d] degrees.";
-		return String.format(format, this.id, station.toString(), this.angle);
+		return String.format(format, this.id_readable, station.toString(), this.angle);
 	}
 
 	@Override
 	protected String id() {
-		return this.id;
+		return this.id_readable;
+	}
+	
+	@Override
+	public int getCVId() {
+		return this.id_cv;
 	}
 
 }
