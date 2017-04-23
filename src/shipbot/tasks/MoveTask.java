@@ -62,6 +62,18 @@ public class MoveTask extends Task {
 		try {
 			// Write new target x,y, and orientation to data file as a command
 			Map<String, Integer> data = new HashMap<String, Integer>();
+			if (sys.needsBaseAdjustment()) {
+				int offset = sys.getBaseAdjustment();
+				MessageLog.logDebugMessage("MOVE TASK", String.format("Using offset of <%d> from CV", offset));
+				if (this.orient == Config.FRONT_FACING) {
+					// we're facing the long side so adjust x
+					this.x += offset;
+				} else {
+					// we're facing the short side so adjust y
+					this.y += offset;
+				}
+			} 
+			
 			data.put(DriveMotor.X, this.x);
 			data.put(DriveMotor.Y, this.y);
 			data.put(DriveMotor.ORIENT, this.orient);
@@ -80,7 +92,7 @@ public class MoveTask extends Task {
 			}
 			
 			// Update virtual representation
-			sys.updateLocation(x, y, orient);
+			sys.updateLocation(this.x, this.y, this.orient);
 		} catch (Exception e) {
 			status = TaskStatus.ABORTED;
 			return;

@@ -44,7 +44,7 @@ public class DeviceData {
 		}
 		try {
 			Writer writer = new FileWriter(motor_path);
-			System.out.println(String.format("[debug] wrote <%s> to path <%s>", sb.toString(), motor_path));
+			MessageLog.logDebugMessage("ARDUINO WRITE", String.format("[debug] wrote <%s> to path <%s>", sb.toString(), motor_path));
 			writer.write(sb.toString());
 			writer.close();
 		} catch (IOException e) {
@@ -82,9 +82,8 @@ public class DeviceData {
 		} else {
 			command = String.format(DeviceData.HEBI_CMD, DeviceData.HEBI_STOP, fixed, reach, effector);
 		}
-		System.out.print("Message to hebis was: ");
-		System.out.println(command);
 		try {
+			MessageLog.logDebugMessage("HEBI WRITE", String.format("[debug] wrote <%s> to path <%s>", command, hebi_path));
 			Writer writer = new FileWriter(hebi_path);
 			writer.write(command);
 			writer.close();

@@ -43,7 +43,7 @@ public class CVSensing {
 		this.data.put(this.ORIENTATION, CVSensing.ORIENT_UP);
 	}
 	
-	public void getNewCapture(String device_type) {
+	public void getNewCapture(int device_type) {
 		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
@@ -57,8 +57,9 @@ public class CVSensing {
 			while (!responded) {
 				Reader reader = new FileReader(this.path);
 				StreamTokenizer tok = new StreamTokenizer(reader);
-				tok.eolIsSignificant(true);
 				tok.parseNumbers();
+				char owner_tag = '@';
+				tok.wordChars((int) owner_tag, (int) owner_tag);
 				
 				boolean ended = false;
 				String key = "";
@@ -71,21 +72,27 @@ public class CVSensing {
 							break;
 						case StreamTokenizer.TT_WORD:
 							key = tok.sval;
+							MessageLog.logDebugMessage("CV", String.format("[debug] word token was <%s>", key));
 							break;
 						case StreamTokenizer.TT_NUMBER:
 							int val = (int) tok.nval;
+							MessageLog.logDebugMessage("CV", String.format("[debug] number token was %d", val));
 							temp.put(key, (Integer) val);
 							break;
 					}
 				}
-				if (data.containsKey("@")) {
-					if (data.get("@") == Config.OWNER_ARDUINO) {
+				reader.close();
+				if (temp.containsKey("@")) {
+					if (temp.get("@") == Config.OWNER_ARDUINO) {
 						this.data.clear();
 						this.data.putAll(temp);
 						responded = true;
+					} else {
+						//MessageLog.logDebugMessage("CV", "Read own command!");
 					}
 				} else {
 					MessageLog.printError("CV", "Missing owner tag!!");
+					return;
 				}
 			}
 		} catch (IOException e) {

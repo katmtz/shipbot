@@ -24,7 +24,8 @@ import shipbot.tasks.Task;
 public class BreakerBox extends Device {
 	
 	/** id: specifies whether breaker box A or B */
-	private String id;
+	private String id_readable;
+	private int id_cv;
 	/** switches: the list of switches (1, 2, or 3) to change */
 	private List<Integer> switches;
 	/** station: the station (and location) of this device */
@@ -32,7 +33,8 @@ public class BreakerBox extends Device {
 	
 	public BreakerBox(Station s, String id) {
 		this.station = s;
-		this.id = id;
+		this.id_readable = id;
+		this.id_cv = CVSensing.DEVICE_BREAKER;
 		this.switches = new ArrayList<Integer>();
 	}
 
@@ -59,7 +61,7 @@ public class BreakerBox extends Device {
 	
 	private String name() {
 		String format = "BreakerBox %s";
-		return String.format(format, this.id);
+		return String.format(format, this.id_readable);
 	}
 
 	public List<Task> getTasks() {
@@ -108,7 +110,12 @@ public class BreakerBox extends Device {
 	
 	@Override
 	protected String id() {
-		return this.id;
+		return this.id_readable;
+	}
+
+	@Override
+	public int getCVId() {
+		return this.id_cv;
 	}
 }
 
