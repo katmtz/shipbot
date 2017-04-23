@@ -1,40 +1,41 @@
-[ MISSION LOG ] (17:29:20 2017/04/21) New mission initialized.
-[ MISSION LOG ] (17:29:20 2017/04/21) Loaded goals from mission file.
-[ MISSION LOG ] (17:29:20 2017/04/21) Mission time limit is 360 sec.
-[ MISSION LOG ] (17:29:20 2017/04/21) Device: Small Valve @ Station A -- Rotate to [175] degrees.
-[ MISSION LOG ] (17:29:20 2017/04/21) Device: BreakerBox A @ Station C -- Goals: switch 2
-[ MISSION LOG ] (17:29:20 2017/04/21) Device: Shuttlecock @ Station D -- Rotate to [0] degrees.
-[ MISSION LOG ] (17:29:20 2017/04/21) Device: BreakerBox B @ Station F -- Goals: switch 3
-[ MISSION LOG ] (17:29:20 2017/04/21) Device: Small Valve @ Station G -- Rotate to [50] degrees.
-    [ TASK LOG ] (17:29:26 2017/04/21) Align Task, Y=200 Z=200 [aborted]
-    [ TASK LOG ] (17:29:26 2017/04/21) EngageTask, rotate 0 degrees [skipped]
-[ MISSION LOG ] (17:29:27 2017/04/21) Starting task execution.
-    [ TASK LOG ] (17:29:27 2017/04/21) Move Task, X=0 Y=165 Orient=0 [complete]
-    [ TASK LOG ] (17:29:27 2017/04/21) Capture Task, device is B at station F [skipped]
-    [ TASK LOG ] (17:29:27 2017/04/21) Move Task, X=1080 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (17:29:27 2017/04/21) Capture Task, device is Small Valve at station A [skipped]
-    [ TASK LOG ] (17:29:30 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:29:31 2017/04/21) Move Task, X=0 Y=195 Orient=0 [complete]
-    [ TASK LOG ] (17:29:50 2017/04/21) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (17:29:52 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:29:52 2017/04/21) EngageTask, rotate 175 degrees [skipped]
-    [ TASK LOG ] (17:29:54 2017/04/21) PositionTask, needs reach hebi engaged! [aborted]
-    [ TASK LOG ] (17:29:54 2017/04/21) Move Task, X=470 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (17:29:54 2017/04/21) Capture Task, device is A at station C [skipped]
-    [ TASK LOG ] (17:29:55 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:29:55 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:29:55 2017/04/21) EngageTask, rotate 180 degrees [skipped]
-    [ TASK LOG ] (17:29:57 2017/04/21) Move Task, X=490 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (17:29:58 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:29:59 2017/04/21) Move Task, X=0 Y=470 Orient=0 [complete]
-    [ TASK LOG ] (17:29:59 2017/04/21) Capture Task, device is Small Valve at station G [skipped]
-    [ TASK LOG ] (17:30:20 2017/04/21) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (17:30:22 2017/04/21) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (17:30:25 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:30:25 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:30:25 2017/04/21) EngageTask, rotate 180 degrees [skipped]
-    [ TASK LOG ] (17:30:25 2017/04/21) EngageTask, rotate 50 degrees [skipped]
-[ MISSION LOG ] (17:30:25 2017/04/21) Task execution complete.
-    [ TASK LOG ] (17:30:28 2017/04/21) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:30:51 2017/04/21) Move Task, X=165 Y=0 Orient=1 [aborted]
-    [ TASK LOG ] (17:30:51 2017/04/21) Capture Task, device is Shuttlecock at station D [skipped]
+[ MISSION LOG ] (14:16:50 2017/04/23) New mission initialized.
+[ MISSION LOG ] (14:16:50 2017/04/23) Loaded goals from mission file.
+[ MISSION LOG ] (14:16:50 2017/04/23) Mission time limit is 360 sec.
+[ MISSION LOG ] (14:16:50 2017/04/23) Device: Small Valve @ Station A -- Rotate to [175] degrees.
+[ MISSION LOG ] (14:16:50 2017/04/23) Device: BreakerBox A @ Station C -- Goals: switch 2
+[ MISSION LOG ] (14:16:50 2017/04/23) Device: Shuttlecock @ Station D -- Rotate to [0] degrees.
+[ MISSION LOG ] (14:16:50 2017/04/23) Device: BreakerBox B @ Station F -- Goals: switch 3
+[ MISSION LOG ] (14:16:50 2017/04/23) Device: Small Valve @ Station G -- Rotate to [50] degrees.
+[ MISSION LOG ] (14:17:02 2017/04/23) Starting task execution.
+    [ TASK LOG ] (14:17:03 2017/04/23) Move Task, X=1080 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (14:17:03 2017/04/23) Capture Task, device is Small Valve at station A [skipped]
+    [ TASK LOG ] (14:17:08 2017/04/23) PositionTask, no reach needed. [aborted]
+    [ TASK LOG ] (14:17:11 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:11 2017/04/23) EngageTask, rotate 175 degrees [skipped]
+    [ TASK LOG ] (14:17:12 2017/04/23) Move Task, X=470 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (14:17:12 2017/04/23) Capture Task, device is A at station C [skipped]
+    [ TASK LOG ] (14:17:14 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:14 2017/04/23) Move Task, X=490 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (14:17:20 2017/04/23) PositionTask, no reach needed. [aborted]
+    [ TASK LOG ] (14:17:24 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:24 2017/04/23) EngageTask, rotate 180 degrees [skipped]
+    [ TASK LOG ] (14:17:25 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:27 2017/04/23) Move Task, X=165 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (14:17:27 2017/04/23) Capture Task, device is Shuttlecock at station D [skipped]
+    [ TASK LOG ] (14:17:33 2017/04/23) PositionTask, no reach needed. [aborted]
+    [ TASK LOG ] (14:17:35 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:35 2017/04/23) EngageTask, rotate 0 degrees [skipped]
+    [ TASK LOG ] (14:17:36 2017/04/23) Move Task, X=0 Y=165 Orient=0 [complete]
+    [ TASK LOG ] (14:17:36 2017/04/23) Capture Task, device is B at station F [skipped]
+    [ TASK LOG ] (14:17:37 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:38 2017/04/23) Move Task, X=0 Y=195 Orient=0 [complete]
+    [ TASK LOG ] (14:17:43 2017/04/23) PositionTask, needs reach hebi engaged! [aborted]
+    [ TASK LOG ] (14:17:45 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:45 2017/04/23) EngageTask, rotate 180 degrees [skipped]
+    [ TASK LOG ] (14:17:46 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:47 2017/04/23) Move Task, X=0 Y=470 Orient=0 [complete]
+    [ TASK LOG ] (14:17:47 2017/04/23) Capture Task, device is Small Valve at station G [skipped]
+    [ TASK LOG ] (14:17:52 2017/04/23) PositionTask, no reach needed. [aborted]
+    [ TASK LOG ] (14:17:55 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (14:17:55 2017/04/23) EngageTask, rotate 50 degrees [skipped]
+[ MISSION LOG ] (14:17:55 2017/04/23) Task execution complete.

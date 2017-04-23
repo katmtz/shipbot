@@ -31,7 +31,7 @@ public class Config {
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
-	public static int SLEEPTIME = 10;
+	public static int SLEEPTIME = 5;
 	
 	/* DEVICE & TESTBED CONSTANTS */
 	

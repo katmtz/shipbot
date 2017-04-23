@@ -9,41 +9,42 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
+import shipbot.staticlib.Config;
 import shipbot.staticlib.MessageLog;
 
 public class CVSensing {
-
-	// CV OBJECT TYPES
-	public static String NONE = "n";
-	public static String VALVE = "valve";
-	public static String BREAKER = "breaker";
-	public static String SHUTTLECOCK = "shuttlecock";
+	
+	// Static codes
+	public static Integer ORIENT_UP = 0;
+	public static Integer ORIENT_SIDE = 1;
+	
+	public static Integer DEVICE_NONE = 0;
+	public static Integer DEVICE_VALVE_SM = 1;
+	public static Integer DEVICE_VALVE_LG = 2;
+	public static Integer DEVICE_SHUTTLE = 3;
+	public static Integer DEVICE_BREAKER = 4;
 	
 	// Data keys
-	private String DEVICE_TYPE = "device";
-	private String DEVICE_SEEN = "seen";
-	private String X_OFFSET = "x";
-	private String Y_OFFSET = "y";
-	private String ORIENTATION = "r";
-	private String ANGLE = "theta";
+	private String DEVICE_TYPE = "DEVICE";
+	private String OFFSET = "OFFSET";
+	private String ORIENTATION = "ORIENT";
+	private String ANGLE = "ANGLE";
 	
 	// Data storage map
-	private Map<String, String> data;
+	private Map<String, Integer> data;
 	
 	private String path = "devices/CV.txt";
 	
 	public CVSensing() {
-		this.data = new HashMap<String,String>();
-		this.data.put(this.DEVICE_TYPE, CVSensing.NONE);
-		this.data.put(this.DEVICE_SEEN, "0");
-		this.data.put(this.X_OFFSET, "0");
-		this.data.put(this.Y_OFFSET, "0");
-		this.data.put(this.ANGLE, "0");
-		this.data.put(this.ORIENTATION, "0");
+		this.data = new HashMap<String, Integer>();
+		this.data.put(this.DEVICE_TYPE, CVSensing.DEVICE_NONE);
+		this.data.put(this.OFFSET, 0);
+		this.data.put(this.ANGLE, 0);
+		this.data.put(this.ORIENTATION, CVSensing.ORIENT_UP);
 	}
 	
 	public void getNewCapture(String device_type) {
-		String format_str = "@ 1\n%s %s\n";
+		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
 			// SEND COMMAND
@@ -56,8 +57,36 @@ public class CVSensing {
 			while (!responded) {
 				Reader reader = new FileReader(this.path);
 				StreamTokenizer tok = new StreamTokenizer(reader);
+				tok.eolIsSignificant(true);
 				tok.parseNumbers();
-				responded = true;
+				
+				boolean ended = false;
+				String key = "";
+				Map<String, Integer> temp = new HashMap<String, Integer>();
+				while (!ended) {
+					int token = tok.nextToken();
+					switch (token) {
+						case StreamTokenizer.TT_EOF:
+							ended = true;
+							break;
+						case StreamTokenizer.TT_WORD:
+							key = tok.sval;
+							break;
+						case StreamTokenizer.TT_NUMBER:
+							int val = (int) tok.nval;
+							temp.put(key, (Integer) val);
+							break;
+					}
+				}
+				if (data.containsKey("@")) {
+					if (data.get("@") == Config.OWNER_ARDUINO) {
+						this.data.clear();
+						this.data.putAll(temp);
+						responded = true;
+					}
+				} else {
+					MessageLog.printError("CV", "Missing owner tag!!");
+				}
 			}
 		} catch (IOException e) {
 			MessageLog.printError("CV", "IO exception while communicating with CV file.");
@@ -65,17 +94,18 @@ public class CVSensing {
 	}
 	
 	public int getHorizontalOffset() {
-		String val = this.data.get(this.X_OFFSET);
-		return Integer.parseInt(val);
+		return this.data.get(this.OFFSET);
 	}
 	
 	public int getDeviceOrientation() {
-		String val = this.data.get(this.ORIENTATION);
-		return Integer.parseInt(val);
+		return this.data.get(ORIENTATION);
 	}
 
 	public boolean isUpward() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.data.get(ORIENTATION) == CVSensing.ORIENT_UP) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

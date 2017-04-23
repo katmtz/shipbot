@@ -42,17 +42,19 @@ class Shuttlecock:
 						cmd_recieved = True
 			file.close()
 
-		if not ("SHUTTLECOCK" in device):
+		# Shuttlecock code is 3!!
+		if not ("3" in device):
 			print ("Unexpected device!")
+			return False
 
 		# send capture to picamera!
 		# for now, use dummy image
 		self.loadImage()
 		return True
 
-	def writeData(self, center, orientation):
-		format_str = "@ 0\ndevice SHUTTLECOCK\nx {x_offset}\ny {y_offset}\norient {orient}\n"
-		msg = format_str.format(x_offset=center[0], y_offset=center[1], orient=orientation)
+	def writeData(self, center, orientation, angle):
+		format_str = "@ 0\nOFFSET {offset}\nORIENT {orient}\nANGLE {angle}\n"
+		msg = format_str.format(offset=center[0], orient=orientation, angle=angle)
 		file = open(self.data_path, 'w')
 		file.write(msg)
 		file.close()
@@ -89,18 +91,18 @@ class Shuttlecock:
 				if (ret):
 					if (orient is "vertical"):
 						x_offset = img_center[0] - center[0]
-						y_offset = img_center[1] - (center[1] - 100) 
+						theta = 90
 					else:
 						x_offset = img_center[0] - (center[0] - 100)
-						y_offset = img_center[1] - center[1]
+						theta = 0
 
 					#print ("Detected {orient} shuttlecock!".format(orient=orient))
 					#print ("position: " + str(center[0]) + " " + str(center[1]))
 					#print ("ratio: " + str(ratio))
 					#print ("area: " + str(area))
 					#print ("angle: " + str(angle))
-					self.writeData((x_offset, y_offset), orient)
-					break
+					self.writeData((x_offset, y_offset), 0, theta)
+					return
 
 
 	def inRange(self, ratio, angle, area):

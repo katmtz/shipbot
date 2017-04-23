@@ -3,6 +3,12 @@ package shipbot.tasks;
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
 
+/**
+ * Insert the effector and rotate it as needed.
+ * 
+ * @author kat
+ *
+ */
 public class EngageTask extends Task {
 	
 	private TaskStatus status;
@@ -30,7 +36,6 @@ public class EngageTask extends Task {
 		// check if system is already at needed position
 		
 		// Write angle to effector hebi
-
 		this.status = TaskStatus.SKIPPED;
 	}
 

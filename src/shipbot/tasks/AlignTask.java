@@ -77,6 +77,4 @@ public class AlignTask extends Task {
 	public Device getAssociatedDevice() {
 		return this.device;
 	}
-	
-
 }
