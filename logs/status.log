@@ -1,14 +1,14 @@
-[ MISSION LOG ] (19:48:12 2017/04/23) New mission initialized.
-[ MISSION LOG ] (19:48:12 2017/04/23) Loaded goals from mission file.
-[ MISSION LOG ] (19:48:12 2017/04/23) Mission time limit is 100 sec.
-[ MISSION LOG ] (19:48:12 2017/04/23) Device: Shuttlecock @ Station D -- Rotate to [90] degrees.
-[ MISSION LOG ] (19:48:19 2017/04/23) Starting task execution.
-    [ TASK LOG ] (19:48:19 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (19:48:19 2017/04/23) Capture Task, device is Shuttlecock at station D [complete]
-    [ TASK LOG ] (19:48:20 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (19:48:20 2017/04/23) Capture Task, device is Shuttlecock at station D [complete]
-    [ TASK LOG ] (19:48:32 2017/04/23) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (19:48:33 2017/04/23) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (19:48:33 2017/04/23) EngageTask, rotate 90 degrees [complete]
-    [ TASK LOG ] (19:48:34 2017/04/23) shipbot.tasks.DisengageTask@12a3a380
-[ MISSION LOG ] (19:48:34 2017/04/23) Task execution complete.
+[ MISSION LOG ] (20:39:49 2017/04/23) New mission initialized.
+[ MISSION LOG ] (20:39:49 2017/04/23) Loaded goals from mission file.
+[ MISSION LOG ] (20:39:49 2017/04/23) Mission time limit is 100 sec.
+[ MISSION LOG ] (20:39:49 2017/04/23) Device: Shuttlecock @ Station D -- Rotate to [90] degrees.
+[ MISSION LOG ] (20:40:02 2017/04/23) Starting task execution.
+    [ TASK LOG ] (20:40:02 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (20:40:02 2017/04/23) Capture Task, device is Shuttlecock at station D [skipped]
+    [ TASK LOG ] (20:40:03 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (20:40:03 2017/04/23) Capture Task, device is Shuttlecock at station D [skipped]
+    [ TASK LOG ] (20:40:15 2017/04/23) PositionTask, no reach needed. [aborted]
+    [ TASK LOG ] (20:40:16 2017/04/23) Align Task, Y=200 Z=200 [complete]
+    [ TASK LOG ] (20:40:16 2017/04/23) EngageTask, rotate 90 degrees [complete]
+    [ TASK LOG ] (20:40:17 2017/04/23) shipbot.tasks.DisengageTask@12a3a380
+[ MISSION LOG ] (20:40:17 2017/04/23) Task execution complete.
