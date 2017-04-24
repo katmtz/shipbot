@@ -5,7 +5,7 @@ axis_port = "/dev/ttyACM0"
 base_port = "/dev/ttyACM1"
 verbose = True
 serialmock_axis = False
-serialmock_base = False
+serialmock_base = True #False
 
 class SerialPipeline:
 
@@ -47,13 +47,13 @@ class SerialPipeline:
 					print "[SERIAL] recieved stop signal."
 				return
 
-			if (height_cmd and depth_cmd):
+			if (height_cmd or depth_cmd):
 				if verbose:
 					print "[SERIAL] processing stepper command."
 				
 				self.stepper_pipeline.send(self.command["D"], self.command["H"])
 				#status = self.stepper_pipeline.recieve()
-				self.sendStatus(status, False, True)
+				self.sendStatus(1, False, True)
 				processed = True
 			elif (drive_cmd):
 				if verbose:

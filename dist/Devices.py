@@ -13,13 +13,13 @@ mock serial communication over stdout.
 - recieve: wait for a response from the Arduino
 """
 class DrivePipeline:
-	RECIEVE_TIMEOUT = 50
+	RECIEVE_TIMEOUT = 500
 
 	# Defined orientation codes
 	FRONT = 1
 	SIDE = 0
 
-	x = 0
+	x = 1156
 	y = 0
 	r = 1
 
