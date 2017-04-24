@@ -19,8 +19,8 @@ class SerialPipeline:
 		"X": "0",
 		"Y": "0",
 		"R": "0",
-		"D": "0",
-		"H": "0"
+		"D": "270",
+		"H": "10"
 	}
 
 	def __init__(self):
@@ -47,7 +47,7 @@ class SerialPipeline:
 					print "[SERIAL] recieved stop signal."
 				return
 
-			if (height_cmd or depth_cmd):
+			if (height_cmd and depth_cmd):
 				if verbose:
 					print "[SERIAL] processing stepper command."
 				

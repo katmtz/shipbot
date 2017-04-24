@@ -265,6 +265,7 @@ class StepperPipeline:
 			self.serial.write(str(diff_y))
 			self.serial.flush()
 			response_y = self.recieve()
+			self.y += diff_y
 		if (diff_z != 0):
 			if self.debug:
 				print " - Sending a z offset of " + str(diff_z)
@@ -272,9 +273,7 @@ class StepperPipeline:
 			self.serial.write(str(diff_z))
 			self.serial.flush()
 			response_z = self.recieve()
-
-		self.y += diff_y
-		self.z += diff_z
+			self.z += diff_z
 
 	def sendAbsolute(self, y, z):
 		if (self.debug):
