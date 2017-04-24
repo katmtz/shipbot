@@ -52,7 +52,7 @@ class SerialPipeline:
 					print "[SERIAL] processing stepper command."
 				
 				self.stepper_pipeline.send(self.command["D"], self.command["H"])
-				status = self.stepper_pipeline.recieve()
+				#status = self.stepper_pipeline.recieve()
 				self.sendStatus(status, False, True)
 				processed = True
 			elif (drive_cmd):
