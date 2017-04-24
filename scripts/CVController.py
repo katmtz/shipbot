@@ -5,7 +5,7 @@ USE_CAMERA = False
 
 class CVController:
 
-	data_path = "devices/CV.txt"
+	data_path = "../devices/CV.txt"
 	capture_path = "imgs/capture.jpg"
 
 	format_str = "@ 0\nOFFSET {offset}\nORIENT {orient}\nANGLE {angle}\n"
@@ -44,7 +44,12 @@ class CVController:
 						if "DEVICE" in key:
 							device_code = int(value.strip('\n'))
 			file.close()
-		print ("Recived device code: " + str(device_code))
+
+		if self.killed:
+			print ("Recieved stop.")
+			return
+		else:
+			print ("Recived device code: " + str(device_code))
 
 		# Case on extracted device code!
 		if (device_code == 1):
