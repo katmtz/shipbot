@@ -16,9 +16,9 @@ class CVController:
 		print ("Awaiting sync...")
 		synced = False
 		while not synced:
-			file = open(data_path, 'r')
+			file = open(self.data_path, 'r')
 			for line in file:
-				if "NO DATA" in line
+				if "NO DATA" in line:
 					synced = True
 			file.close()
 		print ("Sync acquired.")
@@ -32,7 +32,7 @@ class CVController:
 		cmd_recieved = False
 		device_code = 0
 		while not cmd_recieved:
-			file = open(data_path, 'r')
+			file = open(self.data_path, 'r')
 			for line in file:
 				if "@ 1" in line:
 					cmd_recieved = True
@@ -70,7 +70,7 @@ class CVController:
 
 		if USE_CAMERA:
 			self.capture()
-			path = capture_path
+			path = self.capture_path
 		else:
 			path = "imgs/test_img.jpg"
 

@@ -1,1 +1,2 @@
-RECIEVED STOP
+CV control running.
+Awaiting sync...
