@@ -237,8 +237,7 @@ class StepperPipeline:
 
 			if self.debug:
 				print "[STEPPER] pulling back y axis"
-			self.sendAbsolute(response_y - 20, response_z / 2)
-			response = self.recieve()
+			self.sendAbsolute(270, 10)
 
 	def send(self, y, z):
 		print self.y
@@ -291,13 +290,13 @@ class StepperPipeline:
 			return
 
 		self.serial.write("ya")
-		self.serial.write(y)
+		self.serial.write(str(y))
 		self.serial.flush()
 		response_y = self.recieve()
 		self.y = int(y)
 
 		self.serial.write("za")
-		self.serial.write(z)
+		self.serial.write(str(z))
 		self.serial.flush()
 		response_z = self.recieve()
 		self.z = int(z)

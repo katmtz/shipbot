@@ -1,6 +1,6 @@
 import serial
 
-dev = serial.Serial("/dev/ttyACM3", 9600, timeout=1)
+dev = serial.Serial("/dev/ttyACM0", 9600, timeout=1)
 
 TIMEOUT = 2
 timeout = 0
@@ -13,5 +13,5 @@ while (timeout < TIMEOUT):
 
 dev.close()
 
-dev=serial.Serial("/dev/ttyACM3", 9600, timeout=1)
+dev=serial.Serial("/dev/ttyACM0", 9600, timeout=1)
 dev.close()
