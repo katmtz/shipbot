@@ -2,6 +2,7 @@ package shipbot.tasks;
 
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
+import shipbot.staticlib.MessageLog;
 
 /**
  * Performs the process of capturing, analyzing, and storing information
@@ -32,6 +33,7 @@ public class CaptureTask extends Task {
 		if (retval) {
 			this.status = TaskStatus.COMPLETE;
 		} else {
+			MessageLog.printError("CAPTURE TASK", "Timed out waiting for capture response");
 			this.status = TaskStatus.ABORTED;
 		}
 	}
