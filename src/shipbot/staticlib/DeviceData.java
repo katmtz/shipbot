@@ -63,6 +63,7 @@ public class DeviceData {
 	 */
 	public static boolean waiting(String motor_id) throws IOException {
 		String motor_path = String.format(motor_path_format, motor_id);
+		MessageLog.logDebugMessage("DEVICE WAITING", String.format("waiting on %s", motor_path));
 		BufferedReader reader = new BufferedReader(new FileReader(motor_path));
 		if (reader.ready()) {
 			String header = reader.readLine();

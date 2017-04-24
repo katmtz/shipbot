@@ -1,5 +1,6 @@
 package shipbot.tasks;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,10 +64,11 @@ public class DisengageTask extends Task {
 
 			// hang, waiting for arduino to acknowledge & complete task
 			int timeout = 0;
-			while (DeviceData.waiting(Config.Y_STEPPER_ID) && DeviceData.waiting(Config.Z_STEPPER_ID)) {
+			while (DeviceData.waiting(Config.Y_STEPPER_ID) || DeviceData.waiting(Config.Z_STEPPER_ID)) {
 				if (timeout > Config.MAX_TIMEOUT) {
-					System.out.println(">> DISENGAGE TASK TIMEOUT");
-					throw new Exception();
+					MessageLog.printError("DISENGAGE TASK", "Timed out waiting for stepper response");
+					this.status = TaskStatus.ABORTED;
+					return;
 				}
 				Thread.sleep(Config.SLEEPTIME);
 				timeout++;
@@ -76,8 +78,15 @@ public class DisengageTask extends Task {
 			// Reset hebi positions
 			DeviceData.writeToHebis(true, arm_pos[0], 90, 0);
 			sys.updateArm(arm_pos[0], 90, 0);
-		} catch (Exception e) {
+			status = TaskStatus.COMPLETE;
+		} catch (InterruptedException e) {
+			MessageLog.printError("DISENGAGE TASK", "???? Interrupt exception");
+			status = TaskStatus.ABORTED;
+			return;
+		} catch (IOException e) {
 			MessageLog.printError("DISENGAGE TASK", "Exception while disengaging effector.");
+			status = TaskStatus.ABORTED;
+			return;
 		}
 	}
 

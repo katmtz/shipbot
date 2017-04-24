@@ -8,6 +8,7 @@ import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
 import shipbot.staticlib.Config;
 import shipbot.staticlib.DeviceData;
+import shipbot.staticlib.MessageLog;
 
 /**
  * Tells the stepper motors where to position!
@@ -43,10 +44,11 @@ public class AlignTask extends Task {
 			
 			// hang, waiting for arduino to acknowledge & complete task
 			int timeout = 0;
-			while (DeviceData.waiting(Config.Y_STEPPER_ID) && DeviceData.waiting(Config.Z_STEPPER_ID)) {
+			while (DeviceData.waiting(Config.Z_STEPPER_ID)) {
 				if (timeout > Config.MAX_TIMEOUT) {
-					System.out.println(">> ALIGN TASK TIMEOUT");
-					throw new Exception();
+					MessageLog.printError("ALIGN TASK", "Timed out waiting for stepper response");
+					this.status = TaskStatus.ABORTED;
+					return;
 				}
 				Thread.sleep(Config.SLEEPTIME);
 				timeout++;

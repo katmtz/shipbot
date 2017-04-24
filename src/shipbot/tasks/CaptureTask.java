@@ -2,6 +2,7 @@ package shipbot.tasks;
 
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
+import shipbot.staticlib.MessageLog;
 
 /**
  * Performs the process of capturing, analyzing, and storing information
@@ -28,6 +29,7 @@ public class CaptureTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
+<<<<<<< HEAD
 		this.status = TaskStatus.SKIPPED;
 		return;
 		/*
@@ -36,6 +38,15 @@ public class CaptureTask extends Task {
 		
 		this.status = TaskStatus.COMPLETE; 
 		*/
+=======
+		boolean retval = sys.getNewCapture(this.device);
+		if (retval) {
+			this.status = TaskStatus.COMPLETE;
+		} else {
+			MessageLog.printError("CAPTURE TASK", "Timed out waiting for capture response");
+			this.status = TaskStatus.ABORTED;
+		}
+>>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 	}
 
 	@Override
