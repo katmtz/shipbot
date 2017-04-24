@@ -2,10 +2,12 @@ from DeviceRecognition import *
 
 # static flag to enable picamera code
 USE_CAMERA = False
+MOCK_IMG_PATH = "imgs/single_img.jpg"
+#MOCK_IMG_PATH = "imgs/shuttlecock_lowres.jpg"
 
 class CVController:
 
-	data_path = "../devices/CV.txt"
+	data_path = "devices/CV.txt"
 	capture_path = "imgs/capture.jpg"
 
 	format_str = "@ 0\nOFFSET {offset}\nORIENT {orient}\nANGLE {angle}\n"
@@ -22,7 +24,7 @@ class CVController:
 					synced = True
 			file.close()
 		print ("Sync acquired.")
-		self.writeData(self, 0, 0, 0)
+		self.writeData(0, 0, 0)
 
 	def isActive(self):
 		return not self.killed
@@ -72,7 +74,7 @@ class CVController:
 			self.capture()
 			path = self.capture_path
 		else:
-			path = "imgs/test_img.jpg"
+			path = MOCK_IMG_PATH
 
 		retval = device.processImage(path)
 

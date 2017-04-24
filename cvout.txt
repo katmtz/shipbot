@@ -1,2 +1,24 @@
 CV control running.
 Awaiting sync...
+Sync acquired.
+Awaiting command...
+Recived device code: 2
+ * Bad Area: 200.0
+32.400054931640625 62.20001220703125
+fourth quad
+Detected large valve!
+ - Horizontal offset: 45.5
+ - Angle: 152.484943119
+Successful detection!
+Awaiting command...
+Recived device code: 2
+ * Bad Area: 200.0
+32.400054931640625 62.20001220703125
+fourth quad
+Detected large valve!
+ - Horizontal offset: 45.5
+ - Angle: 152.484943119
+Successful detection!
+Awaiting command...
+Recieved stop.
+CV control stopped.

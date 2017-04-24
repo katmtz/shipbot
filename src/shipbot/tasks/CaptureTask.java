@@ -28,14 +28,9 @@ public class CaptureTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-		this.status = TaskStatus.SKIPPED;
-		return;
-		/*
-		// Take photo & process data
 		sys.getNewCapture(this.device);
 		
 		this.status = TaskStatus.COMPLETE; 
-		*/
 	}
 
 	@Override

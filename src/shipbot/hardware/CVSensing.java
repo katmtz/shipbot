@@ -53,9 +53,7 @@ public class CVSensing {
 			writer.close();
 			
 			// AWAIT RESPONSE
-			MessageLog.logDebugMessage("CV", "Ignoring CV FOR NOW");
-			return;
-/**			boolean responded = false;
+			boolean responded = false;
 			while (!responded) {
 				Reader reader = new FileReader(this.path);
 				StreamTokenizer tok = new StreamTokenizer(reader);
@@ -97,7 +95,6 @@ public class CVSensing {
 					return;
 				}
 			}
-*/
 		} catch (IOException e) {
 			MessageLog.printError("CV", "IO exception while communicating with CV file.");
 		}

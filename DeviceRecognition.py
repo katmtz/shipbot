@@ -212,7 +212,7 @@ class ValveLarge:
 			if self.inBounds(bounds, rect) and (dim[0] > 0 and dim[1] > 0):
 				box = cv2.boxPoints(rect)
 				box = np.int0(box)
-				cv2.drawContours(image,[box],0,(0,255,0),3)
+				#cv2.drawContours(image,[box],0,(0,255,0),3)
 				return rect[0]
 		return (-1, -1)
 
@@ -223,21 +223,21 @@ class ValveLarge:
 		rad = np.arctan(tan_val)
 		deg = np.degrees(rad)
 		# IV quad
-		print (str(x) + " " + str(y))
+		#print (str(x) + " " + str(y))
 		if (y > 0 and x > 0):
-			print ("fourth quad")
+			#print ("fourth quad")
 			return deg + 90
 		# III quad
 		elif (y > 0 and x < 0):
-			print ("3rd quad")
+			#print ("3rd quad")
 			return 180 + (90 - deg)
 		# II quad
 		elif (y < 0 and x < 0):
-			print ("2nd quad")
+			#print ("2nd quad")
 			return 270 + deg
 		# I quad
 		else:
-			print ("1st quad")
+			#print ("1st quad")
 			return 90 - deg
 
 	def processImage(self, path):
@@ -270,19 +270,19 @@ class ValveLarge:
 				ret,orient = self.inRange(area, ratio)
 				if (ret):
 					x_offset = img_center[0] - center[0]
-					cv2.drawContours(image,[box],0,(0,0,255),3)
+					#cv2.drawContours(image,[box],0,(0,0,255),3)
 					mark_center = self.findMarker(image, hsv_image, rect)
 					theta = self.calculateAngle(center, mark_center)
 					print ("Detected large valve!")
 					print (" - Horizontal offset: " + str(x_offset))
 					print (" - Angle: " + str(theta))
-					cv2.imshow("image", image)
-					cv2.waitKey(0)
-					cv2.destroyAllWindows()
+					#cv2.imshow("image", image)
+					#cv2.waitKey(0)
+					#cv2.destroyAllWindows()
 					return ( x_offset, orient, theta )
 
 
-		cv2.imshow("image", image)
-		cv2.waitKey(0)
-		cv2.destroyAllWindows()
+		#cv2.imshow("image", image)
+		#cv2.waitKey(0)
+		#cv2.destroyAllWindows()
 		return False

@@ -9,10 +9,10 @@ serialmock_base = True #False
 
 class SerialPipeline:
 
-	drive_path = "../devices/actuators/DRIVE_0.txt"
+	drive_path = "devices/actuators/DRIVE_0.txt"
 	stepper_paths = [ 
-		"../devices/actuators/STEP_0.txt", 
-		"../devices/actuators/STEP_1.txt" 
+		"devices/actuators/STEP_0.txt", 
+		"devices/actuators/STEP_1.txt" 
 	]
 
 	command = {
