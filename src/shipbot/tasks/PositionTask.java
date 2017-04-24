@@ -54,6 +54,7 @@ public class PositionTask extends Task {
 				Thread.sleep(Config.SLEEPTIME);
 			}
 			sys.updateArm(fixed, reach, effector);
+			this.status = TaskStatus.COMPLETE;
 		} catch (InterruptedException e) {
 			this.status = TaskStatus.ABORTED;
 			MessageLog.printError("POSITION TASK", "Interrupted while waiting for hebi response.");
@@ -62,8 +63,6 @@ public class PositionTask extends Task {
 			this.status = TaskStatus.ABORTED;
 			return;
 		}
-		
-		this.status = TaskStatus.SKIPPED;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class Config {
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
-	public static int SLEEPTIME = 5;
+	public static int SLEEPTIME = 10;
 	
 	// BASE OFFSET THRESHOLD (the min distance we adjust with base motion)
 	public static int OFFSET_THRESHOLD = 20;
@@ -86,7 +86,6 @@ public class Config {
 		ids.add(DRIVE_MOTOR_ID);
 		ids.add(Y_STEPPER_ID);
 		ids.add(Z_STEPPER_ID);
-		ids.add(HEBI_ID);
 		return ids;
 	}
 }
