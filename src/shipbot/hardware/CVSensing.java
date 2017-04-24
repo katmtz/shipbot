@@ -43,7 +43,7 @@ public class CVSensing {
 		this.data.put(this.ORIENTATION, CVSensing.ORIENT_UP);
 	}
 	
-	public void getNewCapture(int device_type) {
+	public boolean getNewCapture(int device_type) {
 		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
@@ -53,8 +53,13 @@ public class CVSensing {
 			writer.close();
 			
 			// AWAIT RESPONSE
+			int timeout = 0;
 			boolean responded = false;
 			while (!responded) {
+				if (timeout > Config.MAX_TIMEOUT) {
+					return false;
+				}
+				
 				Reader reader = new FileReader(this.path);
 				StreamTokenizer tok = new StreamTokenizer(reader);
 				tok.parseNumbers();
@@ -72,11 +77,11 @@ public class CVSensing {
 							break;
 						case StreamTokenizer.TT_WORD:
 							key = tok.sval;
-							MessageLog.logDebugMessage("CV", String.format("[debug] word token was <%s>", key));
+							//MessageLog.logDebugMessage("CV", String.format("[debug] word token was <%s>", key));
 							break;
 						case StreamTokenizer.TT_NUMBER:
 							int val = (int) tok.nval;
-							MessageLog.logDebugMessage("CV", String.format("[debug] number token was %d", val));
+							//MessageLog.logDebugMessage("CV", String.format("[debug] number token was %d", val));
 							temp.put(key, (Integer) val);
 							break;
 					}
@@ -89,15 +94,17 @@ public class CVSensing {
 						responded = true;
 					} else {
 						//MessageLog.logDebugMessage("CV", "Read own command!");
+						timeout++;
 					}
 				} else {
-					MessageLog.printError("CV", "Missing owner tag!!");
-					return;
+					timeout++;
 				}
 			}
 		} catch (IOException e) {
 			MessageLog.printError("CV", "IO exception while communicating with CV file.");
+			return false;
 		}
+		return true;
 	}
 	
 	public int getHorizontalOffset() {

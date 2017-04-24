@@ -28,9 +28,12 @@ public class CaptureTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-		sys.getNewCapture(this.device);
-		
-		this.status = TaskStatus.COMPLETE; 
+		boolean retval = sys.getNewCapture(this.device);
+		if (retval) {
+			this.status = TaskStatus.COMPLETE;
+		} else {
+			this.status = TaskStatus.ABORTED;
+		}
 	}
 
 	@Override
