@@ -84,7 +84,7 @@ public class DeviceData {
 			command = String.format(DeviceData.HEBI_CMD, DeviceData.HEBI_STOP, fixed, reach, effector);
 		}
 		try {
-			MessageLog.logDebugMessage("HEBI WRITE", String.format("[debug] wrote <%s> to path <%s>", command, hebi_path));
+			System.out.println(String.format("[debug] wrote <%s> to path <%s>", command, hebi_path));
 			Writer writer = new FileWriter(hebi_path);
 			writer.write(command);
 			writer.close();

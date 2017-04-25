@@ -139,19 +139,12 @@ public class SystemState {
 		return stepper_z.get(StepperMotor.POS);
 	}
 
-<<<<<<< HEAD
-	public void getNewCapture(Device device) {
-		cv.getNewCapture(device.getCVId());
-		this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.OFFSET_THRESHOLD);
-		return;
-=======
 	public boolean getNewCapture(Device device) {
 		boolean retval = cv.getNewCapture(device.getCVId());
 		if (retval == true) {
 			this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.OFFSET_THRESHOLD);
 		}
 		return retval;
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 	}
 	
 	public int[] getArmPosition() {

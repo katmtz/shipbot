@@ -36,26 +36,13 @@ public class AlignTask extends Task {
 		
 		// Move to predetermined position based on system state
 		try {
-			Map<String, Integer> data = new HashMap<String,Integer>();
-			data.put(StepperMotor.POS, this.depth);
-			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, data);
-			data.put(StepperMotor.POS, this.height);
-			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
-			
-			// hang, waiting for arduino to acknowledge & complete task
-			int timeout = 0;
-			while (DeviceData.waiting(Config.Z_STEPPER_ID)) {
-				if (timeout > Config.MAX_TIMEOUT) {
-					MessageLog.printError("ALIGN TASK", "Timed out waiting for stepper response");
-					this.status = TaskStatus.ABORTED;
-					return;
-				}
-				Thread.sleep(Config.SLEEPTIME);
-				timeout++;
+			if (sys.deviceIsUpward()) {
+				// Move Z+clearance, then y
+				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE;
+				
+			} else {
+				// Move Y-clearance, then z
 			}
-			
-			// write new positions to virtual representation
-			sys.updateSteppers(this.depth, this.height);
 		} catch (Exception e) {
 			this.status = TaskStatus.ABORTED;
 			return;

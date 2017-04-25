@@ -29,16 +29,6 @@ public class CaptureTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-<<<<<<< HEAD
-		this.status = TaskStatus.SKIPPED;
-		return;
-		/*
-		// Take photo & process data
-		sys.getNewCapture(this.device);
-		
-		this.status = TaskStatus.COMPLETE; 
-		*/
-=======
 		boolean retval = sys.getNewCapture(this.device);
 		if (retval) {
 			this.status = TaskStatus.COMPLETE;
@@ -46,7 +36,6 @@ public class CaptureTask extends Task {
 			MessageLog.printError("CAPTURE TASK", "Timed out waiting for capture response");
 			this.status = TaskStatus.ABORTED;
 		}
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 	}
 
 	@Override

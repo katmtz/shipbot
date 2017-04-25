@@ -36,9 +36,6 @@ public class Config {
 	// BASE OFFSET THRESHOLD (the min distance we adjust with base motion)
 	public static int OFFSET_THRESHOLD = 20;
 	
-	// BASE OFFSET THRESHOLD (the min distance we adjust with base motion)
-	public static int OFFSET_THRESHOLD = 20;
-	
 	/* DEVICE & TESTBED CONSTANTS */
 	
 	/**

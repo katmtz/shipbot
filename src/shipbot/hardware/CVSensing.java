@@ -43,11 +43,8 @@ public class CVSensing {
 		this.data.put(this.ORIENTATION, CVSensing.ORIENT_UP);
 	}
 	
-<<<<<<< HEAD
-	public void getNewCapture(int device_type) {
-=======
+
 	public boolean getNewCapture(int device_type) {
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
@@ -57,14 +54,9 @@ public class CVSensing {
 			writer.close();
 			
 			// AWAIT RESPONSE
-<<<<<<< HEAD
-			MessageLog.logDebugMessage("CV", "Ignoring CV FOR NOW");
-			return;
-/**			boolean responded = false;
-=======
+
 			int timeout = 0;
 			boolean responded = false;
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 			while (!responded) {
 				if (timeout > Config.MAX_TIMEOUT) {
 					return false;
@@ -87,19 +79,11 @@ public class CVSensing {
 							break;
 						case StreamTokenizer.TT_WORD:
 							key = tok.sval;
-<<<<<<< HEAD
-							MessageLog.logDebugMessage("CV", String.format("[debug] word token was <%s>", key));
-							break;
-						case StreamTokenizer.TT_NUMBER:
-							int val = (int) tok.nval;
-							MessageLog.logDebugMessage("CV", String.format("[debug] number token was %d", val));
-=======
 							//MessageLog.logDebugMessage("CV", String.format("[debug] word token was <%s>", key));
 							break;
 						case StreamTokenizer.TT_NUMBER:
 							int val = (int) tok.nval;
 							//MessageLog.logDebugMessage("CV", String.format("[debug] number token was %d", val));
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 							temp.put(key, (Integer) val);
 							break;
 					}
@@ -112,20 +96,12 @@ public class CVSensing {
 						responded = true;
 					} else {
 						//MessageLog.logDebugMessage("CV", "Read own command!");
-<<<<<<< HEAD
-					}
-				} else {
-					MessageLog.printError("CV", "Missing owner tag!!");
-					return;
-=======
 						timeout++;
 					}
 				} else {
 					timeout++;
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
 				}
 			}
-*/
 		} catch (IOException e) {
 			MessageLog.printError("CV", "IO exception while communicating with CV file.");
 			return false;
