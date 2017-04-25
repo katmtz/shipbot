@@ -15,12 +15,18 @@ public enum Station {
 	
 	private int x;
 	private int y;
-	private boolean needs_flip;
+	private boolean needs_reach;
+	private int orient;
 	
-	private Station(int x, int y, boolean flip) {
+	private Station(int x, int y, boolean reach) {
 		this.x = x;
 		this.y = y;
-		this.needs_flip = flip;
+		this.needs_reach = reach;
+		if (this.y != 0) {
+			this.orient = Config.SIDE_FACING;
+		} else {
+			this.orient = Config.FRONT_FACING;
+		}
 	}
 	
 	/**
@@ -34,8 +40,12 @@ public enum Station {
 		return coords;
 	}
 	
-	public boolean needsFlip() {
-		return this.needs_flip;
+	public boolean needsRightReach() {
+		return ((this.orient == Config.SIDE_FACING) && this.needs_reach);
+	}
+	
+	public boolean needsLeftReach() {
+		return ((this.orient == Config.FRONT_FACING) && this.needs_reach);
 	}
 	
 	/**
@@ -45,10 +55,6 @@ public enum Station {
 	 * @return true if the station is along the front end
 	 */
 	public int getOrientation() {
-		if (this.y != 0) {
-			return Config.SIDE_FACING;
-		} else {
-			return Config.FRONT_FACING;
-		}
+		return this.orient;
 	}
 }

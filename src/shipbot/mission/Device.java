@@ -31,8 +31,12 @@ public abstract class Device {
 		return this.getStation().getOrientation();
 	}
 	
-	public boolean needsReach() {
-		return this.getStation().needsFlip();
+	public boolean needsLeftReach() {
+		return this.getStation().needsLeftReach();
+	}
+	
+	public boolean needsRightReach() {
+		return this.getStation().needsRightReach();
 	}
 	
 	@Override

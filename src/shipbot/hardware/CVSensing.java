@@ -124,4 +124,8 @@ public class CVSensing {
 			return false;
 		}
 	}
+	
+	public int getAngularPosition() {
+		return this.data.get(ANGLE);
+	}
 }

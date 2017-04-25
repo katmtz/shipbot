@@ -38,10 +38,11 @@ public class AlignTask extends Task {
 		
 		// Move to predetermined position based on system state
 		try {
+			int holdover_height = sys.getStoredHeightOffset();
 			if (sys.deviceIsUpward()) {
 				// SEND Z+CLEARANCE
 				Map<String, Integer> data = new HashMap<String, Integer>();
-				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE;
+				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE + holdover_height;
 				data.put(AlignTask.STEPPER_POS, target_z);
 				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
 				if (!this.await(Config.Z_STEPPER_ID)) {
@@ -72,7 +73,7 @@ public class AlignTask extends Task {
 				}
 				
 				// SEND Z 
-				int target_z = Config.DEVICE_HEIGHT;
+				int target_z = Config.DEVICE_HEIGHT + holdover_height;
 				data.put(AlignTask.STEPPER_POS, target_z);
 				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
 				if (!this.await(Config.Z_STEPPER_ID)) {

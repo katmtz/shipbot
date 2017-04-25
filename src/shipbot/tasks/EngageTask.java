@@ -43,7 +43,7 @@ public class EngageTask extends Task {
 		this.status = TaskStatus.ACTIVE;
 
 		if (sys.needsEngagement(this.angle)) {
-			int target_angle = sys.getEngagement();
+			int target_angle = sys.getEngagement(this.angle);
 			try {
 				if (sys.deviceIsUpward()) {
 					// WE NEED TO MOVE DOWN TO ENGAGE

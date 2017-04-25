@@ -86,7 +86,6 @@ public class MoveTask extends Task {
 				MessageLog.printError("MOVE TASK", "Positioning was unconfirmed.");
 				return;
 			}
-			
 			this.status = TaskStatus.COMPLETE;
 			return;
 		} catch (IOException e) {

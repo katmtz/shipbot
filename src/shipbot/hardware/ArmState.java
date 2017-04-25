@@ -15,5 +15,4 @@ public class ArmState {
 		int[] retval = { fixed, rotator };
 		return retval;
 	}
-	
 }

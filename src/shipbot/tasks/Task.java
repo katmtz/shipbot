@@ -25,15 +25,14 @@ public abstract class Task {
 			int timeout = 0;
 			while (DeviceData.waiting(motor_id)) {
 				if (timeout > Config.MAX_TIMEOUT) {
-					MessageLog.printError(this.toString(), "Timed out waiting for z-axis response");
 					return false;
 				}
 				timeout++;
 				Thread.sleep(Config.SLEEPTIME);
 			}
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
-		return true;
 	}
 }

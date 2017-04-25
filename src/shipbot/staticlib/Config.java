@@ -30,6 +30,9 @@ public class Config {
 
 	public static final int DEVICE_DEPTH = 150;
 	public static final int DEVICE_HEIGHT = 150;
+
+	/* Length of arm */
+	public static final int ROTATOR_LENGTH = 0;
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
@@ -49,8 +52,6 @@ public class Config {
 	/* State that motors should be in before moving on */
 	public static int Y_TRAVELLING = 270;
 	public static int Z_TRAVELLING = 10;
-	
-	
 	
 	/**
 	 * Returns an array of all the motor ids

@@ -24,6 +24,7 @@ public class SystemState {
 	private CVSensing cv;
 	private ArmState arm;
 	
+	private int height_offset = 0;
 	private boolean base_adjustment = false;
 	
 	public SystemState() {
@@ -55,18 +56,44 @@ public class SystemState {
 		return cv.getHorizontalOffset();
 	}
 
+	/* If given angle is greater than 5 deg away from goal */
 	public boolean needsEngagement(int angle) {
-		// TODO check if the goal state matches the desired state
-		return false;
+		int diff = angle - cv.getAngularPosition();
+		if (Math.abs(diff) > 5) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public int getEngagement() {
-		// TODO get the value we should be rotating the hebi effector
-		return 0;
+	public int getEngagement(int angle) {
+		int diff = angle - cv.getAngularPosition();
+		return diff;
 	}
 
 	public int[] getArmPosition() {
-		// TODO return [fixed, rotator] values
-		return null;
+		return this.arm.getPosition();
+	}
+
+	public boolean needsFineAdjustment() {
+		return (Math.abs(cv.getHorizontalOffset()) < Config.ROTATOR_LENGTH);
+	}
+
+	public int getFineAdjustment() {
+		return cv.getHorizontalOffset();
+	}
+
+	public void storeHeightOffset(int height_offset) {
+		this.height_offset = height_offset;
+	}
+
+	public void updateArmPosition(int fixed, int rotator) {
+		arm.setPosition(fixed, rotator);
+	}
+
+	public int getStoredHeightOffset() {
+		int ret = this.height_offset;
+		this.height_offset = 0;
+		return ret;
 	}
 }
