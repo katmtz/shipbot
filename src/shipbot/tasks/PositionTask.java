@@ -23,46 +23,8 @@ public class PositionTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
-		
-		int reach;
-		int fixed;
-		int effector = 0;
-		
-		if (this.flip) {
-			reach = 180;
-		} else {
-			reach = 0;
-		}
-		
-		if (sys.deviceIsUpward()) {
-			fixed = -90;
-		} else {
-			fixed = 0;
-		}
-		
-		try {
-			DeviceData.writeToHebis(true, fixed, reach, effector);
-			
-			int timeout = 0;
-			while (DeviceData.waiting(Config.HEBI_ID)) {
-				if (timeout > Config.MAX_TIMEOUT) {
-					MessageLog.printError("POSITION TASK", "Timed out waiting for hebi response");
-					this.status = TaskStatus.ABORTED;
-					return;
-				}
-				timeout++;
-				Thread.sleep(Config.SLEEPTIME);
-			}
-			sys.updateArm(fixed, reach, effector);
-			this.status = TaskStatus.COMPLETE;
-		} catch (InterruptedException e) {
-			this.status = TaskStatus.ABORTED;
-			MessageLog.printError("POSITION TASK", "Interrupted while waiting for hebi response.");
-			return;
-		} catch (IOException e) {
-			this.status = TaskStatus.ABORTED;
-			return;
-		}
+	
+		// TODO: IMPLEMENT
 	}
 
 	@Override
@@ -72,11 +34,7 @@ public class PositionTask extends Task {
 	
 	@Override
 	public String toString() {
-		if (this.flip) {
-			return String.format("PositionTask, needs reach hebi engaged! [%s]", status);
-		} else {
-			return String.format("PositionTask, no reach needed. [%s]", status);
-		}
+		return String.format("PositionTask [%s]", status);
 	}
 
 	@Override

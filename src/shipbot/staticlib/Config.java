@@ -12,7 +12,6 @@ import java.util.List;
 public class Config {
 	
 	// FUNCTIONAL FLAGS
-	public static boolean USE_CV = false;
 	public static boolean DEBUG = true;
 	
 	// DEVICE IDs
@@ -28,6 +27,9 @@ public class Config {
 	// ROBOT ORIENTATION
 	public static final int FRONT_FACING = 1;
 	public static final int SIDE_FACING = 0;
+
+	public static final int DEVICE_DEPTH = 150;
+	public static final int DEVICE_HEIGHT = 150;
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
@@ -39,43 +41,16 @@ public class Config {
 	/* DEVICE & TESTBED CONSTANTS */
 	
 	/**
-	 * Static height & depth of device centers on the testbed
-	 * set at 1.5' in cm.
-	 */
-	public static int DEVICE_HEIGHT = 200;
-	public static int DEVICE_DEPTH = 200;
-	
-	/**
-	 * hebi arm depth offset for fixed hebi positions
-	 * TEMPORARILY set at 3in in mm for downward &
-	 * 4in in mm for outward
-	 */
-	public static int ARM_DEPTH_DOWN = 4;
-	public static int ARM_DEPTH_FRONT = 7;
-	
-	/** 
-	 * hebi arm height offset
-	 * TEMPORARILY set at 0mm for downward &
-	 * 25mm for horizontal
-	 */
-	public static int ARM_HEIGHT_DOWN = 0;
-	public static int ARM_HEIGHT_FRONT = -25;
-	
-	/**
-	 * length of hebi reach offset
-	 * TEMPORARILY set at 6in in mm
-	 */
-	public static int REACH_OFFSET = 50;
-	
-	/**
 	 * Needed clearance to access testbed devices.
 	 * Should be length of "fingers" + extra space
-	 * TEMPORARILY set at 2in in mm
 	 */
 	public static int CLEARANCE = 51;
 	
+	/* State that motors should be in before moving on */
 	public static int Y_TRAVELLING = 270;
 	public static int Z_TRAVELLING = 10;
+	
+	
 	
 	/**
 	 * Returns an array of all the motor ids

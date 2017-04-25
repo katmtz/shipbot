@@ -22,121 +22,14 @@ public class SystemState {
 	
 	// Devices
 	private CVSensing cv;
-	private DriveMotor drive;
-	private Motor stepper_y;
-	private Motor stepper_z;
-	private HebiMotor hebi_arm;
+	private ArmState arm;
 	
 	private boolean base_adjustment = false;
 	
 	public SystemState() {
 		// Initialize onboard hardware
 		cv = new CVSensing();
-		stepper_z = new StepperMotor(Config.Z_STEPPER_ID);
-		stepper_y = new StepperMotor(Config.Y_STEPPER_ID);
-		drive = new DriveMotor(Config.DRIVE_MOTOR_ID);
-		hebi_arm = new HebiMotor();
-	}
-	
-	public int[] getGoalCenter() {
-		int height;
-		int depth;
-		
-		int pos = 0 + cv.getHorizontalOffset();
-		
-		// If the device is oriented upwards, we want
-		// fixed depth & position, but offset height
-		if (cv.isUpward()) {
-			depth = Config.DEVICE_DEPTH;
-			height = Config.DEVICE_HEIGHT + Config.CLEARANCE;
-		} else {
-			depth = Config.DEVICE_DEPTH - Config.CLEARANCE;
-			height = Config.DEVICE_HEIGHT;
-		}
-		
-		int[] coords = { pos, height, depth };
-		return coords;
-	}
-	
-	public int[] getEffectorCenter() {
-		int height;
-		int depth;
-		int pos;
-		
-		// calculate position based on orientation and reach
-		if (hebi_arm.isReaching()) {
-			if (drive.get(DriveMotor.ORIENT) == Config.FRONT_FACING) {
-				pos = drive.get(DriveMotor.X) - Config.REACH_OFFSET;
-			} else {
-				pos = drive.get(DriveMotor.Y) + Config.REACH_OFFSET;
-			}
-		} else {
-			if (drive.get(DriveMotor.ORIENT) == Config.FRONT_FACING) {
-				pos = Config.REACH_OFFSET;
-			} else {
-				pos = (-1) * Config.REACH_OFFSET;
-			}
-		}
-	
-		// calculate height & depth based on fixed hebi position (front or down)
-		if (hebi_arm.isFront()) {
-			height = stepper_z.get(StepperMotor.POS) + Config.ARM_HEIGHT_FRONT;
-			depth = stepper_y.get(StepperMotor.POS) + Config.ARM_DEPTH_FRONT;
-		} else {
-			height = stepper_z.get(StepperMotor.POS) + Config.ARM_HEIGHT_DOWN;
-			depth = stepper_y.get(StepperMotor.POS) + Config.ARM_DEPTH_DOWN;
-		}
-		
-		int[] coords = { pos, height, depth };
-		return coords;
-	}
-	
-	/**
-	 * Gets X position relative to testbed, using upper left corner
-	 * as (0,0).
-	 * 
-	 * @return X position
-	 */
-	public int getXPosition() {
-		return drive.get(DriveMotor.X);
-	}
-	
-	/**
-	 * Gets Y position relative to testbed, using the upper right
-	 * corner as (0,0)
-	 * 
-	 * @return Y position
-	 */
-	public int getYPosition() {
-		return drive.get(DriveMotor.Y);
-	}
-	
-	/**
-	 * Gets the direction the robot is facing (either FRONT/LONG-SIDE 
-	 * or SIDE/SHORT-SIDE).
-	 * 
-	 * @return
-	 */
-	public int getOrientation() {
-		return drive.get(DriveMotor.ORIENT);
-	}
-	
-	/**
-	 * Get Y-axis depth of upper assembly.
-	 * 
-	 * @return
-	 */
-	public int getDepth() {
-		return stepper_y.get(StepperMotor.POS);
-	}
-	
-	/**
-	 * Get Z-axis height of upper assembly.
-	 * 
-	 * @return
-	 */
-	public int getHeight() {
-		return stepper_z.get(StepperMotor.POS);
+		arm = new ArmState();
 	}
 
 	public boolean getNewCapture(Device device) {
@@ -145,14 +38,6 @@ public class SystemState {
 			this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.OFFSET_THRESHOLD);
 		}
 		return retval;
-	}
-	
-	public int[] getArmPosition() {
-		int fixed = this.hebi_arm.get(HebiMotor.FIXED);
-		int reach = this.hebi_arm.get(HebiMotor.REACH);
-		int effector = this.hebi_arm.get(HebiMotor.REACH);
-		int[] data = { fixed, reach, effector };
-		return data;
 	}
 
 	/* CV adjustment info */
@@ -169,22 +54,19 @@ public class SystemState {
 		this.base_adjustment = false;
 		return cv.getHorizontalOffset();
 	}
-	
-	/* UPDATE METHODS: sends updates about accepted commands to virtual representation */
-	public void updateLocation(int x, int y, int r) {
-		this.drive.set(DriveMotor.X, x);
-		this.drive.set(DriveMotor.Y, y);
-		this.drive.set(DriveMotor.ORIENT, r);
+
+	public boolean needsEngagement(int angle) {
+		// TODO check if the goal state matches the desired state
+		return false;
 	}
-	
-	public void updateSteppers(int depth, int height) {
-		this.stepper_y.set(StepperMotor.POS, depth);
-		this.stepper_z.set(StepperMotor.POS, height);
+
+	public int getEngagement() {
+		// TODO get the value we should be rotating the hebi effector
+		return 0;
 	}
-	
-	public void updateArm(int fixed, int reach, int effector) {
-		this.hebi_arm.set(HebiMotor.FIXED, fixed);
-		this.hebi_arm.set(HebiMotor.REACH, reach);
-		this.hebi_arm.set(HebiMotor.EFFECTOR, reach);
+
+	public int[] getArmPosition() {
+		// TODO return [fixed, rotator] values
+		return null;
 	}
 }

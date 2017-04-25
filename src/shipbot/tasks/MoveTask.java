@@ -1,9 +1,9 @@
 package shipbot.tasks;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import shipbot.hardware.DriveMotor;
 import shipbot.hardware.SystemState;
 import shipbot.mission.Device;
 import shipbot.staticlib.Config;
@@ -26,6 +26,10 @@ public class MoveTask extends Task {
 	private int x;
 	private int y;
 	private int orient;
+	
+	private static String DRIVE_X = "X";
+	private static String DRIVE_Y = "Y";
+	private static String DRIVE_ORIENT = "R";
 	
 	public MoveTask(Device device) {
 		this.device = device;
@@ -58,7 +62,6 @@ public class MoveTask extends Task {
 	@Override
 	public void executeTask(SystemState sys) {
 		status = TaskStatus.ACTIVE;
-		
 		try {
 			// Write new target x,y, and orientation to data file as a command
 			Map<String, Integer> data = new HashMap<String, Integer>();
@@ -74,31 +77,23 @@ public class MoveTask extends Task {
 				}
 			} 
 			
-			data.put(DriveMotor.X, this.x);
-			data.put(DriveMotor.Y, this.y);
-			data.put(DriveMotor.ORIENT, this.orient);
+			data.put(DRIVE_X, this.x);
+			data.put(DRIVE_Y, this.y);
+			data.put(DRIVE_ORIENT, this.orient);
 			DeviceData.writeArduinoData(Config.DRIVE_MOTOR_ID, data);
-			
-			// Wait for acknowledgement
-			int timeout = 0;
-			while (DeviceData.waiting(Config.DRIVE_MOTOR_ID)) {
-				if (timeout > Config.MAX_TIMEOUT) {
-					MessageLog.printError("MOVE TASK", "Timed out while waiting for ack!");
-					throw new Exception();
-				}
-				
-				Thread.sleep(Config.SLEEPTIME);
-				timeout++;
+			if (!this.await(Config.DRIVE_MOTOR_ID)) {
+				this.status = TaskStatus.ABORTED;
+				MessageLog.printError("MOVE TASK", "Positioning was unconfirmed.");
+				return;
 			}
 			
-			// Update virtual representation
-			sys.updateLocation(this.x, this.y, this.orient);
-		} catch (Exception e) {
+			this.status = TaskStatus.COMPLETE;
+			return;
+		} catch (IOException e) {
 			status = TaskStatus.ABORTED;
+			MessageLog.printError("MOVE TASK", "IO exception writing to drivetrain.");
 			return;
 		}
-		status = TaskStatus.COMPLETE;
-		return;
 	}
 
 	@Override
