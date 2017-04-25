@@ -1,14 +1,5 @@
-[ MISSION LOG ] (23:05:22 2017/04/24) New mission initialized.
-[ MISSION LOG ] (23:05:23 2017/04/24) Loaded goals from mission file.
-[ MISSION LOG ] (23:05:23 2017/04/24) Mission time limit is 360 sec.
-[ MISSION LOG ] (23:05:23 2017/04/24) Device: Small Valve @ Station D -- Rotate to [175] degrees.
-[ MISSION LOG ] (23:05:37 2017/04/24) Starting task execution.
-    [ TASK LOG ] (23:05:39 2017/04/24) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (23:05:41 2017/04/24) Capture Task, device is Small Valve at station D [aborted]
-    [ TASK LOG ] (23:05:43 2017/04/24) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (23:05:45 2017/04/24) Capture Task, device is Small Valve at station D [aborted]
-    [ TASK LOG ] (23:05:45 2017/04/24) PositionTask, no reach needed. [complete]
-    [ TASK LOG ] (23:05:50 2017/04/24) Align Task, Y=200 Z=10 [complete]
-    [ TASK LOG ] (23:05:50 2017/04/24) EngageTask, rotate 175 degrees [complete]
-    [ TASK LOG ] (23:05:56 2017/04/24) shipbot.tasks.DisengageTask@af3868
-[ MISSION LOG ] (23:05:56 2017/04/24) Task execution complete.
+[ MISSION LOG ] (00:57:38 2017/04/25) New mission initialized.
+[ MISSION LOG ] (00:57:38 2017/04/25) Loaded goals from mission file.
+[ MISSION LOG ] (00:57:38 2017/04/25) Mission time limit is 360 sec.
+[ MISSION LOG ] (00:57:38 2017/04/25) Device: Small Valve @ Station D -- Rotate to [175] degrees.
+[ MISSION LOG ] (00:57:41 2017/04/25) Starting task execution.

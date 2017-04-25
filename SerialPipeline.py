@@ -36,26 +36,27 @@ class SerialPipeline:
 		self.sendStatus(1)
 
 	def processCommand(self):
+		print "[SERIAL] AWAITING CMD"
 		processed = False
 		while not processed:
 			drive_cmd = self.update_drive()
 			depth_cmd = self.update_depth()
 			height_cmd = self.update_height()
 
+
 			if (self.rec_kill):
 				if verbose:
 					print "[SERIAL] recieved stop signal."
 				return
 
-			if (height_cmd and depth_cmd):
+			if (height_cmd or depth_cmd):
 				if verbose:
 					print "[SERIAL] processing stepper command."
 				
 				self.stepper_pipeline.send(self.command["D"], self.command["H"])
-				status = self.stepper_pipeline.recieve()
-				self.sendStatus(status, False, True)
+				self.sendStatus(1, False, True)
 				processed = True
-			elif (drive_cmd):
+			if (drive_cmd):
 				if verbose:
 					print "[SERIAL] processing drive command."
 
@@ -136,13 +137,13 @@ class SerialPipeline:
 					file.close()
 					return False
 
-			if ("x" in key):
+			if ("X" in key):
 				self.command["X"] = value.strip('\n')
-			elif ("y" in key):
+			elif ("Y" in key):
 				self.command["Y"] = value.strip('\n')
 				file.close()
 				return True
-			elif ("r" in key):
+			elif ("R" in key):
 				self.command["R"] = value.strip("\n")
 		file.close()
 		return False

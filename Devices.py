@@ -252,21 +252,23 @@ class StepperPipeline:
 
 		if self.serial_mock:
 			print "[STEPPER] sending relative command:"
-			print " - y offset: " + str(diff_y)
-			print " - z offset: " + str(diff_z)
+			if (int(y) != 0):
+				print " - y offset: " + str(diff_y)
+				self.y += diff_y
+			if (int(z) != 0):
+				print " - z offset: " + str(diff_z)
+				self.z += diff_z
 			response = self.recieve()
-			self.y += diff_y
-			self.z += diff_z
 			return
 
-		if (diff_y != 0):
+		if (int(y) != 0 and diff_y != 0):
 			if self.debug:
 				print " - Sending a y offset of " + str(diff_y)
 			self.serial.write("yr")
 			self.serial.write(str(diff_y))
 			self.serial.flush()
 			response_y = self.recieve()
-		if (diff_z != 0):
+		if (int(z) != 0 and diff_z != 0):
 			if self.debug:
 				print " - Sending a z offset of " + str(diff_z)
 			self.serial.write("zr")

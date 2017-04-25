@@ -66,8 +66,12 @@ public class DeviceData {
 			String header = reader.readLine();
 			reader.close();
 			if ((header != null) && header.endsWith(String.valueOf(Config.OWNER_ARDUINO))) {
+				System.out.print("Read new data from file ");
+				System.out.println(motor_path);
 				return false;
 			}
+		} else {
+			reader.close();
 		}
 		return true;
 	}

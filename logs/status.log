@@ -1,31 +1,14 @@
-<<<<<<< HEAD
-[ MISSION LOG ] (20:39:49 2017/04/23) New mission initialized.
-[ MISSION LOG ] (20:39:49 2017/04/23) Loaded goals from mission file.
-[ MISSION LOG ] (20:39:49 2017/04/23) Mission time limit is 100 sec.
-[ MISSION LOG ] (20:39:49 2017/04/23) Device: Shuttlecock @ Station D -- Rotate to [90] degrees.
-[ MISSION LOG ] (20:40:02 2017/04/23) Starting task execution.
-    [ TASK LOG ] (20:40:02 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (20:40:02 2017/04/23) Capture Task, device is Shuttlecock at station D [skipped]
-    [ TASK LOG ] (20:40:03 2017/04/23) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (20:40:03 2017/04/23) Capture Task, device is Shuttlecock at station D [skipped]
-    [ TASK LOG ] (20:40:15 2017/04/23) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (20:40:16 2017/04/23) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (20:40:16 2017/04/23) EngageTask, rotate 90 degrees [complete]
-    [ TASK LOG ] (20:40:17 2017/04/23) shipbot.tasks.DisengageTask@12a3a380
-[ MISSION LOG ] (20:40:17 2017/04/23) Task execution complete.
-=======
-[ MISSION LOG ] (17:44:48 2017/04/24) New mission initialized.
-[ MISSION LOG ] (17:44:48 2017/04/24) Loaded goals from mission file.
-[ MISSION LOG ] (17:44:48 2017/04/24) Mission time limit is 100 sec.
-[ MISSION LOG ] (17:44:48 2017/04/24) Device: Large Valve @ Station D -- Rotate to [90] degrees.
-[ MISSION LOG ] (17:44:54 2017/04/24) Starting task execution.
-    [ TASK LOG ] (17:44:54 2017/04/24) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (17:44:54 2017/04/24) Capture Task, device is Large Valve at station D [aborted]
-    [ TASK LOG ] (17:44:55 2017/04/24) Move Task, X=305 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (17:44:55 2017/04/24) Capture Task, device is Large Valve at station D [aborted]
-    [ TASK LOG ] (17:45:17 2017/04/24) PositionTask, no reach needed. [aborted]
-    [ TASK LOG ] (17:45:23 2017/04/24) Align Task, Y=200 Z=200 [complete]
-    [ TASK LOG ] (17:45:23 2017/04/24) EngageTask, rotate 90 degrees [complete]
-    [ TASK LOG ] (17:45:24 2017/04/24) shipbot.tasks.DisengageTask@12a3a380
-[ MISSION LOG ] (17:45:24 2017/04/24) Task execution complete.
->>>>>>> 4667ea8ab7b55698b5f60e2bb540119249e6f451
+[ MISSION LOG ] (01:05:37 2017/04/25) New mission initialized.
+[ MISSION LOG ] (01:05:37 2017/04/25) Loaded goals from mission file.
+[ MISSION LOG ] (01:05:37 2017/04/25) Mission time limit is 100 sec.
+[ MISSION LOG ] (01:05:37 2017/04/25) Device: Large Valve @ Station D -- Rotate to [90] degrees.
+[ MISSION LOG ] (01:05:42 2017/04/25) Starting task execution.
+    [ TASK LOG ] (01:05:43 2017/04/25) Move Task, X=305 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (01:05:43 2017/04/25) Capture Task, device is Large Valve at station D [aborted]
+    [ TASK LOG ] (01:05:43 2017/04/25) Move Task, X=305 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (01:05:43 2017/04/25) Capture Task, device is Large Valve at station D [aborted]
+    [ TASK LOG ] (01:05:43 2017/04/25) PositionTask [complete]
+    [ TASK LOG ] (01:05:45 2017/04/25) Align Task, Y=150 Z=150 [complete]
+    [ TASK LOG ] (01:05:46 2017/04/25) EngageTask [complete]
+    [ TASK LOG ] (01:05:47 2017/04/25) shipbot.tasks.DisengageTask@12a3a380
+[ MISSION LOG ] (01:05:47 2017/04/25) Task execution complete.

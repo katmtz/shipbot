@@ -1,7 +1,9 @@
 WAITING FOR SYNC, ready to start pipeline
+Read new data from file devices/actuators/DRIVE_0.txt
 - Drive motor synced.
+Read new data from file devices/actuators/STEP_0.txt
 - Depth stepper synced.
+Read new data from file devices/actuators/STEP_1.txt
 - Height stepper synced.
 SYNC ACQUIRED
-MISSION COMPLETE
-DATA FILES DUMPED
+AWAITING DRIVE_0

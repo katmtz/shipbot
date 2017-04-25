@@ -1,44 +1,29 @@
-[ ARDUINO WRITE DEBUG ] (20:40:02 2017/04/23) [debug] wrote <@ 1
-r 1
-x 305
-y 0
+[ ARDUINO WRITE DEBUG ] (01:05:42 2017/04/25) [debug] wrote <@ 1
+R 1
+X 305
+Y 0
 > to path <devices/actuators/DRIVE_0.txt>
-[ ARDUINO WRITE DEBUG ] (20:40:02 2017/04/23) [debug] wrote <@ 1
-r 1
-x 305
-y 0
+[ ARDUINO WRITE DEBUG ] (01:05:43 2017/04/25) [debug] wrote <@ 1
+R 1
+X 305
+Y 0
 > to path <devices/actuators/DRIVE_0.txt>
-[ HEBI WRITE DEBUG ] (20:40:03 2017/04/23) [debug] wrote <@ 1
-0
-s -90
-e 0
-h 0
-> to path <devices/actuators/HEBI.txt>
-[ ARDUINO WRITE DEBUG ] (20:40:15 2017/04/23) [debug] wrote <@ 1
-position 200
+[ ARDUINO WRITE DEBUG ] (01:05:43 2017/04/25) [debug] wrote <@ 1
+position 201
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (01:05:44 2017/04/25) [debug] wrote <@ 1
+position 150
 > to path <devices/actuators/STEP_0.txt>
-[ ARDUINO WRITE DEBUG ] (20:40:15 2017/04/23) [debug] wrote <@ 1
-position 200
+[ ARDUINO WRITE DEBUG ] (01:05:45 2017/04/25) [debug] wrote <@ 1
+position 150
+> to path <devices/actuators/STEP_0.txt>
+[ DISENGAGE TASK DEBUG ] (01:05:46 2017/04/25) Extracting effector vertically.
+[ ARDUINO WRITE DEBUG ] (01:05:46 2017/04/25) [debug] wrote <@ 1
+position 201
 > to path <devices/actuators/STEP_1.txt>
-[ HEBI WRITE DEBUG ] (20:40:16 2017/04/23) [debug] wrote <@ 1
-0
-s 0
-e 0
-h 90
-> to path <devices/actuators/HEBI.txt>
-[ DISENGAGE TASK DEBUG ] (20:40:16 2017/04/23) Extracting effector vertically.
-[ ARDUINO WRITE DEBUG ] (20:40:16 2017/04/23) [debug] wrote <@ 1
-position 251
-> to path <devices/actuators/STEP_1.txt>
-[ ARDUINO WRITE DEBUG ] (20:40:16 2017/04/23) [debug] wrote <@ 1
+[ ARDUINO WRITE DEBUG ] (01:05:46 2017/04/25) [debug] wrote <@ 1
 position 270
 > to path <devices/actuators/STEP_0.txt>
-[ ARDUINO WRITE DEBUG ] (20:40:16 2017/04/23) [debug] wrote <@ 1
+[ ARDUINO WRITE DEBUG ] (01:05:47 2017/04/25) [debug] wrote <@ 1
 position 10
 > to path <devices/actuators/STEP_1.txt>
-[ HEBI WRITE DEBUG ] (20:40:17 2017/04/23) [debug] wrote <@ 1
-0
-s 0
-e 90
-h 0
-> to path <devices/actuators/HEBI.txt>

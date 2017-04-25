@@ -21,10 +21,13 @@ public abstract class Task {
 	public abstract Device getAssociatedDevice();
 	
 	protected boolean await(String motor_id) {
+		System.out.print("AWAITING ");
+		System.out.println(motor_id);
 		try {
 			int timeout = 0;
 			while (DeviceData.waiting(motor_id)) {
 				if (timeout > Config.MAX_TIMEOUT) {
+					System.out.println("TIMED OUT");
 					return false;
 				}
 				timeout++;
@@ -32,6 +35,7 @@ public abstract class Task {
 			}
 			return true;
 		} catch (Exception e) {
+			System.out.println("EXCEPTION");
 			return false;
 		}
 	}
