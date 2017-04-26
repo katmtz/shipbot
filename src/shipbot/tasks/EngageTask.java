@@ -105,9 +105,15 @@ public class EngageTask extends Task {
 				effector_angle = 160;
 				break;
 			default:
-				System.out.println("WHAT STATIONS???? (engage)");
+				System.out.println("WHAT STATION???? (engage)");
 				break;
 		}
+		
+		int[] vals = Config.getAnglesAndOffset(sys.getFineAdjustment());
+		if (this.device.getDeviceDirection() == Config.ORIENT_SIDE) {
+			z_target += vals[2];
+		}
+		effector_angle += vals[1];
 		
 		try {
 			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, z_target);
