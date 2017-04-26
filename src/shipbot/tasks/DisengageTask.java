@@ -93,4 +93,13 @@ public class DisengageTask extends Task {
 		return this.device;
 	}
 
+	@Override
+	public String toString() {
+		String format = "DisengageTask, direction %s. [%s]";
+		if (device.getDeviceDirection() == Config.ORIENT_UP) {
+			return String.format(format, "vertical", status);
+		} else {
+			return String.format(format, "horizontal", status);
+		}
+	}
 }

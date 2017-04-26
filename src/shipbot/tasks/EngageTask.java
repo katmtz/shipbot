@@ -18,6 +18,7 @@ import shipbot.staticlib.MessageLog;
 public class EngageTask extends Task {
 	
 	private TaskStatus status;
+	private int z_engage;
 	private int angle;
 	private Device device;
 	
@@ -32,6 +33,7 @@ public class EngageTask extends Task {
 	public EngageTask(Device device) {
 		this.device = device;
 		this.angle = device.getGoalState();
+		this.z_engage = 0;
 		this.status = TaskStatus.WAITING;
 	}
 
@@ -85,6 +87,9 @@ public class EngageTask extends Task {
 			
 			int[] arm_pos = sys.getArmPosition();
 			DeviceData.writeToHebis(arm_pos[0], arm_pos[1], effector_angle);
+			
+			z_engage = z_target;
+			angle = effector_angle;
 			this.status = TaskStatus.COMPLETE;
 			return;
 		} catch (IOException e) {
@@ -101,8 +106,8 @@ public class EngageTask extends Task {
 	
 	@Override 
 	public String toString() {
-		String format = "EngageTask [%s]";
-		return String.format(format, status);
+		String format = "EngageTask, Z:%d THETA:%s [%s]";
+		return String.format(format, z_engage, angle, status);
 	}
 
 	@Override

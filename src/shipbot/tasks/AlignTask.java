@@ -36,52 +36,58 @@ public class AlignTask extends Task {
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
 		
-		// Move to predetermined position based on system state
+		int target_y = 270;
+		int target_z = 10;
+		switch(this.device.getStation()) {
+			case A:
+				target_z = 10;
+				target_y = 140;
+				break;
+			case B:
+				target_z = 7;
+				target_y = 140;
+				break;
+			case C:
+				target_z = 70;
+				target_y = 145;
+				break;
+			case D:
+				target_z = 5;
+				target_y = 150;
+				break;
+			case E:
+				target_z = 330;
+				target_y = 145;
+				break;
+			case F:
+				// depends on switch
+				break;
+			case G:
+				target_z = 360;
+				target_y = 80;
+				break;
+			default:
+				System.out.println("STATIONS? ?? ? (align)");
+				break;
+		}
+		
 		try {
-			int holdover_height = sys.getStoredHeightOffset();
-			if (sys.deviceIsUpward()) {
-				// SEND Z+CLEARANCE
-				Map<String, Integer> data = new HashMap<String, Integer>();
-				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE + holdover_height;
-				data.put(AlignTask.STEPPER_POS, target_z);
-				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
-				if (!this.await(Config.Z_STEPPER_ID)) {
-					this.status = TaskStatus.ABORTED;
-					MessageLog.printError("ALIGN TASK", "Z-axis stepper was unconfirmed!");
-					return;
-				}
-				
-				// SEND Y
-				int target_y = Config.DEVICE_DEPTH;
-				data.put(AlignTask.STEPPER_POS, target_y);
-				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, data);
-				if (!this.await(Config.Y_STEPPER_ID)) {
-					this.status = TaskStatus.ABORTED;
-					MessageLog.printError("ALIGN TASK", "Y-axis stepper was unconfirmed!");
-					return;
-				}
-			} else {
-				// SEND Y + CLEARANCE
-				Map<String, Integer> data = new HashMap<String, Integer>();
-				int target_y = Config.DEVICE_DEPTH + Config.CLEARANCE;
-				data.put(AlignTask.STEPPER_POS, target_y);
-				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, data);
-				if (!this.await(Config.Y_STEPPER_ID)) {
-					this.status = TaskStatus.ABORTED;
-					MessageLog.printError("ALIGN TASK", "Y-axis stepper was unconfirmed!");
-					return;
-				}
-				
-				// SEND Z 
-				int target_z = Config.DEVICE_HEIGHT + holdover_height;
-				data.put(AlignTask.STEPPER_POS, target_z);
-				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
-				if (!this.await(Config.Z_STEPPER_ID)) {
-					this.status = TaskStatus.ABORTED;
-					MessageLog.printError("ALIGN TASK", "Z-axis stepper was unconfirmed!");
-					return;
-				}
+			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, target_z);
+			if (!this.await(Config.Z_STEPPER_ID)) {
+				MessageLog.printError("ALIGN TASK", "Z position unconfirmed.");
+				this.status = TaskStatus.ABORTED;
+				return;
 			}
+			
+			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, target_y);
+			if (!this.await(Config.Y_STEPPER_ID)) {
+				MessageLog.printError("ALIGN TASK", "Y position unconfirmed.");
+				this.status = TaskStatus.ABORTED;
+				return;
+			}
+			
+			depth = target_y;
+			height = target_z;
 			this.status = TaskStatus.COMPLETE;
 			return;
 		} catch (IOException e) {

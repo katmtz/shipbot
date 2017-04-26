@@ -13,6 +13,10 @@ public class PositionTask extends Task {
 	
 	private TaskStatus status;
 	private Device device;
+	
+	private int fixed;
+	private int rotator;
+	private int effector;
 
 	public PositionTask(Device device) {
 		this.device = device;
@@ -57,6 +61,10 @@ public class PositionTask extends Task {
 			DeviceData.writeToHebis(target_fixed, target_rotator, target_effector);
 			// assume hebis react instantly, save the new values
 			sys.updateArmPosition(target_fixed, target_rotator);
+			
+			effector = target_effector;
+			rotator = target_rotator;
+			fixed = target_fixed;
 			status = TaskStatus.COMPLETE;
 			return;
 		} catch (IOException e) {
@@ -73,7 +81,7 @@ public class PositionTask extends Task {
 	
 	@Override
 	public String toString() {
-		return String.format("PositionTask [%s]", status);
+		return String.format("PositionTask, hebis at %d %d %d [%s]", fixed, rotator, effector, status);
 	}
 
 	@Override

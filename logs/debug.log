@@ -1,29 +1,145 @@
-[ ARDUINO WRITE DEBUG ] (01:05:42 2017/04/25) [debug] wrote <@ 1
+[ ARDUINO WRITE DEBUG ] (22:45:33 2017/04/25) [debug] wrote <@ 1
 R 1
-X 305
+X 1156
 Y 0
 > to path <devices/actuators/DRIVE_0.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:43 2017/04/25) [debug] wrote <@ 1
+[ ARDUINO WRITE DEBUG ] (22:45:33 2017/04/25) [debug] wrote <@ 1
 R 1
-X 305
+X 1156
 Y 0
 > to path <devices/actuators/DRIVE_0.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:43 2017/04/25) [debug] wrote <@ 1
-position 201
+[ ARDUINO WRITE DEBUG ] (22:45:33 2017/04/25) [debug] wrote <@ 1
+position 10
 > to path <devices/actuators/STEP_1.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:44 2017/04/25) [debug] wrote <@ 1
-position 150
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 140
 > to path <devices/actuators/STEP_0.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:45 2017/04/25) [debug] wrote <@ 1
-position 150
-> to path <devices/actuators/STEP_0.txt>
-[ DISENGAGE TASK DEBUG ] (01:05:46 2017/04/25) Extracting effector vertically.
-[ ARDUINO WRITE DEBUG ] (01:05:46 2017/04/25) [debug] wrote <@ 1
-position 201
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 0
 > to path <devices/actuators/STEP_1.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:46 2017/04/25) [debug] wrote <@ 1
+[ DISENGAGE TASK DEBUG ] (22:45:34 2017/04/25) Extracting effector horizontally.
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 180
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
 position 270
 > to path <devices/actuators/STEP_0.txt>
-[ ARDUINO WRITE DEBUG ] (01:05:47 2017/04/25) [debug] wrote <@ 1
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 10
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+R 1
+X 851
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+R 1
+X 851
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 7
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 140
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 0
+> to path <devices/actuators/STEP_1.txt>
+[ DISENGAGE TASK DEBUG ] (22:45:34 2017/04/25) Extracting effector horizontally.
+[ ARDUINO WRITE DEBUG ] (22:45:34 2017/04/25) [debug] wrote <@ 1
+position 180
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 270
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 10
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+R 1
+X 241
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+R 1
+X 241
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 5
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 150
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 0
+> to path <devices/actuators/STEP_1.txt>
+[ DISENGAGE TASK DEBUG ] (22:45:35 2017/04/25) Extracting effector horizontally.
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 180
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 270
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+position 10
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:35 2017/04/25) [debug] wrote <@ 1
+R 1
+X 0
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+R 1
+X 0
+Y 0
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 330
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 145
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 300
+> to path <devices/actuators/STEP_1.txt>
+[ DISENGAGE TASK DEBUG ] (22:45:36 2017/04/25) Extracting effector vertically.
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 180
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 270
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 10
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+R 0
+X 0
+Y 216
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+R 0
+X 0
+Y 216
+> to path <devices/actuators/DRIVE_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 360
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 80
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:36 2017/04/25) [debug] wrote <@ 1
+position 330
+> to path <devices/actuators/STEP_1.txt>
+[ DISENGAGE TASK DEBUG ] (22:45:37 2017/04/25) Extracting effector vertically.
+[ ARDUINO WRITE DEBUG ] (22:45:37 2017/04/25) [debug] wrote <@ 1
+position 180
+> to path <devices/actuators/STEP_1.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:37 2017/04/25) [debug] wrote <@ 1
+position 270
+> to path <devices/actuators/STEP_0.txt>
+[ ARDUINO WRITE DEBUG ] (22:45:37 2017/04/25) [debug] wrote <@ 1
 position 10
 > to path <devices/actuators/STEP_1.txt>
