@@ -116,14 +116,6 @@ public class CVSensing {
 	public int getDeviceOrientation() {
 		return this.data.get(ORIENTATION);
 	}
-
-	public boolean isUpward() {
-		if (this.data.get(ORIENTATION) == CVSensing.ORIENT_UP) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	public int getAngularPosition() {
 		return this.data.get(ANGLE);

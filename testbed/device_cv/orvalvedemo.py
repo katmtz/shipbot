@@ -1,7 +1,7 @@
 # Manages file I/O, image captures, and using correct image processing objects.
 from DeviceRecognition import ValveLarge
 
-path = "imgs/valvelg.jpg"
+path = "imgs/capture.jpeg"
 valve = ValveLarge()
 retval = valve.processImage(path)
 if not (retval):

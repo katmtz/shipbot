@@ -24,7 +24,6 @@ public class SystemState {
 	private CVSensing cv;
 	private ArmState arm;
 	
-	private int height_offset = 0;
 	private boolean base_adjustment = false;
 	
 	public SystemState() {
@@ -36,17 +35,12 @@ public class SystemState {
 	public boolean getNewCapture(Device device) {
 		boolean retval = cv.getNewCapture(device.getCVId());
 		if (retval == true) {
-			this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.OFFSET_THRESHOLD);
+			this.base_adjustment = (Math.abs(cv.getHorizontalOffset()) >= Config.ROTATOR_LENGTH);
 		}
 		return retval;
 	}
 
 	/* CV adjustment info */
-	
-	public boolean deviceIsUpward() {
-		return cv.isUpward();
-	}
-
 	public boolean needsBaseAdjustment() {
 		return this.base_adjustment;
 	}
@@ -76,24 +70,14 @@ public class SystemState {
 	}
 
 	public boolean needsFineAdjustment() {
-		return (Math.abs(cv.getHorizontalOffset()) < Config.ROTATOR_LENGTH);
+		return (Math.abs(cv.getHorizontalOffset()) <= Config.ROTATOR_LENGTH);
 	}
 
 	public int getFineAdjustment() {
 		return cv.getHorizontalOffset();
 	}
 
-	public void storeHeightOffset(int height_offset) {
-		this.height_offset = height_offset;
-	}
-
 	public void updateArmPosition(int fixed, int rotator) {
 		arm.setPosition(fixed, rotator);
-	}
-
-	public int getStoredHeightOffset() {
-		int ret = this.height_offset;
-		this.height_offset = 0;
-		return ret;
 	}
 }

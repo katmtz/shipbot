@@ -55,9 +55,24 @@ class DrivePipeline:
 		return 0
 
 	def send(self, t_x, t_y, t_r):
-		# for now, just sending all every time
-		# eventually this should route as needed
-		self.sendAll(t_x, t_y, t_r)
+		# if we're moving more than 200mm or changing direction, send all
+		diff_y = int(t_y) - self.y
+		diff_x = int(t_x) - self.x
+		if (diff_x > 200 or diff_x > 200 or (t_r != self.r)):
+			self.sendAll(t_x, t_y, t_r)
+		else:
+			# we're doing a small horizontal adjustment
+			if (diff_y == 0 and self.r == self.FRONT):
+				if (diff_x > 0):
+					self.sendLeft(diff_x)
+				else:
+					self.sendRight(-1 * diff_x)
+			else:
+				if (diff_y > 0):
+					self.sendLeft(diff_y)
+				else:
+					self.sendRight(-1 * diff_y)
+
 
 	def sendAll(self, t_x, t_y, t_r):
 		if self.debug:
@@ -81,9 +96,9 @@ class DrivePipeline:
 		response = self.recieve()
 		
 		# Update state variables
-		self.x = t_x
-		self.y = t_y
-		self.r = t_r
+		self.x = int(t_x)
+		self.y = int(t_y)
+		self.r = int(t_r)
 
 	def sendLeft(self, offset):
 		if self.debug:

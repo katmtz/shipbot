@@ -32,7 +32,7 @@ public class Config {
 	public static final int DEVICE_HEIGHT = 150;
 
 	/* Length of arm */
-	public static final int ROTATOR_LENGTH = 0;
+	public static final int ROTATOR_LENGTH = 152;
 
 	public static final int ORIENT_UP = 0;
 	public static final int ORIENT_SIDE = 1;
@@ -66,5 +66,13 @@ public class Config {
 		ids.add(Y_STEPPER_ID);
 		ids.add(Z_STEPPER_ID);
 		return ids;
+	}
+	
+	// { hebi_rot, hebi_eff, H }
+	public static int[] getAnglesAndOffset(int horiz_offset) {
+		double theta = Math.asin(horiz_offset / Config.ROTATOR_LENGTH);
+		double height = Config.ROTATOR_LENGTH * (1 - Math.cos(theta));
+		int[] retval = {  (int) theta, (int) (theta * -1), (int) height };
+		return retval;
 	}
 }

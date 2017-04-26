@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shipbot.hardware.CVSensing;
+import shipbot.staticlib.Config;
 import shipbot.staticlib.MessageLog;
 import shipbot.tasks.AlignTask;
 import shipbot.tasks.CaptureTask;
+import shipbot.tasks.DisengageTask;
 import shipbot.tasks.EngageTask;
 import shipbot.tasks.MoveTask;
 import shipbot.tasks.PositionTask;
@@ -31,12 +33,24 @@ public class BreakerBox extends Device {
 	/** station: the station (and location) of this device */
 	private Station station;
 	
+	private int boxa_z_align = 70;
+	private int boxa_z_eng = 42;
+	private int boxa_y = 145;
+	private int boxa_dist = 64;
+	
+	private int[] boxb_z_align = { 130, 10, 25 };
+	private int boxb_y = 147;
+	private int[] boxb_z_eng = { 155, 35, 48 };
+	
+	private int boxb_hebifix = 0;
+	private int[] boxb_hebirot = { -90, -45, -15 };
+	private int[] boxb_hebieff = { 45, 50, 180 };
+	
 	public BreakerBox(Station s, String id) {
 		this.station = s;
 		this.id_readable = id;
 		this.id_cv = CVSensing.DEVICE_BREAKER;
 		this.switches = new ArrayList<Integer>();
-		
 	}
 
 	/**
@@ -73,21 +87,35 @@ public class BreakerBox extends Device {
 		// Capture & identify image
 		tasks.add(new CaptureTask(this));
 		
-		// Raise arm (z stepper, partial y stepper)
-		tasks.add(new AlignTask(this));
-
-		// For each switch
-		for (Integer sw_no : switches) {
-			// Adjust L/R position
-			tasks.add(new MoveTask(this, sw_no));
-			// Position HEBI
-			tasks.add(new PositionTask(this));
-			// Push arm in
-			tasks.add(new AlignTask(this));
-			// Rotate effector
-			tasks.add(new EngageTask(this));
-			// Pull arm back
-			tasks.add(new AlignTask(this));
+		tasks.add(new MoveTask(this));
+		
+		tasks.add(new CaptureTask(this));
+		
+		if (this.station == Station.F) {
+			for (Integer n : this.switches) {
+				// use hardcoded values!
+				int i = n - 1;
+				tasks.add(new PositionTask(this.boxb_hebifix, this.boxb_hebirot[i], this.boxb_hebieff[i]));
+				tasks.add(new AlignTask(this.boxb_z_align[i], this.boxb_y));
+				tasks.add(new EngageTask(this.boxb_z_eng[i], this.boxb_hebieff[i]));
+				tasks.add(new DisengageTask());
+			}
+		} else if (this.station == Station.C) {
+			// Use CV offset to find first
+			for (int n : this.switches) {
+				int i = n - 1;
+				int horiz_off = 0;
+				if (n==0) {
+					horiz_off = -1 * this.boxa_dist;
+				} else if (n==2) {
+					horiz_off = this.boxa_dist;
+				}
+				int[] vals = Config.getAnglesAndOffset(horiz_off);
+				tasks.add(new PositionTask(0, 0 + vals[0], 167+vals[1]));
+				tasks.add(new AlignTask(this.boxa_z_align + vals[2], this.boxa_y));
+				tasks.add(new EngageTask(this.boxa_z_eng + vals[2], 167+vals[1]));
+				tasks.add(new DisengageTask());
+			}
 		}
 
 		return tasks;
@@ -121,8 +149,7 @@ public class BreakerBox extends Device {
 
 	@Override
 	public int getDeviceDirection() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Config.ORIENT_SIDE;
 	}
 }
 

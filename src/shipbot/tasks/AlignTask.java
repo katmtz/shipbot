@@ -23,6 +23,8 @@ public class AlignTask extends Task {
 	private int depth;
 	private int height;
 	
+	private boolean use_static = false;
+	
 	private static String STEPPER_POS = "position";
 	
 	public AlignTask(Device device) {
@@ -32,9 +34,52 @@ public class AlignTask extends Task {
 		this.depth = Config.DEVICE_DEPTH;
 	}
 	
+	public AlignTask(int z, int y) {
+		this.use_static = true;
+		this.height = z;
+		this.depth = y;
+	}
+
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
+		
+		int z_offset = 0;
+		int y_offset = 0;
+		if (sys.needsFineAdjustment()) {
+			int horiz_offset = sys.getFineAdjustment();
+			int[] vals = Config.getAnglesAndOffset(horiz_offset);
+			if (this.device.getDeviceDirection() == Config.ORIENT_UP) {
+				y_offset = -1 * vals[2];
+			} else {
+				z_offset = vals[2];
+			}
+		}
+		
+		if (this.use_static) {
+			try {
+				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, this.height + z_offset);
+				if (!this.await(Config.Z_STEPPER_ID)) {
+					MessageLog.printError("ALIGN TASK", "Z position unconfirmed.");
+					this.status = TaskStatus.ABORTED;
+					return;
+				}
+				
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, this.depth + y_offset);
+				if (!this.await(Config.Y_STEPPER_ID)) {
+					MessageLog.printError("ALIGN TASK", "Y position unconfirmed.");
+					this.status = TaskStatus.ABORTED;
+					return;
+				}
+			
+				this.status = TaskStatus.COMPLETE;
+				return;
+			} catch (IOException e) {
+				MessageLog.printError("ALIGN TASK", "Exception during align task.");
+				this.status = TaskStatus.ABORTED;
+				return;
+			}
+		}
 		
 		int target_y = 270;
 		int target_z = 10;
@@ -72,14 +117,14 @@ public class AlignTask extends Task {
 		}
 		
 		try {
-			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, target_z);
+			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, target_z+z_offset);
 			if (!this.await(Config.Z_STEPPER_ID)) {
 				MessageLog.printError("ALIGN TASK", "Z position unconfirmed.");
 				this.status = TaskStatus.ABORTED;
 				return;
 			}
 			
-			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, target_y);
+			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, target_y+y_offset);
 			if (!this.await(Config.Y_STEPPER_ID)) {
 				MessageLog.printError("ALIGN TASK", "Y position unconfirmed.");
 				this.status = TaskStatus.ABORTED;

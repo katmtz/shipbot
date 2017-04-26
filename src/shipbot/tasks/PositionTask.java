@@ -14,6 +14,8 @@ public class PositionTask extends Task {
 	private TaskStatus status;
 	private Device device;
 	
+	private boolean use_static = false;
+	
 	private int fixed;
 	private int rotator;
 	private int effector;
@@ -23,9 +25,39 @@ public class PositionTask extends Task {
 		this.status = TaskStatus.WAITING;
 	}
 
+	public PositionTask(int fixed, int rotator, int effector) {
+		this.use_static = true;
+		this.fixed = fixed;
+		this.rotator = rotator;
+		this.effector = effector;
+	}
+
 	@Override
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
+		
+		int rotator_offset = 0;
+		int engage_offset = 0;
+		if (sys.needsFineAdjustment()) {
+			int horiz_offset = sys.getFineAdjustment();
+			int[] vals = Config.getAnglesAndOffset(horiz_offset);
+			rotator_offset = vals[0];
+			engage_offset = vals[1];
+		}
+		
+		if (this.use_static) {
+			try {
+				DeviceData.writeToHebis(fixed, rotator + rotator_offset, effector + engage_offset);
+				// assume hebis react instantly, save the new values
+				sys.updateArmPosition(fixed, rotator+rotator_offset);
+				status = TaskStatus.COMPLETE;
+				return;
+			} catch (IOException e) {
+				status = TaskStatus.ABORTED;
+				MessageLog.printError("POSITION TASK", "IO exception writing to hebis.");
+				return;
+			}
+		}
 		
 		int target_fixed = 0;
 		int target_rotator = 0;

@@ -86,7 +86,12 @@ public class Valve extends Device {
 
 	@Override
 	public void addGoalState(int goal_state) {
-		this.angle = goal_state;
+		if (goal_state == 1) {
+			// cheap hack to catch shuttcock state
+			this.angle = 90;
+		} else {
+			this.angle = goal_state;
+		}
 	}
 
 	@Override

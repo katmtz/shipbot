@@ -9,6 +9,8 @@ import numpy as np
 ORIENT_UP = 0
 ORIENT_SIDE = 1
 
+ROBOTAXIS = 320
+
 # Detects a shuttlecock device (front-facing only!)
 class Shuttlecock:
 	# See shipbot.hardware.CVSensing: DEVICE_SHUTTLE
@@ -91,13 +93,13 @@ class Shuttlecock:
 				if (ret):
 					orient = ORIENT_SIDE
 					if (theta == 90):
-						x_offset = img_center[0] - center[0]
+						x_offset = ROBOTAXIS - center[0]
 					else:
-						x_offset = img_center[0] - (center[0] - 100)
+						x_offset = ROBOTAXIS - (center[0] - 100)
 
 					print ("Detected shuttlecock at {orient} deg.".format(orient=orient))
 					print ("Horizontal offset: " + str(x_offset))
-					return ( x_offset, orient, theta )
+					return ( int(x_offset), orient, int(theta-90) )
 
 class BreakerBox:
 	# HSB Color Range (Valve)
@@ -129,6 +131,13 @@ class ValveSmall:
 
 	rp_min = 1.89
 	rp_max = 2.10
+
+	def __init__(self):
+		self.np_low = np.array(self.blue_low, dtype="uint8")
+		self.np_high = np.array(self.blue_high, dtype="uint8")
+		
+		self.np_m_l = np.array(self.mark_low, dtype="uint8")
+		self.np_m_h = np.array(self.mark_high, dtype="uint8")
 
 	def processImage(self):
 		# TODO: finish implementing this!
@@ -269,17 +278,17 @@ class ValveLarge:
 				ratio = dim[1] / dim[0]
 				ret,orient = self.inRange(area, ratio)
 				if (ret):
-					x_offset = img_center[0] - center[0]
+					x_offset = ROBOTAXIS - center[0]
 					#cv2.drawContours(image,[box],0,(0,0,255),3)
 					mark_center = self.findMarker(image, hsv_image, rect)
-					theta = self.calculateAngle(center, mark_center)
+					theta = self.calculateAngle(center, mark_center) - 90
 					print ("Detected large valve!")
 					print (" - Horizontal offset: " + str(x_offset))
 					print (" - Angle: " + str(theta))
 					#cv2.imshow("image", image)
 					#cv2.waitKey(0)
 					#cv2.destroyAllWindows()
-					return ( x_offset, orient, theta )
+					return ( int(x_offset), orient, int(theta) )
 
 
 		#cv2.imshow("image", image)

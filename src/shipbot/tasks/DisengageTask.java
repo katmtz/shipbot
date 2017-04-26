@@ -21,6 +21,7 @@ public class DisengageTask extends Task {
 	private TaskStatus status;
 	private Device device;
 	
+	private boolean use_static = false; 
 	private static String STEPPER_POS = "position";
 	
 	public DisengageTask(Device device) {
@@ -28,8 +29,30 @@ public class DisengageTask extends Task {
 		this.status = TaskStatus.WAITING;
 	}
 
+	public DisengageTask() {
+		this.use_static = true;
+	}
+
 	@Override
 	public void executeTask(SystemState sys) {
+		if (this.use_static) {
+			try {
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, 120);
+				if (!this.await(Config.Y_STEPPER_ID)) {
+					this.status = TaskStatus.ABORTED;
+					MessageLog.printError("DISENGAGE TASK", "Y-axis stepper extract was unconfirmed!");
+					return;
+				}
+				status = TaskStatus.COMPLETE;
+				return;
+			} catch (IOException e) {
+				MessageLog.printError("DISENGAGE TASK", "Exception while disengaging effector.");
+				status = TaskStatus.ABORTED;
+				return;
+			}
+		}
+		
+		
 		try {
 			Map<String, Integer> data = new HashMap<String, Integer>();
 			
@@ -73,7 +96,7 @@ public class DisengageTask extends Task {
 			}
 			
 			// RETURN HEBIS TO TRAVEL POSITION
-			DeviceData.writeToHebis(0, 0, 0);
+			DeviceData.writeToHebis(-90, 0, -13);
 			sys.updateArmPosition(0, 0);
 			status = TaskStatus.COMPLETE;
 		} catch (IOException e) {

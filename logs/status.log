@@ -1,50 +1,14 @@
-[ MISSION LOG ] (22:45:27 2017/04/25) New mission initialized.
-[ MISSION LOG ] (22:45:27 2017/04/25) Loaded goals from mission file.
-[ MISSION LOG ] (22:45:27 2017/04/25) Mission time limit is 360 sec.
-[ MISSION LOG ] (22:45:27 2017/04/25) Device: Small Valve @ Station A -- Rotate to [90] degrees.
-[ MISSION LOG ] (22:45:27 2017/04/25) Device: Shuttlecock @ Station B -- Rotate to [90] degrees.
-[ MISSION LOG ] (22:45:27 2017/04/25) Device: Large Valve @ Station D -- Rotate to [120] degrees.
-[ MISSION LOG ] (22:45:27 2017/04/25) Device: Small Valve @ Station E -- Rotate to [45] degrees.
-[ MISSION LOG ] (22:45:27 2017/04/25) Device: Shuttlecock @ Station G -- Rotate to [90] degrees.
-[ MISSION LOG ] (22:45:33 2017/04/25) Starting task execution.
-    [ TASK LOG ] (22:45:33 2017/04/25) Move Task, X=1156 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:33 2017/04/25) Capture Task, device is Small Valve at station A [aborted]
-    [ TASK LOG ] (22:45:33 2017/04/25) Move Task, X=1156 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:33 2017/04/25) Capture Task, device is Small Valve at station A [aborted]
-    [ TASK LOG ] (22:45:33 2017/04/25) PositionTask, hebis at 0 0 0 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) Align Task, Y=140 Z=10 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) EngageTask, Z:0 THETA:90 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) DisengageTask, direction horizontal. [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) Move Task, X=851 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) Capture Task, device is Shuttlecock at station B [aborted]
-    [ TASK LOG ] (22:45:34 2017/04/25) Move Task, X=851 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) Capture Task, device is Shuttlecock at station B [aborted]
-    [ TASK LOG ] (22:45:34 2017/04/25) PositionTask, hebis at 0 0 40 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) Align Task, Y=140 Z=7 [complete]
-    [ TASK LOG ] (22:45:34 2017/04/25) EngageTask, Z:0 THETA:160 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) DisengageTask, direction horizontal. [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) Move Task, X=241 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) Capture Task, device is Large Valve at station D [aborted]
-    [ TASK LOG ] (22:45:35 2017/04/25) Move Task, X=241 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) Capture Task, device is Large Valve at station D [aborted]
-    [ TASK LOG ] (22:45:35 2017/04/25) PositionTask, hebis at 0 0 0 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) Align Task, Y=150 Z=5 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) EngageTask, Z:0 THETA:120 [complete]
-    [ TASK LOG ] (22:45:35 2017/04/25) DisengageTask, direction horizontal. [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Move Task, X=0 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Capture Task, device is Small Valve at station E [aborted]
-    [ TASK LOG ] (22:45:36 2017/04/25) Move Task, X=0 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Capture Task, device is Small Valve at station E [aborted]
-    [ TASK LOG ] (22:45:36 2017/04/25) PositionTask, hebis at -90 30 -13 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Align Task, Y=145 Z=330 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) EngageTask, Z:300 THETA:32 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) DisengageTask, direction vertical. [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Move Task, X=0 Y=216 Orient=0 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Capture Task, device is Shuttlecock at station G [aborted]
-    [ TASK LOG ] (22:45:36 2017/04/25) Move Task, X=0 Y=216 Orient=0 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Capture Task, device is Shuttlecock at station G [aborted]
-    [ TASK LOG ] (22:45:36 2017/04/25) PositionTask, hebis at -90 0 0 [complete]
-    [ TASK LOG ] (22:45:36 2017/04/25) Align Task, Y=80 Z=360 [complete]
-    [ TASK LOG ] (22:45:37 2017/04/25) EngageTask, Z:330 THETA:160 [complete]
-    [ TASK LOG ] (22:45:37 2017/04/25) DisengageTask, direction vertical. [complete]
-[ MISSION LOG ] (22:45:37 2017/04/25) Task execution complete.
+[ MISSION LOG ] (11:34:21 2017/04/26) New mission initialized.
+[ MISSION LOG ] (11:34:21 2017/04/26) Loaded goals from mission file.
+[ MISSION LOG ] (11:34:21 2017/04/26) Mission time limit is 100 sec.
+[ MISSION LOG ] (11:34:21 2017/04/26) Device: Large Valve @ Station D -- Rotate to [90] degrees.
+[ MISSION LOG ] (11:34:28 2017/04/26) Starting task execution.
+    [ TASK LOG ] (11:34:29 2017/04/26) Move Task, X=241 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) Capture Task, device is Large Valve at station D [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) Move Task, X=241 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) Capture Task, device is Large Valve at station D [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) PositionTask, hebis at 0 0 0 [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) Align Task, Y=150 Z=5 [complete]
+    [ TASK LOG ] (11:34:29 2017/04/26) EngageTask, Z:0 THETA:28 [complete]
+    [ TASK LOG ] (11:34:30 2017/04/26) DisengageTask, direction horizontal. [complete]
+[ MISSION LOG ] (11:34:30 2017/04/26) Task execution complete.
