@@ -35,7 +35,7 @@ public class Mission {
 			return;
 		}
 		
-		String path = "missions/mission_single.txt";
+		String path = "missions/mission_testbed.txt";
 		Mission mission = new Mission(path);
 		try {
 			// Clear files before waiting for data sync

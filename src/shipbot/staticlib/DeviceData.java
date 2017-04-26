@@ -52,6 +52,26 @@ public class DeviceData {
 		return;
 	}
 	
+	public static void writeArduinoData(String motor_id, int data) throws IOException {
+		if (motor_id == Config.DRIVE_MOTOR_ID) {
+			System.out.println("CANT SEND INT TO MOTORS!!!");
+			return;
+		}
+		String motor_path = String.format(motor_path_format, motor_id);
+		String format = "@ 1\nposition %d\n";
+		String msg = String.format(format, data);
+		try {
+			Writer writer = new FileWriter(motor_path);
+			MessageLog.logDebugMessage("ARDUINO WRITE", String.format("[debug] wrote <%s> to path <%s>", msg, motor_path));
+			writer.write(msg);
+			writer.close();
+		} catch (IOException e) {
+			MessageLog.printError("MOTOR_UPDATE", "IOException while writing motor data.");
+			throw e;
+		}
+		return;
+	}
+	
 	/**
 	 * Checks if we're still reading the last command we wrote
 	 * 

@@ -34,7 +34,7 @@ public class DisengageTask extends Task {
 			Map<String, Integer> data = new HashMap<String, Integer>();
 			
 			// EXTRACT EFFECTOR
-			if (sys.deviceIsUpward()) {
+			if (this.device.getDeviceDirection() == Config.ORIENT_UP) {
 				MessageLog.logDebugMessage("DISENGAGE TASK", "Extracting effector vertically.");
 				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE;
 				data.put(STEPPER_POS, target_z);
@@ -73,7 +73,8 @@ public class DisengageTask extends Task {
 			}
 			
 			// RETURN HEBIS TO TRAVEL POSITION
-			DeviceData.writeToHebis(0, 90, 0);
+			DeviceData.writeToHebis(0, 0, 0);
+			sys.updateArmPosition(0, 0);
 			status = TaskStatus.COMPLETE;
 		} catch (IOException e) {
 			MessageLog.printError("DISENGAGE TASK", "Exception while disengaging effector.");

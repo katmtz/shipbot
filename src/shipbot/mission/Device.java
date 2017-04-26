@@ -47,7 +47,9 @@ public abstract class Device {
 	
 	protected abstract String id();
 	
-	protected abstract Station getStation();
+	public abstract Station getStation();
 
 	public abstract int getCVId();
+
+	public abstract int getDeviceDirection();
 }

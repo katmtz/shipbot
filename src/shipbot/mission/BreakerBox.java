@@ -56,7 +56,7 @@ public class BreakerBox extends Device {
 	}
 
 	@Override
-	protected Station getStation() {
+	public Station getStation() {
 		return this.station;
 	}
 	
@@ -117,6 +117,12 @@ public class BreakerBox extends Device {
 	@Override
 	public int getCVId() {
 		return this.id_cv;
+	}
+
+	@Override
+	public int getDeviceDirection() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
 

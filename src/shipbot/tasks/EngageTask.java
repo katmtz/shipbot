@@ -42,37 +42,54 @@ public class EngageTask extends Task {
 	public void executeTask(SystemState sys) {
 		this.status = TaskStatus.ACTIVE;
 
-		if (sys.needsEngagement(this.angle)) {
-			int target_angle = sys.getEngagement(this.angle);
-			try {
-				if (sys.deviceIsUpward()) {
-					// WE NEED TO MOVE DOWN TO ENGAGE
-					Map<String, Integer> data = new HashMap<String, Integer>();
-					int target_y = Config.DEVICE_DEPTH;
-					data.put(STEPPER_POS, target_y);
-					DeviceData.writeArduinoData(Config.Y_STEPPER_ID, data);
-					if (!this.await(Config.Y_STEPPER_ID)) {
-						this.status = TaskStatus.ABORTED;
-						MessageLog.printError("ENGAGE TASK", "Y-axis stepper engage was unconfirmed!");
-						return;
-					}
-				}
-				
-				// EFFECTOR IS ENGAGED, ROTATE
-				int[] arm_pos = sys.getArmPosition();
-				DeviceData.writeToHebis(arm_pos[0], arm_pos[1], target_angle);
-				// note: assume hebi commands work instantaneously.
-				this.status = TaskStatus.COMPLETE;
-				return;
-			} catch (IOException e) {
+		int z_target = 0;
+		int effector_angle = 0;
+		
+		switch(this.device.getStation()) {
+			case A:
+				effector_angle = this.angle;
+				break;
+			case B:
+				effector_angle = 160;
+				break;
+			case C:
+				z_target = 42;
+				effector_angle = 167;
+				break;
+			case D:
+				effector_angle = this.angle;
+				break;
+			case E: 
+				z_target = 300;
+				effector_angle = (-13) + this.angle;
+				break;
+			case F:
+				// depends on switch!!
+				break;
+			case G:
+				z_target = 330;
+				effector_angle = 160;
+				break;
+			default:
+				System.out.println("WHAT STATIONS???? (engage)");
+				break;
+		}
+		
+		try {
+			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, z_target);
+			if (!this.await(Config.Z_STEPPER_ID)) {
 				this.status = TaskStatus.ABORTED;
-				MessageLog.printError("ENGAGE TASK", "IO exception while engaging effector.");
+				MessageLog.printError("ENGAGE TASK", "Z-axis engage was unconfirmed!");
 				return;
 			}
 			
-		} else {
-			MessageLog.logTaskStatus("Device already at desired state!");
+			int[] arm_pos = sys.getArmPosition();
+			DeviceData.writeToHebis(arm_pos[0], arm_pos[1], effector_angle);
 			this.status = TaskStatus.COMPLETE;
+			return;
+		} catch (IOException e) {
+			MessageLog.printError("ENGAGE TASK", "Exception during engage task.");
+			this.status = TaskStatus.ABORTED;
 			return;
 		}
 	}
