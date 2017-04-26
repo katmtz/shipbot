@@ -37,7 +37,7 @@ public class DisengageTask extends Task {
 	public void executeTask(SystemState sys) {
 		if (this.use_static) {
 			try {
-				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, 120);
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, 250);
 				if (!this.await(Config.Y_STEPPER_ID)) {
 					this.status = TaskStatus.ABORTED;
 					MessageLog.printError("DISENGAGE TASK", "Y-axis stepper extract was unconfirmed!");
@@ -118,11 +118,12 @@ public class DisengageTask extends Task {
 
 	@Override
 	public String toString() {
-		String format = "DisengageTask, direction %s. [%s]";
-		if (device.getDeviceDirection() == Config.ORIENT_UP) {
-			return String.format(format, "vertical", status);
-		} else {
-			return String.format(format, "horizontal", status);
-		}
+		return "DISENGAGE";
+//		String format = "DisengageTask, direction %s. [%s]";
+//		if (device.getDeviceDirection() == Config.ORIENT_UP) {
+//			return String.format(format, "vertical", status);
+//		} else {
+//			return String.format(format, "horizontal", status);
+//		}
 	}
 }

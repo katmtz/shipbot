@@ -12,7 +12,7 @@ import java.util.List;
 public class Config {
 	
 	// FUNCTIONAL FLAGS
-	public static boolean USE_CV = true;
+	public static boolean USE_CV = false;
 	public static boolean DEBUG = true;
 	
 	// DEVICE IDs

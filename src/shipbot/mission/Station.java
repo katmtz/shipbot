@@ -18,14 +18,18 @@ public enum Station {
 	private boolean needs_reach;
 	private int orient;
 	
-	private Station(int x, int y, boolean reach) {
+	private Station(int x, int y, boolean orient) {
 		this.x = x;
 		this.y = y;
-		this.needs_reach = reach;
-		if (this.y != 0) {
+		if (orient) {
 			this.orient = Config.SIDE_FACING;
 		} else {
 			this.orient = Config.FRONT_FACING;
+		}
+		if (this.y == 0 && this.x == 0) {
+			this.needs_reach = true;
+		} else {
+			this.needs_reach = false;
 		}
 	}
 	

@@ -34,7 +34,7 @@ public class BreakerBox extends Device {
 	private Station station;
 	
 	private int boxa_z_align = 70;
-	private int boxa_z_eng = 42;
+	private int boxa_z_eng = 40;
 	private int boxa_y = 145;
 	private int boxa_dist = 64;
 	
@@ -103,7 +103,6 @@ public class BreakerBox extends Device {
 		} else if (this.station == Station.C) {
 			// Use CV offset to find first
 			for (int n : this.switches) {
-				int i = n - 1;
 				int horiz_off = 0;
 				if (n==0) {
 					horiz_off = -1 * this.boxa_dist;
@@ -112,8 +111,8 @@ public class BreakerBox extends Device {
 				}
 				int[] vals = Config.getAnglesAndOffset(horiz_off);
 				tasks.add(new PositionTask(0, 0 + vals[0], 167+vals[1]));
-				tasks.add(new AlignTask(this.boxa_z_align + vals[2], this.boxa_y));
-				tasks.add(new EngageTask(this.boxa_z_eng + vals[2], 167+vals[1]));
+				tasks.add(new AlignTask(this.boxa_z_align, this.boxa_y));
+				tasks.add(new EngageTask(this.boxa_z_eng, 167+vals[1]));
 				tasks.add(new DisengageTask());
 			}
 		}
