@@ -1,14 +1,14 @@
-[ MISSION LOG ] (11:34:21 2017/04/26) New mission initialized.
-[ MISSION LOG ] (11:34:21 2017/04/26) Loaded goals from mission file.
-[ MISSION LOG ] (11:34:21 2017/04/26) Mission time limit is 100 sec.
-[ MISSION LOG ] (11:34:21 2017/04/26) Device: Large Valve @ Station D -- Rotate to [90] degrees.
-[ MISSION LOG ] (11:34:28 2017/04/26) Starting task execution.
-    [ TASK LOG ] (11:34:29 2017/04/26) Move Task, X=241 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) Capture Task, device is Large Valve at station D [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) Move Task, X=241 Y=0 Orient=1 [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) Capture Task, device is Large Valve at station D [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) PositionTask, hebis at 0 0 0 [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) Align Task, Y=150 Z=5 [complete]
-    [ TASK LOG ] (11:34:29 2017/04/26) EngageTask, Z:0 THETA:28 [complete]
-    [ TASK LOG ] (11:34:30 2017/04/26) DisengageTask, direction horizontal. [complete]
-[ MISSION LOG ] (11:34:30 2017/04/26) Task execution complete.
+[ MISSION LOG ] (12:17:06 2017/04/26) New mission initialized.
+[ MISSION LOG ] (12:17:06 2017/04/26) Loaded goals from mission file.
+[ MISSION LOG ] (12:17:06 2017/04/26) Mission time limit is 100 sec.
+[ MISSION LOG ] (12:17:06 2017/04/26) Device: Large Valve @ Station D -- Rotate to [90] degrees.
+[ MISSION LOG ] (12:17:12 2017/04/26) Starting task execution.
+    [ TASK LOG ] (12:17:12 2017/04/26) Move Task, X=241 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) Capture Task, device is Large Valve at station D [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) Move Task, X=421 Y=0 Orient=1 [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) Capture Task, device is Large Valve at station D [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) PositionTask, hebis at 0 0 0 [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) Align Task, Y=150 Z=5 [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) EngageTask, Z:22 THETA:-10 [complete]
+    [ TASK LOG ] (12:17:12 2017/04/26) DisengageTask, direction horizontal. [complete]
+[ MISSION LOG ] (12:17:12 2017/04/26) Task execution complete.

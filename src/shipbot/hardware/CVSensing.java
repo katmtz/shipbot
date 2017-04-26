@@ -45,6 +45,10 @@ public class CVSensing {
 	
 
 	public boolean getNewCapture(int device_type) {
+		if (!Config.USE_CV) {
+			return true;
+		}
+		
 		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
@@ -110,14 +114,18 @@ public class CVSensing {
 	}
 	
 	public int getHorizontalOffset() {
-		return this.data.get(this.OFFSET);
-	}
-	
-	public int getDeviceOrientation() {
-		return this.data.get(ORIENTATION);
+		if (Config.USE_CV) {
+			return this.data.get(this.OFFSET);
+		} else {
+			return 180;
+		}
 	}
 	
 	public int getAngularPosition() {
-		return this.data.get(ANGLE);
+		if (Config.USE_CV) {
+			return this.data.get(ANGLE);
+		} else {
+			return 100;
+		}
 	}
 }

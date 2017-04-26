@@ -57,15 +57,17 @@ public class AlignTask extends Task {
 		}
 		
 		if (this.use_static) {
+			this.depth += y_offset;
+			this.height += z_offset;
 			try {
-				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, this.height + z_offset);
+				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, this.height);
 				if (!this.await(Config.Z_STEPPER_ID)) {
 					MessageLog.printError("ALIGN TASK", "Z position unconfirmed.");
 					this.status = TaskStatus.ABORTED;
 					return;
 				}
 				
-				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, this.depth + y_offset);
+				DeviceData.writeArduinoData(Config.Y_STEPPER_ID, this.depth);
 				if (!this.await(Config.Y_STEPPER_ID)) {
 					MessageLog.printError("ALIGN TASK", "Y position unconfirmed.");
 					this.status = TaskStatus.ABORTED;
@@ -81,8 +83,8 @@ public class AlignTask extends Task {
 			}
 		}
 		
-		int target_y = 270;
-		int target_z = 10;
+		int target_y = 270 + y_offset;
+		int target_z = 10 + z_offset;
 		switch(this.device.getStation()) {
 			case A:
 				target_z = 10;
@@ -117,14 +119,14 @@ public class AlignTask extends Task {
 		}
 		
 		try {
-			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, target_z+z_offset);
+			DeviceData.writeArduinoData(Config.Z_STEPPER_ID, target_z);
 			if (!this.await(Config.Z_STEPPER_ID)) {
 				MessageLog.printError("ALIGN TASK", "Z position unconfirmed.");
 				this.status = TaskStatus.ABORTED;
 				return;
 			}
 			
-			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, target_y+y_offset);
+			DeviceData.writeArduinoData(Config.Y_STEPPER_ID, target_y);
 			if (!this.await(Config.Y_STEPPER_ID)) {
 				MessageLog.printError("ALIGN TASK", "Y position unconfirmed.");
 				this.status = TaskStatus.ABORTED;

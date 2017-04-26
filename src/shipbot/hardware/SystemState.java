@@ -42,6 +42,9 @@ public class SystemState {
 
 	/* CV adjustment info */
 	public boolean needsBaseAdjustment() {
+		if (this.base_adjustment) {
+			System.out.println("USING COARSE ADJUST BASE");
+		}
 		return this.base_adjustment;
 	}
 	
@@ -70,11 +73,20 @@ public class SystemState {
 	}
 
 	public boolean needsFineAdjustment() {
-		return (Math.abs(cv.getHorizontalOffset()) <= Config.ROTATOR_LENGTH);
+		if (Config.USE_CV) {
+			return (Math.abs(cv.getHorizontalOffset()) <= Config.ROTATOR_LENGTH);
+		} else {
+			System.out.println("skipped cv so auto-running fineadjust");
+			return true;
+		}
 	}
 
 	public int getFineAdjustment() {
-		return cv.getHorizontalOffset();
+		if (Config.USE_CV) {
+			return cv.getHorizontalOffset();
+		} else {
+			return 80;
+		}
 	}
 
 	public void updateArmPosition(int fixed, int rotator) {

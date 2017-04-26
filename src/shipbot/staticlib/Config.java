@@ -12,6 +12,7 @@ import java.util.List;
 public class Config {
 	
 	// FUNCTIONAL FLAGS
+	public static boolean USE_CV = false;
 	public static boolean DEBUG = true;
 	
 	// DEVICE IDs
@@ -70,8 +71,9 @@ public class Config {
 	
 	// { hebi_rot, hebi_eff, H }
 	public static int[] getAnglesAndOffset(int horiz_offset) {
-		double theta = Math.asin(horiz_offset / Config.ROTATOR_LENGTH);
+		double theta = Math.asin((double) horiz_offset / Config.ROTATOR_LENGTH);
 		double height = Config.ROTATOR_LENGTH * (1 - Math.cos(theta));
+		//System.out.println(String.format("horiz was %d theta was %f height was %f", horiz_offset, theta, height));
 		int[] retval = {  (int) theta, (int) (theta * -1), (int) height };
 		return retval;
 	}

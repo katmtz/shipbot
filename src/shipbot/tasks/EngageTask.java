@@ -23,9 +23,7 @@ public class EngageTask extends Task {
 	private Device device;
 	
 	private boolean use_static = false;
-	
-	private static String STEPPER_POS = "position";
-	
+		
 	/**
 	 * Create a new EngageTask that rotates the end effector by
 	 * specified angle.

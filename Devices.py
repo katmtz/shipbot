@@ -58,7 +58,9 @@ class DrivePipeline:
 		# if we're moving more than 200mm or changing direction, send all
 		diff_y = int(t_y) - self.y
 		diff_x = int(t_x) - self.x
-		if (diff_x > 200 or diff_x > 200 or (t_r != self.r)):
+		if (abs(diff_x) > 200 or abs(diff_y) > 200 or (int(t_r) != self.r)):
+			print "Diff X was: " + str(diff_x)
+			print "Diff Y was: " + str(diff_y)
 			self.sendAll(t_x, t_y, t_r)
 		else:
 			# we're doing a small horizontal adjustment
@@ -117,7 +119,7 @@ class DrivePipeline:
 		# Wait for response
 		response = self.recieve()
 
-		if (self.r == FRONT):
+		if (self.r == self.FRONT):
 			self.x += offset
 		else:
 			self.y += offset
@@ -139,7 +141,7 @@ class DrivePipeline:
 		# Wait for response
 		response = self.recieve()
 
-		if (self.r == FRONT):
+		if (self.r == self.FRONT):
 			self.x -= offset
 		else:
 			self.y -= offset
@@ -161,7 +163,7 @@ class DrivePipeline:
 		# Wait for response
 		response = self.recieve()
 
-		if (self.r == FRONT):
+		if (self.r == self.FRONT):
 			self.y -= offset
 		else:
 			self.x -= offset
@@ -183,7 +185,7 @@ class DrivePipeline:
 		# Wait for response
 		response = self.recieve()
 
-		if (self.r == FRONT):
+		if (self.r == self.FRONT):
 			self.y += offset
 		else:
 			self.x += offset

@@ -41,6 +41,7 @@ public class PositionTask extends Task {
 		if (sys.needsFineAdjustment()) {
 			int horiz_offset = sys.getFineAdjustment();
 			int[] vals = Config.getAnglesAndOffset(horiz_offset);
+			System.out.println(String.format("!!! Offsets were %d deg, %d mm", vals[0], vals[2]));
 			rotator_offset = vals[0];
 			engage_offset = vals[1];
 		}
