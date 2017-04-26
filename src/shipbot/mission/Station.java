@@ -10,8 +10,8 @@ public enum Station {
 	D (241,0,false),
 	E (0,0,false),
 	F (0,0,true),
-	G (0,216,true),
-	H (0,521,true);
+	G (0,245,true),
+	H (0,550,true);
 	
 	private int x;
 	private int y;

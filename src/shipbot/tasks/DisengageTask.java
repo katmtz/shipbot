@@ -36,7 +36,7 @@ public class DisengageTask extends Task {
 			// EXTRACT EFFECTOR
 			if (this.device.getDeviceDirection() == Config.ORIENT_UP) {
 				MessageLog.logDebugMessage("DISENGAGE TASK", "Extracting effector vertically.");
-				int target_z = Config.DEVICE_HEIGHT + Config.CLEARANCE;
+				int target_z = 360;
 				data.put(STEPPER_POS, target_z);
 				DeviceData.writeArduinoData(Config.Z_STEPPER_ID, data);
 				if (!this.await(Config.Z_STEPPER_ID)) {

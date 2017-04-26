@@ -34,7 +34,7 @@ public class PositionTask extends Task {
 			case A:
 				break;
 			case B: 
-				target_effector = 40;
+				target_effector = -40;
 				break;
 			case C:
 				target_effector = 167;

@@ -56,7 +56,7 @@ public class AlignTask extends Task {
 				target_y = 150;
 				break;
 			case E:
-				target_z = 330;
+				target_z = 335;
 				target_y = 145;
 				break;
 			case F:

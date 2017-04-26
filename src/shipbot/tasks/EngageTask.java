@@ -52,7 +52,7 @@ public class EngageTask extends Task {
 				effector_angle = this.angle;
 				break;
 			case B:
-				effector_angle = 160;
+				effector_angle = 60;
 				break;
 			case C:
 				z_target = 42;
