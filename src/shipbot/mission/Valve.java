@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import shipbot.hardware.CVSensing;
+import shipbot.staticlib.Config;
 import shipbot.tasks.AlignTask;
 import shipbot.tasks.CaptureTask;
 import shipbot.tasks.DisengageTask;
@@ -30,20 +31,51 @@ public class Valve extends Device {
 	private Station station;
 	private int angle = -1;
 	
+	private int device_orientation;
+	private int y_target;
+	private int z_target;
+	
 	public Valve(Station s, String id) {
 		this.station = s;
 		switch (id) {
 			case "V1":
 				this.id_readable = Valve.VALVE_SM;
 				this.id_cv = CVSensing.DEVICE_VALVE_SM;
+				if (s == Station.A) {					
+					this.device_orientation = Config.ORIENT_SIDE;
+					this.y_target = 140;
+					this.z_target = 10;
+				} else if (this.station == Station.E) {
+					this.device_orientation = Config.ORIENT_UP;
+					this.y_target = 145;
+					this.z_target = 325;
+				} else {
+					System.out.println("Unexpected small valve station!");
+				}
 				break;
 			case "V2":
 				this.id_readable = Valve.VALVE_LG;
 				this.id_cv = CVSensing.DEVICE_VALVE_LG;
+				if (this.station == Station.D) {
+					this.device_orientation = Config.ORIENT_SIDE;
+					this.y_target = 150;
+					this.z_target = 330;
+				} else {
+					System.out.println("Unexpected large valve station!");
+				}
 				break;
 			case "V3":
 				this.id_readable = Valve.SHUTTLECOCK;
 				this.id_cv = CVSensing.DEVICE_SHUTTLE;
+				if (this.station == Station.B) {
+					this.device_orientation = Config.ORIENT_SIDE;
+					this.y_target = 140;
+					this.z_target = 7;
+				} else if (this.station == Station.G) {
+					this.device_orientation = Config.ORIENT_UP;
+					this.y_target = 80;
+					this.z_target = 360;
+				}
 				break;
 		}
 	}

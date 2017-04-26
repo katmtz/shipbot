@@ -36,6 +36,7 @@ public class BreakerBox extends Device {
 		this.id_readable = id;
 		this.id_cv = CVSensing.DEVICE_BREAKER;
 		this.switches = new ArrayList<Integer>();
+		
 	}
 
 	/**

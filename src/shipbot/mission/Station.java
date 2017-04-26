@@ -4,14 +4,14 @@ import shipbot.staticlib.Config;
 
 public enum Station {
 
-	A (1220,0,false),
-	B (915,0,false),
-	C (610,0,false),
-	D (305,0,false),
-	E (0,0,true),
-	F (0,305,true),
-	G (0,610,false),
-	H (0,915,false);
+	A (1156,0,false),
+	B (851,0,false),
+	C (546,0,false),
+	D (241,0,false),
+	E (0,0,false),
+	F (0,0,true),
+	G (0,216,true),
+	H (0,521,true);
 	
 	private int x;
 	private int y;

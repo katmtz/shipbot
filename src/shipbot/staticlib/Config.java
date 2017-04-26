@@ -33,6 +33,9 @@ public class Config {
 
 	/* Length of arm */
 	public static final int ROTATOR_LENGTH = 0;
+
+	public static final int ORIENT_UP = 0;
+	public static final int ORIENT_SIDE = 1;
 	
 	// TIMEOUT LIMITS (arbitrary!!)
 	public static int MAX_TIMEOUT = 2000;
@@ -47,7 +50,7 @@ public class Config {
 	 * Needed clearance to access testbed devices.
 	 * Should be length of "fingers" + extra space
 	 */
-	public static int CLEARANCE = 51;
+	public static int CLEARANCE = 30;
 	
 	/* State that motors should be in before moving on */
 	public static int Y_TRAVELLING = 270;
