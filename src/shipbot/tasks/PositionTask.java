@@ -67,7 +67,11 @@ public class PositionTask extends Task {
 			case A:
 				break;
 			case B: 
-				target_effector = -40;
+				if (sys.getMeasuredAngle() == 0) {
+					target_effector = -40;
+				} else {
+					target_effector = 200;
+				}
 				break;
 			case C:
 				target_effector = 167;
@@ -83,7 +87,11 @@ public class PositionTask extends Task {
 				// varies based on switch!
 				break;
 			case G:
-				target_fixed = -90;
+				if (sys.getMeasuredAngle() == 0) {
+					target_fixed = -90;
+				} else {
+					target_fixed = 180;
+				}
 				break;
 			default:
 				System.out.println("WHAT STATION???");

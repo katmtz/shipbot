@@ -195,23 +195,24 @@ class ValveSmall:
 		tan_val = y / x
 		rad = np.arctan(tan_val)
 		deg = np.degrees(rad)
-		# IV quad
-		#print (str(x) + " " + str(y))
-		if (y > 0 and x > 0):
-			#print ("fourth quad")
-			return deg + 90
-		# III quad
-		elif (y > 0 and x < 0):
-			#print ("3rd quad")
-			return 180 + (90 - deg)
-		# II quad
-		elif (y < 0 and x < 0):
-			#print ("2nd quad")
-			return 270 + deg
-		# I quad
-		else:
-			#print ("1st quad")
-			return 90 - deg
+		return deg
+		# # IV quad
+		# #print (str(x) + " " + str(y))
+		# if (y > 0 and x > 0):
+		# 	#print ("fourth quad")
+		# 	return deg + 90
+		# # III quad
+		# elif (y > 0 and x < 0):
+		# 	#print ("3rd quad")
+		# 	return 180 + (90 - deg)
+		# # II quad
+		# elif (y < 0 and x < 0):
+		# 	#print ("2nd quad")
+		# 	return 270 + deg
+		# # I quad
+		# else:
+		# 	#print ("1st quad")
+		# 	return 90 - deg
 
 
 	def processImage(self, path):
@@ -244,13 +245,13 @@ class ValveSmall:
 						x_offset = ROBOTAXIS - center[1]
 						#cv2.drawContours(image,[box],0,(0,0,255),3)
 						mark_center = self.findMarker(image, hsv_image, rect)
-						theta = self.calculateAngle(center, mark_center) - 90
+						theta = self.calculateAngle(center, mark_center)
 						print ("Detected large valve!")
 						print (" - Horizontal offset: " + str(x_offset))
 						print (" - Angle: " + str(theta))
-						#cv2.imshow("image", image)
-						#cv2.waitKey(0)
-						#cv2.destroyAllWindows()
+						cv2.imshow("image", image)
+						cv2.waitKey(0)
+						cv2.destroyAllWindows()
 						return ( int(x_offset * .66), orient, int(theta) )
 		return False
 
@@ -343,23 +344,7 @@ class ValveLarge:
 		tan_val = y / x
 		rad = np.arctan(tan_val)
 		deg = np.degrees(rad)
-		# IV quad
-		#print (str(x) + " " + str(y))
-		if (y > 0 and x > 0):
-			#print ("fourth quad")
-			return deg + 90
-		# III quad
-		elif (y > 0 and x < 0):
-			#print ("3rd quad")
-			return 180 + (90 - deg)
-		# II quad
-		elif (y < 0 and x < 0):
-			#print ("2nd quad")
-			return 270 + deg
-		# I quad
-		else:
-			#print ("1st quad")
-			return 90 - deg
+		return deg
 
 	def processImage(self, path):
 		# Load image from path as HSV
@@ -393,7 +378,7 @@ class ValveLarge:
 					x_offset = ROBOTAXIS - center[1]
 					#cv2.drawContours(image,[box],0,(0,0,255),3)
 					mark_center = self.findMarker(image, hsv_image, rect)
-					theta = self.calculateAngle(center, mark_center) - 90
+					theta = self.calculateAngle(center, mark_center)
 					print ("Detected large valve!")
 					print (" - Horizontal offset: " + str(x_offset))
 					print (" - Angle: " + str(theta))

@@ -2,7 +2,7 @@ from DeviceRecognition import *
 
 # static flag to enable picamera code
 USE_CAMERA = False
-MOCK_IMG_PATH = "imgs/single_img.jpg"
+MOCK_IMG_PATH = "imgs/capture.jpg"
 #MOCK_IMG_PATH = "imgs/shuttlecock_lowres.jpg"
 
 class CVController:
@@ -30,7 +30,7 @@ class CVController:
 		return not self.killed
 
 	def processCommand(self):
-		print ("Awaiting command...")
+		#print ("Awaiting command...")
 		cmd_recieved = False
 		device_code = 0
 		while not cmd_recieved:
@@ -50,9 +50,7 @@ class CVController:
 		if self.killed:
 			print ("Recieved stop.")
 			return
-		else:
-			print ("Recived device code: " + str(device_code))
-
+			
 		# Case on extracted device code!
 		if (device_code == 1):
 			# device type: valve small

@@ -55,7 +55,7 @@ public class Config {
 	
 	/* State that motors should be in before moving on */
 	public static int Y_TRAVELLING = 270;
-	public static int Z_TRAVELLING = 10;
+	public static int Z_TRAVELLING = 20;
 	
 	/**
 	 * Returns an array of all the motor ids

@@ -71,7 +71,9 @@ public class EngageTask extends Task {
 			}
 		}
 		
+		int measured = sys.getMeasuredAngle();
 		this.angle = sys.getEngagement(this.angle);
+		System.out.println(String.format("Engage angle was %d", this.angle));
 		
 		int z_target = 0;
 		int effector_angle = 0;
@@ -81,7 +83,11 @@ public class EngageTask extends Task {
 				effector_angle = this.angle;
 				break;
 			case B:
-				effector_angle = 60;
+				if (this.angle == 0) {
+					effector_angle = 60;
+				} else {
+					effector_angle = -10;
+				}
 				break;
 			case C:
 				z_target = 42;
@@ -100,7 +106,11 @@ public class EngageTask extends Task {
 				break;
 			case G:
 				z_target = 330;
-				effector_angle = 160;
+				if (this.angle == 0) {
+					effector_angle = 160;
+				} else {
+					effector_angle = 90;
+				}
 				break;
 			default:
 				System.out.println("WHAT STATION???? (engage)");

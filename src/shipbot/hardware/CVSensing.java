@@ -45,7 +45,6 @@ public class CVSensing {
 	
 
 	public boolean getNewCapture(int device_type) {
-		
 		String format_str = "@ 1\n%s %d\n";
 		String msg = String.format(format_str, this.DEVICE_TYPE, device_type);
 		try {
@@ -59,7 +58,7 @@ public class CVSensing {
 			int timeout = 0;
 			boolean responded = false;
 			while (!responded) {
-				if (timeout > Config.MAX_TIMEOUT) {
+				if (timeout > 1000000) {
 					return false;
 				}
 				
@@ -91,7 +90,9 @@ public class CVSensing {
 				}
 				reader.close();
 				if (temp.containsKey("@")) {
+					//System.out.println("HAD OWNER TAG");
 					if (temp.get("@") == Config.OWNER_ARDUINO) {
+						System.out.println("ADDING CV DATA");
 						this.data.clear();
 						this.data.putAll(temp);
 						responded = true;
@@ -111,10 +112,14 @@ public class CVSensing {
 	}
 	
 	public int getHorizontalOffset() {
-		return this.data.get(this.OFFSET);
+		return 0;
+		//return this.data.get(this.OFFSET);
 	}
 	
 	public int getAngularPosition() {
-		return this.data.get(ANGLE);
+		int angle = this.data.get(ANGLE);
+		System.out.println(String.format("GOT CURRENT ANGLE OF %d", angle));
+		return angle;
+		// return 330;
 	}
 }

@@ -52,19 +52,18 @@ public class SystemState {
 
 	/* If given angle is greater than 5 deg away from goal */
 	public boolean needsEngagement(int angle) {
-		int diff = angle - cv.getAngularPosition();
-		if (Math.abs(diff) > 5) {
-			return true;
-		} else {
-			return false;
-		}
+		return (cv.getAngularPosition() != angle);
 	}
 
 	public int getEngagement(int angle) {
-		int diff = angle - cv.getAngularPosition();
+		int diff = angle + cv.getAngularPosition();
 		return diff;
 	}
-
+	
+	public int getMeasuredAngle() {
+		return cv.getAngularPosition();
+	}
+	
 	public int[] getArmPosition() {
 		return this.arm.getPosition();
 	}
